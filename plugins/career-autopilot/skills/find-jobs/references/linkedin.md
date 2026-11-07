@@ -9,5 +9,5 @@ LinkedIn's User Agreement prohibits automated access; accounts can be restricted
 - Read descriptions from the open job pane or page text. Do not call undocumented endpoints in a loop.
 - Any error, CAPTCHA or "unusual activity" page: stop LinkedIn for the session and tell the user.
 
-geoIds: Singapore 102454443 · Indonesia 102478259 · Malaysia 106808692 · Australia 101452733 · Japan 101355337 · UAE 104305776.
+geoIds (confirm once, as below): Singapore 102454443 · Indonesia 102478259 · Malaysia 106808692 · Australia 101452733 · Japan 101355337 · UAE 104305776 · Germany 101282230 · Netherlands 102890719 · United Kingdom 101165590 · United States 103644278 · Canada 101174742. Other countries: open a LinkedIn job search for the country and read the geoId from the URL.
 Check a geoId by opening the search URL once and confirming the location label.

@@ -1,9 +1,17 @@
 {
   "name": "career-autopilot",
-  "version": "0.1.0",
-  "description": "Builds your profile from your CV, finds matching roles, scores fit, prefills applications in your browser for you to submit, drafts recruiter emails, tracks replies, and prepares you for interviews.",
+  "version": "0.2.0",
+  "description": "Builds your profile from your CV, finds matching jobs in the countries you choose, scores fit, prefills applications in your browser for you to submit, drafts recruiter emails, tracks replies, and prepares you for interviews. Works for any profession through customizable role presets.",
   "author": {
     "name": "Tursina Labs"
   },
-  "keywords": ["jobs", "job search", "career", "cv", "tracker", "singapore", "sre", "interview"]
+  "keywords": [
+    "jobs",
+    "job search",
+    "career",
+    "cv",
+    "tracker",
+    "interview",
+    "relocation"
+  ]
 }

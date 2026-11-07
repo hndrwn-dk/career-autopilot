@@ -42,9 +42,25 @@ Look for a spreadsheet named exactly `Career Autopilot Tracker`. Create it if mi
 
 ## 3. Preset
 
-If Filters has no `preset`, ask once which fits: `sre-platform`, `tam-presales`, `storage-infra`, several (comma list), or `none`.
-Read the files from `${CLAUDE_PLUGIN_ROOT}/presets/`. For several presets, union `target_roles` and `keywords`,
-take the lowest `min_match`, and use the weights of the first one. Write only keys that are empty in Filters.
+Format and locations: `${CLAUDE_PLUGIN_ROOT}/presets/README.md`.
+
+If Filters has no `preset`, ask once what kind of role the user wants (any field). Then:
+- A bundled preset fits (`sre-platform`, `tam-presales`, `storage-infra`) → offer it.
+- Otherwise, or if the user asks for `custom` → draft a custom preset with the template in the presets README, from the
+  role titles the user names, their CV (if already uploaded) and 2–3 web searches on how such postings are usually worded
+  in their target countries. Show it, apply the user's edits, save it to Drive `Career Autopilot/presets/<name>.md`
+  (`<name>`: lowercase, hyphens) and set Filters `preset: custom:<name>`.
+- `none` → no preset; fit-check scores against each posting's own requirements.
+
+For several presets, union `target_roles` and `keywords`, take the lowest `min_match`, and use the weights of the first one.
+Write only keys that are empty in Filters. "Edit my preset" later → open the Drive file, change it, save it.
+
+## 3b. Target countries
+
+If Filters has no `countries`, ask for them (any countries; remote too). For each country, look it up in
+`${CLAUDE_PLUGIN_ROOT}/skills/find-jobs/references/sources.md`. Not listed → find its 2–3 main job portals
+(official government portal first) with a web search, show them, and save to Filters `country_portals`
+(`<country>: <portal url>, …`). Ask per country whether the user needs a work permit there (`needs_sponsorship`).
 
 ## 4. Settings block
 

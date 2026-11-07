@@ -8,8 +8,10 @@ description: >
 
 # Check fit
 
-Load `Profile` and `Filters`. Keys: `references/filters.md`. If Filters has `preset`, also read
-`${CLAUDE_PLUGIN_ROOT}/presets/<preset>.md` for stack groups, cert equivalents and preset-specific checks.
+Load `Profile` and `Filters`. Keys: `references/filters.md`. If Filters has `preset`, read each one for skill groups,
+credential equivalents and field-specific checks: bundled names from `${CLAUDE_PLUGIN_ROOT}/presets/<name>.md`,
+`custom:<name>` from the user's Drive `Career Autopilot/presets/<name>.md`. A preset file that cannot be read: continue
+without it and say so. No preset: derive skill groups from the posting itself.
 
 ## 1. Hard filters (any hit → exclude with the reason)
 
@@ -17,6 +19,7 @@ Read the full description:
 - Required language the user does not speak. "Nice to have" is not a blocker; mention it.
 - Work rights the user cannot meet ("citizens/PR only", "no sponsorship", "must hold a valid work pass", "security clearance required") when Profile says they need sponsorship there.
 - Posted salary maximum below `salary_floor_<region>`.
+- A professional licence or registration the posting requires in that country (e.g. nursing, medical, legal, engineering, teaching, accounting) that Profile does not hold → exclude when it is a must-hold now; flag "licence conversion needed" when it can be obtained after hire.
 - Seniority outside `seniority`, or title words in `exclude_keywords`.
 - Employment model not allowed by `employment_types` (see 2).
 - Company in `exclude_companies`, already in `Applications` or `Skip`, posting closed.
@@ -35,12 +38,12 @@ Flag, do not exclude, unless `employment_types` rules it out:
 Weights from Filters `weights` (else the preset's, else `must_have:45, years:15, stack:20, certs:10, domain:5, scope:5`).
 - must_have: share of required items proven by Profile. Any "required/must/essential" item that is missing caps the total at 70.
 - years: Profile years vs. requested years for the main skill.
-- stack: overlap per stack group from the preset (a group counts once), else per named tool.
-- certs: required or preferred certs held, or covered by a cert equivalent from the preset.
-- domain: industry overlap (banking, telco, government, SaaS vendor...).
+- stack: skills, tools and methods; overlap per skill group from the preset (a group counts once), else per named item.
+- certs: certifications, licences and registrations held, or covered by an equivalent from the preset.
+- domain: industry or sector overlap.
 - scope: seniority, team size, customer-facing vs. internal match the profile.
 
-Only facts in Profile count. A cert proves the skill exists, not years of use.
+Only facts in Profile count. A credential proves the skill exists, not years of use.
 
 ## 4. Report
 

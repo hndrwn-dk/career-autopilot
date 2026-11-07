@@ -8,7 +8,8 @@
 | keywords | kubernetes, openshift, object storage | search terms |
 | target_companies | Red Hat, Google, NetApp | companies to check directly |
 | exclude_companies | Acme | never apply |
-| countries | Singapore, Malaysia | where to search |
+| countries | Singapore, Australia, Germany, Canada | any countries; `remote` too |
+| country_portals | Portugal: net-empregos.pt, … | portals found for countries not in sources.md |
 | remote_ok | yes | include remote roles open to the user's country |
 | needs_sponsorship | singapore: yes | per country |
 | languages_spoken | English, Indonesian | any other required language is a blocker |
@@ -31,10 +32,27 @@
 | availability | weekdays after 18:00 SGT | used when proposing interview slots |
 | last_inbox_sync | 2026-11-01 | set by inbox-sync |
 
-# Work-pass notes (check current thresholds with a web search when it matters)
+# Work-permit notes (orientation only; check the current rule with a web search whenever a threshold decides the outcome)
 
-- Singapore: Employment Pass needs a new application by each new employer; the employer applies. Assessed on a qualifying salary that rises with age (higher in financial services) plus COMPASS points. Jobs must usually be advertised on MyCareersFuture first. S Pass for mid-skilled roles has quotas.
-- Malaysia: Employment Pass via the employer (ESD); categories by salary.
-- Indonesia: citizens need nothing; foreigners need a KITAS/RPTKA through the employer.
-- Australia: employer-sponsored Skills in Demand visa; check the occupation list.
-- Remote roles: check whether the company hires in the user's country directly or via an employer of record.
+## Singapore and APAC
+- Singapore: Employment Pass is applied for by each new employer; assessed on a qualifying salary that rises with age (higher in financial services) plus COMPASS points. S Pass for mid-skilled roles has quotas.
+- Malaysia: Employment Pass through the employer; categories by salary.
+- Indonesia: foreigners need a work permit (RPTKA/KITAS) through the employer.
+- Australia: employer-sponsored Skills in Demand visa; skilled independent visas via points.
+- Japan: work visa sponsored by the employer, category by job type; highly-skilled professional points route.
+- Hong Kong: General Employment Policy via the employer; talent schemes exist.
+
+## EMEA
+- EU: EU Blue Card through the employer when the salary meets the country's threshold; national skilled-worker permits otherwise.
+- Germany: EU Blue Card or skilled-worker visa; recognition of foreign qualifications may be needed for regulated jobs.
+- Netherlands: highly skilled migrant permit; the employer must be an IND recognised sponsor.
+- United Kingdom: Skilled Worker visa; the employer must hold a sponsor licence, and salary and occupation thresholds apply.
+- Ireland: Critical Skills or General Employment Permit.
+- Gulf states: employer-sponsored work visa; some roles are reserved for nationals.
+
+## US / Canada
+- United States: most employer routes need sponsorship (H-1B is lottery-based and capped; L-1 for intra-company transfers; TN for Canadian and Mexican citizens; O-1 for extraordinary ability). Treat "no sponsorship" as a hard filter when the user needs it.
+- Canada: employer route usually needs an LMIA (Job Bank shows LMIA-approved postings); permanent route via Express Entry; intra-company transfers and some trade-agreement categories are LMIA-exempt.
+
+## Regulated professions (any country)
+Medicine, nursing, law, teaching, engineering, accounting and similar often need local registration or a conversion exam. Flag it in fit-check.

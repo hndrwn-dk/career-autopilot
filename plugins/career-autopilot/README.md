@@ -1,6 +1,9 @@
 # Career Autopilot
 
-A Claude plugin for job hunting, built for tech professionals (SRE, platform, cloud, storage, TAM, solutions architects and similar) with first-class support for Singapore and APAC.
+A Claude plugin for job hunting. You choose the profession and the target countries; the plugin adapts.
+
+- **Any profession.** Role presets set target titles, keywords, skill groups and scoring weights. The plugin ships with example presets for tech roles, and `setup` can draft a custom preset for any field (finance, healthcare, education, design, operations…) from your CV and the roles you name.
+- **Any country.** Built-in sources and work-permit notes for Singapore, APAC, EMEA and US/Canada. For any other country, Claude finds the main job portals on first use and saves them to your settings.
 
 It reads your CV, keeps a tracker in Google Sheets, finds roles that match, scores the fit, prefills application forms in your own browser (you press Submit), drafts recruiter emails (you press Send), syncs replies from Gmail, and builds an interview brief for every invite.
 
@@ -20,9 +23,10 @@ Claude Code:
 ## First run
 
 1. Say **"set up career autopilot"**. Claude checks Gmail, Google Drive/Sheets and the browser, then creates the `Career Autopilot Tracker` sheet.
-2. Pick a preset (or none): `sre-platform`, `tam-presales`, `storage-infra`. Presets fill sensible target roles, keywords and scoring weights; you can edit everything afterwards.
-3. Upload your CV and say **"build my profile"**.
-4. Optional: paste a settings block (format below) to set everything in one go.
+2. Pick a preset: one of the bundled examples (`sre-platform`, `tam-presales`, `storage-infra`), **`custom`** (Claude drafts one for your field and saves it in your Drive), or `none`. Everything stays editable.
+3. Tell Claude your target countries (e.g. `Singapore, Australia, Germany, Canada`).
+4. Upload your CV and say **"build my profile"**.
+5. Optional: paste a settings block (format below) to set everything in one go.
 
 ## Modes
 
@@ -47,9 +51,9 @@ Claude Code:
 
 ```
 CAREER-AUTOPILOT-SETTINGS v1
-preset: sre-platform
+preset: custom:marketing-manager
 mode: watch
-countries: Singapore
+countries: Singapore, Australia, United Kingdom
 remote_ok: yes
 ...
 END-SETTINGS
@@ -63,4 +67,4 @@ Passwords and logins, consent and terms checkboxes, diversity questions, date of
 
 ## LinkedIn
 
-LinkedIn's terms prohibit automation. It is off by default; when enabled the plugin works slowly in your own signed-in browser with a daily cap, and your account carries the risk. Public company ATS boards and MyCareersFuture are the default sources.
+LinkedIn's terms prohibit automation. It is off by default; when enabled the plugin works slowly in your own signed-in browser with a daily cap, and your account carries the risk. Public company ATS boards and official country job portals are the default sources.

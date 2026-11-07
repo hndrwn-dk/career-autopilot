@@ -20,20 +20,42 @@ Discovery queries: `site:job-boards.greenhouse.io "site reliability" Singapore`,
 
 ## Country portals
 
-### Singapore
-- **MyCareersFuture** (government portal; every EP-eligible posting must be advertised here first under the Fair Consideration Framework, so it is the widest source).
-  Search API used by the site: `https://api.mycareersfuture.gov.sg/v2/jobs?search=<keywords>&limit=20&page=0&sortBy=new_posting_date`.
-  Unofficial: confirm the response shape on first use. Fallback: `https://www.mycareersfuture.gov.sg/search?search=<keywords>` in the browser.
-  Postings show a salary range (SGD/month): use it for the salary filter.
-- **NodeFlair** (tech roles, often with salary), **eFinancialCareers** (banks and financial institutions), **JobStreet**, **Glints**: browser search; read only, no login unless the user signs in.
+Built-in starting points by region. Any country not listed: find its official portal and 1–2 leading private boards with a
+web search, then save them to Filters `country_portals`. Read-only browsing; log in only when the user signs in.
+Portals change: if one no longer works, search for its replacement and update `country_portals`.
 
-### Indonesia
-- Glints, JobStreet ID, Kalibrr, LinkedIn. Browser search.
+### Singapore (primary)
+- **MyCareersFuture**: government portal; most roles open to work-pass holders must be advertised here first (Fair Consideration Framework), so it is the widest source. Search API used by the site: `https://api.mycareersfuture.gov.sg/v2/jobs?search=<keywords>&limit=20&page=0&sortBy=new_posting_date` (unofficial: confirm the response shape on first use; fallback `https://www.mycareersfuture.gov.sg/search?search=<keywords>` in the browser). Salary ranges are SGD/month.
+- JobStreet SG, LinkedIn, eFinancialCareers (finance), NodeFlair (tech), Glints.
 
-### Malaysia / wider APAC
-- JobStreet MY, LinkedIn, company boards via ATS APIs. Remote-APAC roles: ATS discovery with `"APAC" remote`.
+### APAC
+| Country | Starting points |
+|---|---|
+| Malaysia | MYFutureJobs (official), JobStreet MY |
+| Indonesia | Karirhub Kemnaker (official), JobStreet ID, Glints, Kalibrr |
+| Australia | Workforce Australia (official), SEEK |
+| New Zealand | SEEK NZ, Trade Me Jobs |
+| Japan | Hello Work (official), Daijob and CareerCross (English-friendly) |
+| Hong Kong | Labour Department iES (official), JobsDB HK, CTgoodjobs |
+| India | National Career Service (official), Naukri |
+| Philippines, Thailand, Vietnam | JobStreet / JobsDB, local official portal via web search |
 
-Add other countries here as users need them.
+### EMEA
+| Country / area | Starting points |
+|---|---|
+| EU / EEA (all) | EURES (EU-wide official portal) |
+| Germany | Jobbörse der Bundesagentur für Arbeit (official), StepStone |
+| Netherlands | werk.nl (official), Indeed NL |
+| Ireland | Jobs Ireland (official), IrishJobs |
+| United Kingdom | Find a job on GOV.UK (official), Reed, Totaljobs |
+| Nordics | national employment-service portals (e.g. Arbetsförmedlingen, NAV), via web search |
+| UAE / Saudi / Qatar | Bayt, GulfTalent, national portals via web search |
+
+### US / Canada
+| Country | Starting points |
+|---|---|
+| United States | USAJOBS (federal government roles only), Indeed, LinkedIn, Dice (tech); most private employers: company ATS boards above |
+| Canada | Job Bank (official; shows whether an employer has an LMIA), Indeed CA, LinkedIn |
 
 ## Gmail queries for recruiter outreach
 
