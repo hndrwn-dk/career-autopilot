@@ -25,7 +25,7 @@ Run inbox-sync. Flip `Ready to submit` rows to `Submitted` when a confirmation e
 
 ## 2. New roles
 
-Run find-jobs without its final question. LinkedIn only if `use_linkedin: yes`.
+Run find-jobs without its final question. Account platforms only if listed in `use_platforms` and the user has a current `platform_ack_<platform>`, at half the daily caps, skipping paused ones (`find-jobs/references/platforms.md`). A platform without an ack is skipped and named in the summary ("LinkedIn dilewati: belum ada persetujuan risiko akun").
 - `active`: queue postings with no hard-filter hit and score ≥ `min_match`, best first, up to `max_applications_per_day` minus forms already prefilled today. Leftover queued jobs go first.
 - `watch`: keep only score ≥ `watch_min_match` and an allowed employment model. Do not queue anything. Max 5.
 
@@ -55,6 +55,7 @@ Replies
 - Rejected: <Company> · <Role>
 
 Skipped: <n> (<top reasons>) · Scams skipped: <n> · Waiting for reply: <n>
+Platforms: <platform> <used>/<cap> · paused: <platform until date>
 Tracker: <sheet link>
 ```
 

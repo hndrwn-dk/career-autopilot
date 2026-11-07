@@ -14,7 +14,7 @@ description: >
 
 1. Confirm the job was approved in this conversation (or queued by an `active` autopilot run) and passes fit-check.
 2. Check `Applications` for the same company + role or link. Already there → stop and say so. Run the scam check again on the apply page (a form asking for payment, bank or ID details → stop, skip, tell the user).
-3. Open the posting in a new tab. Note the route: company ATS, portal, LinkedIn Easy Apply, or email (→ recruiter-email).
+3. Open the posting in a new tab. Note the route: company ATS, portal, an account platform (LinkedIn Easy Apply, JobStreet, Indeed, Glints…), or email (→ recruiter-email). Account platforms: follow `${CLAUDE_PLUGIN_ROOT}/skills/find-jobs/references/platforms.md` (reminder, prefill cap, stop on warning signs).
 4. Pick the CV: the `cv_<label>` whose note matches the role, else `cv_default`. Respect the form's file-size limit.
 5. Fill only from Profile. Patterns per ATS: `references/ats-forms.md`.
    - Phone: the regional phone for the job's country.

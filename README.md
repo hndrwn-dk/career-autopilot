@@ -17,6 +17,7 @@ Nothing about you is in the plugin. Your data stays in your own Google Sheet and
 | For everyone | Five situations (segments) change scoring, sources and tone: `experienced`, `fresh-graduate`, `career-returner`, `side-income`, `career-switcher`. A fresh graduate is scored on education and projects, not years; a returner's career break is not penalised; side income is scored on schedule, pay per hour and safety. |
 | Any field | Example presets for finance, nursing, marketing, supply chain and tech, plus custom presets Claude drafts for any other field. |
 | Any country, any work mode | Remote, hybrid or onsite, with commute limit, hours per week, schedule and pay per hour, day, project or month. Built-in sources for Singapore, APAC, EMEA and US/Canada; other countries' portals are found on first use. |
+| Account safety | A reminder mode for LinkedIn, JobStreet, Indeed, Upwork and similar platforms: you confirm the risk once, Claude stays under daily caps, warns at 80%, and pauses at the first warning sign. |
 | Scam guard | "Agents" who ask you to pay first, like or comment first, join a paid class or install an app are skipped automatically, along with task scams, money-mule and reshipping jobs, pay-to-join schemes, fake government recruitment, and overseas offers that match trafficking patterns. Paste any offer you received and ask "ini penipuan bukan?". |
 | No hassle | Three questions to start; nothing else is asked until it changes a result. Works in chat only if you do not connect Gmail or Drive. |
 | Sounds like you | Every email, reply and cover letter follows a writing guide that removes AI-sounding patterns, and can match a sample of your own writing. |
@@ -80,6 +81,15 @@ Segments: `plugins/career-autopilot/segments/`. Presets: `plugins/career-autopil
 
 Passwords and logins, consent and terms checkboxes, diversity questions, date of birth, home address, ID numbers, payments, the final Submit, and sending email.
 
-## LinkedIn
+## Account safety on LinkedIn and similar platforms
 
-LinkedIn's terms prohibit automation. It is off by default; when enabled the plugin works slowly in your own signed-in browser with a daily cap, and your account carries the risk.
+LinkedIn, JobStreet/JobsDB, SEEK, Indeed, Glassdoor, Glints, Kalibrr, Naukri, XING, Upwork, Fiverr and similar platforms mostly prohibit automation and can restrict accounts. Career Autopilot always runs them in account-safety mode:
+
+- a reminder before first use of each platform, which you confirm (repeated every 30 days)
+- read-only browsing in your own signed-in browser, one page at a time with pauses
+- conservative daily caps (e.g. 40 LinkedIn job descriptions, 5 quick-apply prefills), with a heads-up at 80%
+- an immediate 48-hour pause on that platform at any CAPTCHA, "unusual activity" message or limit warning
+- no automated messages, connection requests, likes, comments or marketplace proposals: Claude drafts, you send
+- unattended runs use only the platforms you list in `use_platforms`, at half the caps
+
+Sources without an account (company career sites, official portals, remote boards) are always tried first.

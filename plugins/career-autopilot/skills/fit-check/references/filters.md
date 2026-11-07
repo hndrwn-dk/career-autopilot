@@ -33,8 +33,11 @@
 | weights | must_have:45, years:15, stack:20, certs:10, domain:5, scope:5 | scoring |
 | max_applications_per_day | 10 | pacing in active mode |
 | company_boards | greenhouse:acme, lever:foo | saved ATS boards |
-| use_linkedin | no | include LinkedIn in unattended runs |
-| linkedin_daily_cap | 40 | LinkedIn descriptions per day |
+| use_platforms | linkedin, jobstreet | account platforms allowed in unattended runs (default none) |
+| platform_caps | linkedin: opened=30, prefilled=3 | overrides of the daily caps in find-jobs/references/platforms.md |
+| platform_ack_<platform> | 2026-11-08 | date the user accepted the account-risk reminder |
+| platform_pause_<platform> | 2026-11-10 | paused until this date after a warning sign |
+| platform_usage_<platform> | 2026-11-08 opened=12 searches=3 prefilled=1 | today's counters |
 | run_time | 09:40 | local time of scheduled runs |
 | run_day | Sunday | watch-mode weekday |
 | timezone | Asia/Singapore | IANA zone |
