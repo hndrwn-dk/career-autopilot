@@ -87,7 +87,7 @@ LinkedIn, JobStreet/JobsDB, SEEK, Indeed, Glassdoor, Glints, Kalibrr, Naukri, XI
 
 - a reminder before first use of each platform, which you confirm (repeated every 30 days)
 - read-only browsing in your own signed-in browser, one page at a time with pauses
-- conservative daily caps (e.g. 40 LinkedIn job descriptions, 5 quick-apply prefills), with a heads-up at 80%
+- low daily caps per platform (12 job descriptions, 5 search pages, 3 quick-apply prefills), with a heads-up at 80%
 - an immediate 48-hour pause on that platform at any CAPTCHA, "unusual activity" message or limit warning
 - no automated messages, connection requests, likes, comments or marketplace proposals: Claude drafts, you send
 - unattended runs use only the platforms you list in `use_platforms`, at half the caps

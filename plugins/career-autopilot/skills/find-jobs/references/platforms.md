@@ -19,7 +19,7 @@ Any other site the user signs in to for job search counts too.
 
 Show these in the user's language, briefly, never as a wall of text:
 1. **First use of a platform in a session**: "<Platform> melarang otomasi di syarat penggunaannya. Saya akan bekerja pelan di browser Anda, membaca saja, dan berhenti kalau ada peringatan. Risikonya ada di akun Anda. Lanjut?" Wait for yes. Record `platform_ack_<platform>: <date>` in Filters; repeat the reminder after 30 days.
-2. **At 80% of a daily cap**: "Hari ini sudah 32 dari 40 lowongan LinkedIn yang saya buka. Sisanya besok, supaya akun Anda aman."
+2. **At 80% of a daily cap**: "Hari ini sudah 10 dari 12 lowongan LinkedIn yang saya buka. Sisanya besok, supaya akun Anda aman."
 3. **Cap reached**: stop that platform for the day and say so in the summary.
 4. **Any warning sign** (CAPTCHA, "unusual activity", "you've reached the limit", forced logout, HTTP 429, a verification step): stop that platform at once, for 48 hours (`platform_pause_<platform>: <until>`), and tell the user what appeared. Never try to get around it.
 
@@ -27,18 +27,19 @@ Show these in the user's language, briefly, never as a wall of text:
 
 - Only in the user's own browser, signed in by the user. Claude never types a password, never creates accounts, never solves CAPTCHAs.
 - Read-only by default: search pages and job descriptions. No bulk scraping of profiles, no exporting contacts.
-- One page at a time, never parallel tabs on the same platform. Wait 4–10 seconds between page loads, varied, and a longer pause every 10 pages.
+- One page at a time, never parallel tabs on the same platform. Wait 10–30 seconds between page loads, varied, and read each page fully before moving on, as a person would.
 - No calls to undocumented internal endpoints in loops; read what the page shows.
 - Daily caps (conservative defaults chosen by this plugin, not limits published by the platforms; change in Filters `platform_caps`):
 
 | Action | Default cap per platform per day |
 |---|---|
-| Job descriptions opened | 40 (LinkedIn), 60 (other portals) |
-| Search result pages | 15 |
-| Applications prefilled (Easy Apply / quick apply) | 5 |
+| Job descriptions opened | 12 |
+| Search result pages | 5 |
+| Applications prefilled (Easy Apply / quick apply) | 3 |
 | Messages, connection requests, proposals | 0 automated; Claude drafts, the user sends |
 
-- Unattended runs (`autopilot-run`) use account platforms only when Filters `use_platforms` lists them, at half the caps above.
+- Unattended runs (`autopilot-run`) use account platforms only when Filters `use_platforms` lists them, at half the caps above (6 descriptions, 2 search pages, 1 prefill).
+- The user may lower caps in `platform_caps`. Raising a cap above 15 descriptions per day needs the user to confirm the risk again in this conversation.
 - Never: mass connection requests, auto-endorsements, auto-likes or comments, profile-view bots, bulk messaging, or sending marketplace proposals. Claude writes the text; the user posts it.
 - Spread work out: prefer a short daily session over one long one.
 - Prefer sources without an account first (company ATS boards, official portals' public search, remote boards). Account platforms fill the gaps.
