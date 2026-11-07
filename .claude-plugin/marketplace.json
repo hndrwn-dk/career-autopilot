@@ -1,0 +1,15 @@
+{
+  "name": "career-autopilot",
+  "owner": {
+    "name": "Tursina Labs"
+  },
+  "description": "Career Autopilot: semi-automated job search for tech professionals, with role presets and a Singapore/APAC focus.",
+  "plugins": [
+    {
+      "name": "career-autopilot",
+      "source": "./plugins/career-autopilot",
+      "description": "Builds your profile from your CV, finds matching roles, scores fit, prefills applications in your browser for you to submit, drafts recruiter emails, tracks replies, and prepares you for interviews.",
+      "version": "0.1.0"
+    }
+  ]
+}
