@@ -1,7 +1,7 @@
 {
   "name": "career-autopilot",
-  "version": "0.2.1",
-  "description": "Builds your profile from your CV, finds matching jobs in the countries you choose, scores fit, prefills applications in your browser for you to submit, drafts recruiter emails, tracks replies, and prepares you for interviews. Works for any profession through customizable role presets.",
+  "version": "0.3.0",
+  "description": "Job search help for anyone: professionals, fresh graduates, returners, side income and career switchers, in any field, any country, remote or onsite. Finds and scores jobs, skips scams, prefills applications for you to submit, writes emails in your voice, builds a CV, tracks replies and prepares interviews.",
   "author": {
     "name": "Tursina Labs"
   },
@@ -10,8 +10,11 @@
     "job search",
     "career",
     "cv",
-    "tracker",
-    "interview",
-    "relocation"
+    "fresh graduate",
+    "part-time",
+    "freelance",
+    "remote",
+    "scam check",
+    "interview"
   ]
 }

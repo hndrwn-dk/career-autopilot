@@ -8,6 +8,8 @@ description: >
 
 # Interview brief
 
+Adapt to the segment (`${CLAUDE_PLUGIN_ROOT}/segments/<segment>.md`): fresh graduates get practice for online tests, group interviews and "tell me about a project"; returners get a short, confident answer about the break; side-income users get a short call script (availability, pay, how they work).
+
 Inputs: the Applications row (or a link/description the user gives), `Profile`, `Stories`, and the invite email if any (who, which round, format).
 
 ## Research (web, 3–6 searches)

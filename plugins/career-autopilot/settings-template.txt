@@ -1,0 +1,52 @@
+CAREER-AUTOPILOT-SETTINGS v1
+# Copy this block, fill in what applies, delete what does not, and paste it after "set up career autopilot".
+# Lines starting with # are ignored. Leave a value empty to have Claude ask.
+
+# Who is this for? (leave empty for yourself; a name creates a separate profile, e.g. for a family member)
+profile:
+
+# Your situation: experienced | fresh-graduate | career-returner | side-income | career-switcher
+segment:
+
+# Your field: an example name (see presets/README.md), custom:<name>, or none
+preset:
+
+# active (daily, forms prefilled) | watch (weekly digest, strong matches only) | off
+mode: watch
+language: id
+timezone: Asia/Jakarta
+
+# Where and how
+countries:
+work_mode: any
+remote_scope:
+home_area:
+max_commute_minutes:
+hours_per_week:
+schedule:
+
+# Pay (pick one style)
+salary_floor_<region>:
+pay_unit:
+pay_floor:
+
+# What to look for
+target_roles:
+keywords:
+seniority:
+exclude_keywords:
+exclude_companies:
+employment_types:
+languages_spoken:
+needs_sponsorship:
+
+# Profile facts (never put ID numbers, bank details, date of birth or a full address here)
+profile.full_name:
+profile.email:
+profile.phone_default:
+profile.location_current:
+profile.linkedin_url:
+profile.notice_period:
+profile.availability_note:
+profile.tone:
+END-SETTINGS

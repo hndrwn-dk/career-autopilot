@@ -10,6 +10,7 @@ description: >
 # Recruiter email: draft, then send on approval
 
 Guardrails: `${CLAUDE_PLUGIN_ROOT}/skills/apply-assist/references/guardrails.md`.
+Writing: `${CLAUDE_PLUGIN_ROOT}/references/writing-style.md` for every draft (application, reply, follow-up, thank-you note). Scam check `${CLAUDE_PLUGIN_ROOT}/references/scam-signals.md` on every incoming message before drafting: an always-skip signal → no draft, tell the user why.
 
 ## Application by email
 
@@ -28,4 +29,10 @@ Guardrails: `${CLAUDE_PLUGIN_ROOT}/skills/apply-assist/references/guardrails.md`
 
 ## Style
 
-Plain and specific. No buzzwords, no superlatives, no claims beyond Profile. Language: the recruiter's.
+Follow writing-style.md. Language: the recruiter's. After the user edits a draft, offer once to save their wording as `writing_sample`.
+
+## Other messages it can draft
+
+- Thank-you note after an interview (same day, under 100 words, one specific point from the conversation the user tells you).
+- Polite withdrawal or declining an offer, only when the user decides to.
+- Freelance proposals and replies to clients on marketplaces (text for the user to paste).

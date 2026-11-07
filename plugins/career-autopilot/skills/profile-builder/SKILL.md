@@ -40,12 +40,18 @@ Source: CV = from the CV · ask = ask the user · calc = computed from CV dates.
 | willing_to_relocate | ask | |
 | cv_default, cv_<label> | auto/ask | file name in Drive plus a one-line "use for" note |
 | facts_confirmed | ask | extra facts the user confirmed |
+| career_break | ask, optional | dates and the user's own one-line description; nothing beyond what they say |
+| availability_note | ask | e.g. "weekdays 9-2, can start next month" |
+| writing_sample | ask, optional | 1–2 messages the user wrote, for voice matching |
+| tone | ask, optional | e.g. formal, friendly, Bahasa Indonesia baku |
+| portfolio_links | ask, optional | Drive or web links to work samples |
 
-Never store: ID or passport numbers, bank or card details, passwords, date of birth, gender, marital status, religion, health.
+Never store: ID or passport numbers, bank or card details, passwords, date of birth, gender, marital status, number or ages of children, religion, health. A full home address never goes in; `home_area` (district or city) is enough.
 
 ## Steps
 
-1. Read the CV. Extract the keys above.
+0. No CV, or the user says it is old → offer cv-builder instead; it fills the Profile at the end.
+1. Read the CV. Extract the keys above. Read the segment file (`${CLAUDE_PLUGIN_ROOT}/segments/<segment>.md`, section Profile) for what matters most for this user.
 2. Show a compact table plus the arithmetic lines, and list every empty `ask` key. Ask for them in one message.
 3. After the user confirms, write to `Profile` (overwrite only changed keys).
 4. Save the CV in Drive folder `Career Autopilot/CV` if missing; set `cv_default`.

@@ -14,7 +14,7 @@ Turning on `active` mode approves searching and prefilling forms. It never appro
 
 ## 0. Load
 
-Read Profile, Filters, Applications, Skip from `Career Autopilot Tracker`.
+Read Profile, Filters, Applications, Skip from the tracker of the profile the prompt names (setup step 0; default profile when none is named).
 - `mode` is `off` → stop: "Autopilot is off."
 - Profile empty → stop: "Profile is empty. Upload your CV and say: build my profile."
 - The prompt names a mode that differs from Filters → use Filters and mention it.
@@ -54,7 +54,7 @@ Replies
 - Offer: <Company> · <Role>
 - Rejected: <Company> · <Role>
 
-Skipped: <n> (<top reasons>) · Waiting for reply: <n>
+Skipped: <n> (<top reasons>) · Scams skipped: <n> · Waiting for reply: <n>
 Tracker: <sheet link>
 ```
 

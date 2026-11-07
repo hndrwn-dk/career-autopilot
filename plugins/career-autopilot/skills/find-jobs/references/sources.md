@@ -57,6 +57,25 @@ Portals change: if one no longer works, search for its replacement and update `c
 | United States | USAJOBS (federal government roles only), Indeed, LinkedIn, Dice (tech); most private employers: company ATS boards above |
 | Canada | Job Bank (official; shows whether an employer has an LMIA), Indeed CA, LinkedIn |
 
+## Remote and freelance
+
+Remote job boards (check each posting's location restriction):
+- Remotive (public API `https://remotive.com/api/remote-jobs?search=<keywords>`; unofficial for automation, confirm the shape on first use), We Work Remotely, Remote OK, Working Nomads, Himalayas: browser or WebFetch, read only.
+- ATS discovery with `"remote" "<region or country>"` (see above).
+
+Freelance and project marketplaces (the user signs up and applies personally; Claude finds listings the user can see and drafts proposals):
+- Global: Upwork, Fiverr, Freelancer, Contra; Toptal and similar vetted networks for senior freelancers.
+- Indonesia: Sribulancer, Projects.co.id, Fastwork. Southeast Asia: Fastwork (TH, ID, VN), FastJobs (SG, MY, PH) for part-time and hourly jobs.
+
+Part-time, flexible and returner roles:
+- Country portals' part-time / flexible filters.
+- Web search: `returnship <country>`, `part time work from home <city> site:<official portal>`, `school hours jobs <city>`.
+
+Graduate and entry level:
+- Company graduate programmes (search `graduate programme <company or industry> <country> <year>`), country portals' entry-level filters, university career portals the user names.
+
+Prefer official portals and company sites for side-income searches; marketplace and social-media listings get the scam check every time.
+
 ## Gmail queries for recruiter outreach
 
 - `newer_than:14d (opportunity OR position OR role OR opening OR "your profile") -category:promotions -category:social`

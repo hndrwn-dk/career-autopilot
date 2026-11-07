@@ -2,7 +2,9 @@
 
 | Key | Example | Meaning |
 |---|---|---|
-| preset | sre-platform, tam-presales | role presets in use |
+| profile | Siti | which person this tracker belongs to (setup step 0) |
+| segment | experienced / fresh-graduate / career-returner / side-income / career-switcher | the user's situation |
+| preset | finance-accounting, custom:barista | role presets in use |
 | mode | active / watch / off | how autopilot behaves |
 | target_roles | Site Reliability Engineer, Platform Engineer | titles to search |
 | keywords | kubernetes, openshift, object storage | search terms |
@@ -10,13 +12,21 @@
 | exclude_companies | Acme | never apply |
 | countries | Singapore, Australia, Germany, Canada | any countries; `remote` too |
 | country_portals | Portugal: net-empregos.pt, … | portals found for countries not in sources.md |
-| remote_ok | yes | include remote roles open to the user's country |
+| work_mode | remote / hybrid / onsite / any (comma list allowed) | allowed work arrangements |
+| remote_scope | Indonesia, Singapore, worldwide | countries whose employers the user may legally work for remotely |
+| remote_timezones | UTC+7 to UTC+9 | acceptable working-hours overlap |
+| max_commute_minutes | 45 | for hybrid/onsite, from `home_area` |
+| home_area | Bekasi Barat | area name only, never a full address |
+| hours_per_week | 20 | for part-time and side income |
+| schedule | weekdays 09:00-14:00 | when the user can work |
+| pay_unit | hour / day / project / month | unit for `pay_floor` |
+| pay_floor | IDR 50,000 | minimum pay in `pay_unit` |
 | needs_sponsorship | singapore: yes | per country |
 | languages_spoken | English, Indonesian | any other required language is a blocker |
 | salary_floor_<region> | salary_floor_sg: SGD 12,000/month | exclude below |
 | seniority | senior, staff, lead | allowed levels |
 | exclude_keywords | intern, junior | title words to skip |
-| employment_types | permanent, contract (direct) | allowed models |
+| employment_types | permanent, contract (direct), part-time, freelance / project, casual / gig, internship, graduate programme, returnship | allowed models |
 | min_contract_months | 12 | shorter contracts get flagged |
 | min_match | 75 | apply threshold in active mode |
 | watch_min_match | 88 | threshold in watch mode |
