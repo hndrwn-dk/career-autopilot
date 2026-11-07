@@ -2,7 +2,7 @@
 
 A Claude plugin for job hunting. You choose the profession and the target countries; the plugin adapts.
 
-- **Any profession.** Role presets set target titles, keywords, skill groups and scoring weights. The plugin ships with example presets for tech roles, and `setup` can draft a custom preset for any field (finance, healthcare, education, design, operations…) from your CV and the roles you name.
+- **Any profession.** Role presets set target titles, keywords, skill groups and scoring weights. The plugin ships with example presets for several fields (finance, nursing, marketing, supply chain, tech), and `setup` can draft a custom preset for any other field from your CV and the roles you name.
 - **Any country.** Built-in sources and work-permit notes for Singapore, APAC, EMEA and US/Canada. For any other country, Claude finds the main job portals on first use and saves them to your settings.
 
 It reads your CV, keeps a tracker in Google Sheets, finds roles that match, scores the fit, prefills application forms in your own browser (you press Submit), drafts recruiter emails (you press Send), syncs replies from Gmail, and builds an interview brief for every invite.
@@ -23,7 +23,7 @@ Claude Code:
 ## First run
 
 1. Say **"set up career autopilot"**. Claude checks Gmail, Google Drive/Sheets and the browser, then creates the `Career Autopilot Tracker` sheet.
-2. Pick a preset: one of the bundled examples (`sre-platform`, `tam-presales`, `storage-infra`), **`custom`** (Claude drafts one for your field and saves it in your Drive), or `none`. Everything stays editable.
+2. Pick a preset: an example from `presets/examples/`, **`custom`** (Claude drafts one for your field and saves it in your Drive), or `none`. Everything stays editable.
 3. Tell Claude your target countries (e.g. `Singapore, Australia, Germany, Canada`).
 4. Upload your CV and say **"build my profile"**.
 5. Optional: paste a settings block (format below) to set everything in one go.

@@ -9,7 +9,7 @@ description: >
 # Check fit
 
 Load `Profile` and `Filters`. Keys: `references/filters.md`. If Filters has `preset`, read each one for skill groups,
-credential equivalents and field-specific checks: bundled names from `${CLAUDE_PLUGIN_ROOT}/presets/<name>.md`,
+credential equivalents and field-specific checks: example names from `${CLAUDE_PLUGIN_ROOT}/presets/examples/<name>.md`,
 `custom:<name>` from the user's Drive `Career Autopilot/presets/<name>.md`. A preset file that cannot be read: continue
 without it and say so. No preset: derive skill groups from the posting itself.
 

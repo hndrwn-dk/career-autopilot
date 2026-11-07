@@ -45,8 +45,8 @@ Look for a spreadsheet named exactly `Career Autopilot Tracker`. Create it if mi
 Format and locations: `${CLAUDE_PLUGIN_ROOT}/presets/README.md`.
 
 If Filters has no `preset`, ask once what kind of role the user wants (any field). Then:
-- A bundled preset fits (`sre-platform`, `tam-presales`, `storage-infra`) → offer it.
-- Otherwise, or if the user asks for `custom` → draft a custom preset with the template in the presets README, from the
+- An example in `${CLAUDE_PLUGIN_ROOT}/presets/examples/` fits (list them from the presets README) → offer it as is, or as a custom copy the user can adjust.
+- Otherwise, or if the user asks for `custom` → draft a custom preset from `${CLAUDE_PLUGIN_ROOT}/presets/_template.md`, from the
   role titles the user names, their CV (if already uploaded) and 2–3 web searches on how such postings are usually worded
   in their target countries. Show it, apply the user's edits, save it to Drive `Career Autopilot/presets/<name>.md`
   (`<name>`: lowercase, hyphens) and set Filters `preset: custom:<name>`.

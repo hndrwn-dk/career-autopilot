@@ -1,52 +1,48 @@
 # Role presets
 
-A preset tells Career Autopilot what a good match looks like for one kind of role. The bundled files
-(`sre-platform`, `tam-presales`, `storage-infra`) are examples for tech roles. Any profession works the same way.
+A preset tells Career Autopilot what a good match looks like for one kind of role: target titles, search keywords,
+skill groups, credential equivalents, scoring weights and field-specific checks. Presets are optional; without one,
+fit-check scores each posting against its own requirements.
+
+## Layout
+
+```
+presets/
+  README.md          this file
+  _template.md       empty template for a new preset
+  examples/          ready-to-use examples, one file per field
+```
+
+Examples in `examples/`:
+
+| Name | Field |
+|---|---|
+| finance-accounting | accounting, controlling, FP&A, audit |
+| healthcare-nursing | registered nurses and nurse leaders |
+| marketing-digital | digital, performance, content and brand marketing |
+| operations-supply-chain | supply chain, logistics, procurement, operations |
+| sre-platform | SRE, platform, DevOps, cloud infrastructure |
+| storage-infra | storage, backup and data infrastructure |
+| tam-presales | technical account managers, solutions architects, pre-sales |
 
 ## Where presets live
 
 | Kind | Location | Filters value |
 |---|---|---|
-| Bundled | this folder | `preset: sre-platform` |
+| Example | `presets/examples/<name>.md` in this plugin | `preset: finance-accounting` |
 | Custom (per user) | the user's Drive, `Career Autopilot/presets/<name>.md` | `preset: custom:<name>` |
 
-Several presets: comma list, e.g. `preset: custom:product-marketing, tam-presales`.
-Custom presets stay in the user's own Drive, so they never end up in this repo.
+Several presets: comma list, e.g. `preset: custom:product-marketing, marketing-digital`.
+Custom presets stay in each user's Drive and never enter this repo. To start from an example, ask
+"copy the marketing-digital preset and adjust it for me": setup saves the copy as a custom preset.
 
-## Template
+## Writing one
 
-```markdown
-# Preset: <name>
+Copy `_template.md`. Notes:
+- `stack` in weights means skills, tools and methods for any field: software for engineers, procedures for clinicians, channels and platforms for marketers.
+- `certs` covers certifications, licences and registrations.
+- Keep "Things to check" to points that change whether someone should apply.
 
-<one line: who this is for>
+## Contributing an example
 
-| Key | Value |
-|---|---|
-| target_roles | <titles, comma list> |
-| keywords | <search terms, comma list> |
-| seniority | <allowed levels> |
-| exclude_keywords | <title words to skip> |
-| min_match | 75 |
-| weights | must_have:45, years:15, stack:20, certs:10, domain:5, scope:5 |
-
-## Skill groups (overlap counts once per group)
-
-- <Group>: <tool, method or skill>, <…>
-
-## Credential equivalents (a credential counts as proof of the skill)
-
-<licence / certification> → <skill>
-
-## Things to check in these postings
-
-- <field-specific red flags or checks, e.g. licence required in that country, shift work, travel, quota>
-```
-
-`stack` in weights means "skills, tools and methods" for any field: software for engineers, instruments and procedures for clinicians, channels and platforms for marketers.
-`certs` covers certifications, licences and registrations (e.g. CPA, nursing registration, PMP).
-
-## Examples of custom presets
-
-- `custom:registered-nurse` — skill groups: ICU, ED, med-surg; credential check: nursing registration in the target country (flag if a conversion exam is needed).
-- `custom:finance-controller` — skill groups: IFRS/GAAP, consolidation, ERP (SAP, Oracle, NetSuite); credentials: CPA, ACCA, CA.
-- `custom:product-designer` — skill groups: research, interaction, visual, design systems; portfolio link required.
+Add a file to `examples/` and a row to the table above. Keep it field-generic: no personal data, no company names.

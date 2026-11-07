@@ -9,7 +9,7 @@
       "name": "career-autopilot",
       "source": "./plugins/career-autopilot",
       "description": "Builds your profile from your CV, finds matching jobs in the countries you choose, scores fit, prefills applications in your browser for you to submit, drafts recruiter emails, tracks replies, and prepares you for interviews. Works for any profession through customizable role presets.",
-      "version": "0.2.0"
+      "version": "0.2.1"
     }
   ]
 }
