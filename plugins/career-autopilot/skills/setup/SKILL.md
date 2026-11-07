@@ -10,6 +10,22 @@ description: >
 
 # Setup and health check
 
+## Quick start (default for new users)
+
+The user should be able to start in under two minutes. Ask only three things, in one friendly message:
+1. What work they are looking for (any words: "admin", "jaga toko", "kerja dari rumah", "SRE").
+2. Where: city or area, or remote.
+3. Whether they have a CV (upload it) or want Claude to make one.
+
+Then create the tracker if Drive is connected (otherwise run in chat-only mode), infer `segment`, `preset` (an example
+or `none`) and `work_mode` from the answers, set `mode: off`, share the five simple scam rules from
+`${CLAUDE_PLUGIN_ROOT}/references/scam-signals.md`, and run find-jobs once. Everything else (pay, hours, countries,
+schedule, voice sample, autopilot) is asked later, only when it changes a result ("Lowongan ini dibayar per jam;
+berapa minimal per jam yang Anda mau?"). Use the full steps below only when the user asks for full setup, a health
+check, or pastes a settings block.
+
+## Full setup
+
 Speak plainly. Many users are not technical: explain a connector as "akses ke Gmail Anda supaya saya bisa membaca balasan
 lamaran", not by tool name. Ask in small groups of questions, never one long form.
 Run every step, never stop at the first failure, and finish with one table: Check | Status (OK / Missing / Error) | What to do.

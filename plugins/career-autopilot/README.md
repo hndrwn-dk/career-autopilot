@@ -17,7 +17,8 @@ Nothing about you is in the plugin. Your data stays in your own Google Sheet and
 | For everyone | Five situations (segments) change scoring, sources and tone: `experienced`, `fresh-graduate`, `career-returner`, `side-income`, `career-switcher`. A fresh graduate is scored on education and projects, not years; a returner's career break is not penalised; side income is scored on schedule, pay per hour and safety. |
 | Any field | Example presets for finance, nursing, marketing, supply chain and tech, plus custom presets Claude drafts for any other field. |
 | Any country, any work mode | Remote, hybrid or onsite, with commute limit, hours per week, schedule and pay per hour, day, project or month. Built-in sources for Singapore, APAC, EMEA and US/Canada; other countries' portals are found on first use. |
-| Scam guard | "Agents" who ask you to pay first, like or comment first, or join a paid class are skipped automatically, along with task scams, money-mule jobs and early requests for ID or bank details. |
+| Scam guard | "Agents" who ask you to pay first, like or comment first, join a paid class or install an app are skipped automatically, along with task scams, money-mule and reshipping jobs, pay-to-join schemes, fake government recruitment, and overseas offers that match trafficking patterns. Paste any offer you received and ask "ini penipuan bukan?". |
+| No hassle | Three questions to start; nothing else is asked until it changes a result. Works in chat only if you do not connect Gmail or Drive. |
 | Sounds like you | Every email, reply and cover letter follows a writing guide that removes AI-sounding patterns, and can match a sample of your own writing. |
 | No CV needed | `cv-builder` interviews you in plain language and makes a CV, including an honest line for a career break if you want one. |
 | Watch mode | Already employed? A weekly digest of only the strongest matches, nothing filled in. |
@@ -37,6 +38,10 @@ Claude Code:
 ```
 
 ## First run
+
+Quick start: say **"mulai cari kerja"** and answer three questions (what work, where or remote, CV or no CV). Claude shows matching jobs right away and asks for anything else only when it matters.
+
+Full setup:
 
 1. Say **"set up career autopilot"** (or "mulai cari kerja"). Claude checks Gmail, Google Drive and the browser and creates your tracker.
 2. Answer a few plain questions: your situation, the kind of work, remote or onsite, hours, pay, countries.
@@ -58,6 +63,7 @@ Claude Code:
 |---|---|
 | "find jobs" / "cari lowongan" / "cari kerja sampingan dari rumah" | ranked shortlist with match %, work mode, pay and reasons |
 | "check this job: <link>" | fit check with gaps, blockers, scam check and flags |
+| "ini penipuan bukan?" + a pasted WhatsApp/email offer | scam check with the reason, in plain words |
 | "apply to 1 and 3" | forms prefilled in the browser; you tick consents and submit |
 | "draft an email for this job" / "balas email HRD ini" | Gmail draft in your voice; sent only when you say so |
 | "check my application emails" | tracker statuses updated, next actions, scams listed separately |
