@@ -67,8 +67,11 @@ When the user pastes the copied text ("Lanjutkan setup Career Autopilot dari das
    `contract (direct), contract via agency` to `employment_types`: most remote roles abroad are contractor roles (fit-check flags them).
    `employment: internship` → `employment_types: internship, graduate programme`; `employment: rotation` → add `rotation` to `employment_types`
    and save `rotation` as `rotation_pattern` (e.g. 14/14); `work: energy` also adds offshore sources (find-jobs sources.md, Offshore and rotation).
-   `move` → `relocation` (none/alone/family); `family_text` → `family` (who comes along, as typed). For `alone` or `family`, ask once in one
-   message: the user's citizenship (for `needs_sponsorship` per country) and whether a relocation package is required (`relocation_support`). `pay: official` → propose each country's official floor (career-autopilot-setup step 5) in one message; with `relocation: family`
+   `move` → `relocation` (none/alone/family); `family_text` → `family` as who comes along only (spouse, children, parents): drop any
+   number, names or ages, and write the same cleaned text back to `onboarding/answers`. For `alone` or `family`, ask once in one
+   message: the user's citizenship (for `needs_sponsorship` per country) and whether a relocation package is required (`relocation_support`).
+   Unanswered → `relocation_support: preferred` (flag, not exclude) and say so in one line. `Europe` with no countries named → search
+   EU-wide (EURES and visa-sponsor boards) and apply each posting country's threshold; do not ask again before the first search. `pay: official` → propose each country's official floor (career-autopilot-setup step 5) in one message; with `relocation: family`
    the floor is the higher of that and the country's minimum for bringing family (fit-check filters.md, Family relocation);
    `pay: custom` → parse `pay_text` into `salary_floor_<code>` lines and confirm them in one line.
 3. `cv: build` → run career-autopilot-cv-builder; `cv: have` → ask for the file.

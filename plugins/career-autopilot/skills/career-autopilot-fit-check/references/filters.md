@@ -24,7 +24,7 @@
 | needs_sponsorship | singapore: yes | per country |
 | citizenship | Indonesia | decides work rights per country; asked only when the user looks abroad |
 | relocation | none / alone / family | whether the user would move for the job |
-| family | spouse + 2 children | who moves along (as the user typed it; no names or ages needed) |
+| family | spouse, children | who moves along: spouse, children, parents. Never the number, names or ages of children (profile-builder privacy rule) |
 | relocation_support | required / preferred / none | relocation package: flights, shipping, temporary housing, visa costs for the family |
 | rotation_pattern | 14/14, 28/28 | days on / days off for rotation work (offshore, mining, remote sites) |
 | rotation_region | Asia Pacific, Middle East | where the user accepts to fly in for rotations; crew-change point travel |
