@@ -23,7 +23,7 @@
 | pay_floor | IDR 50,000 | minimum pay in `pay_unit` |
 | needs_sponsorship | singapore: yes | per country |
 | languages_spoken | English, Indonesian | any other required language is a blocker |
-| salary_floor_<region> | salary_floor_sg: SGD 12,000/month | exclude below |
+| salary_floor_<region> | salary_floor_sg: SGD 5,600/month | exclude below; see "Default salary floors" when the user has none |
 | seniority | senior, staff, lead | allowed levels |
 | exclude_keywords | intern, junior | title words to skip |
 | employment_types | permanent, contract (direct), part-time, freelance / project, casual / gig, internship, graduate programme, returnship | allowed models |
@@ -44,6 +44,27 @@
 | language | id / en | language for summaries and drafts to the user |
 | availability | weekdays after 18:00 SGT | used when proposing interview slots |
 | last_inbox_sync | 2026-11-01 | set by inbox-sync |
+
+# Default salary floors (when the user gives none)
+
+Use the official reference for the country, tell the user which one, and let them change it. Thresholds change: before relying on a figure, check the official page once per month and update this table.
+
+## Singapore (Ministry of Manpower, mom.gov.sg)
+
+Singapore has no national minimum wage. Reference points:
+
+| Situation | Default `salary_floor_sg` | Source and notes |
+|---|---|---|
+| Needs an Employment Pass (PMET roles) | EP qualifying salary: SGD 5,600/month (financial services SGD 6,200), higher with age | MOM EP eligibility, in force since 1 Jan 2025. From 1 Jan 2027 for new applications: SGD 6,000 (financial services SGD 6,600). Age-adjusted figure: MOM Self-Assessment Tool (SAT). |
+| Needs an S Pass (mid-skilled roles) | S Pass qualifying salary: SGD 3,300/month (financial services SGD 3,800), higher with age | MOM S Pass eligibility, in force since 1 Sep 2025. From 1 Jan 2027 for new applications: SGD 3,600 (financial services SGD 4,000). |
+| Singapore citizen or PR, full time | Local Qualifying Salary: SGD 1,800/month | MOM LQS from 1 Jul 2026. Not a legal minimum wage for every job, but the level a full-time local must earn to count toward an employer's quota. Sectors under the Progressive Wage Model (cleaning, security, landscape, retail, food services and others) have their own higher wage ladders: check the MOM PWM page for the job's sector. |
+| Part-time locals | No fixed floor; use `pay_floor` per hour | The LQS has a pro-rated part-time rule; ask the user for an hourly floor. |
+
+For a work-pass holder the EP or S Pass figure is a hard floor: an employer cannot get the pass approved below it. Always state that meeting it does not guarantee approval (EP also needs COMPASS points).
+
+## Other countries
+
+Use the official national minimum wage or the work-permit salary threshold for that country (e.g. Malaysia national minimum wage, Indonesia provincial UMP/UMK, Australia national minimum wage and skilled-visa income thresholds, UK National Living Wage and Skilled Worker thresholds, EU Blue Card thresholds per country, US state minimum wage). Look up the current figure on the government site, show it with its source and date, and save it as the default floor only after the user agrees.
 
 # Work-permit notes (orientation only; check the current rule with a web search whenever a threshold decides the outcome)
 

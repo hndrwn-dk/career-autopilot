@@ -93,6 +93,9 @@ Several presets: union `target_roles` and `keywords`, lowest `min_match`, weight
 
 Ask, if empty: remote, hybrid, onsite or any (`work_mode`); for onsite/hybrid, home area and `max_commute_minutes`;
 `hours_per_week` and `schedule` if not full-time; `pay_unit` (hour/day/project/month) and `pay_floor`.
+No salary floor from the user → propose the official default for each country from
+`${CLAUDE_PLUGIN_ROOT}/skills/fit-check/references/filters.md` (Default salary floors; for Singapore the MOM EP or S Pass
+qualifying salary when a work pass is needed, otherwise the Local Qualifying Salary), with its source, and save it once the user agrees.
 Remote: ask which countries' employers they can legally work for (`remote_scope`) and their timezone overlap (`remote_timezones`).
 
 ## 6. Countries

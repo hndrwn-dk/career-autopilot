@@ -34,7 +34,7 @@ Source: CV = from the CV · ask = ask the user · calc = computed from CV dates.
 | education | CV | school, qualification, field, years; note equivalents only if the user states them |
 | languages | CV/ask | with level |
 | notice_period | ask | |
-| salary_floor_<region> | ask | e.g. salary_floor_sg: SGD 12,000/month |
+| salary_floor_<region> | ask | e.g. salary_floor_sg: SGD 5,600/month. If the user has no figure, propose the official default from `fit-check/references/filters.md` (Default salary floors), say which rule it is, and let them raise it |
 | current_salary | ask, optional | only if the user wants forms to show it |
 | preferred_employment | ask | permanent / contract / either |
 | willing_to_relocate | ask | |
