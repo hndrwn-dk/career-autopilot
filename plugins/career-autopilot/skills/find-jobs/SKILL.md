@@ -37,4 +37,5 @@ Table, best first: # | Company | Role | Location | Work mode | Pay | Model | Mat
 For non-technical users, also give a two-line plain summary of the top 3.
 Then one "Excluded" line grouped by reason. Write excluded postings with a reason to `Skip`.
 Save the shortlist to Drive `Career Autopilot/shortlists/<YYYY-MM-DD>.md`.
+Sync the dashboard (`${CLAUDE_PLUGIN_ROOT}/skills/dashboard/SKILL.md`, Sync) if Filters has `dashboard_url`.
 Ask which to apply to. Never start applying without the user's go-ahead in this conversation (autopilot-run in `active` mode is the only exception).

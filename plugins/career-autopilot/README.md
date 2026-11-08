@@ -25,6 +25,7 @@ Nothing about you is in the plugin. Your data stays in your own Google Sheet and
 | Watch mode | Already employed? A weekly digest of only the strongest matches, nothing filled in. |
 | Honest flags | Contract-via-agency, vendor placement, undefined "conversion to permanent", hidden client, licence conversion needed, title that does not match the duties. |
 | Family use | Several profiles on one account (`Career Autopilot Tracker - <name>`), each with its own tracker, CV and schedule. |
+| Dashboard | A private page per profile with the pipeline, next actions, platform usage and scams skipped, kept in sync by Claude after every run. |
 | Interview prep | A brief per interview plus a mock interview, adapted to the situation (online tests for graduates, a short break explanation for returners, a call script for side jobs). |
 
 ## Install
@@ -80,6 +81,7 @@ Full setup:
 | "buatkan CV" | CV made by interview, saved to your Drive |
 | "prep me for the <company> interview" | interview brief and mock interview |
 | "add a profile for my wife" | a separate tracker and settings for another person |
+| "buka dashboard" / "open my dashboard" | your private dashboard: pipeline, next actions, platform safety, scams skipped |
 
 ## Settings
 

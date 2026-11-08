@@ -1,7 +1,8 @@
 ---
 name: setup
 description: >
-  Use when the user says "set up career autopilot", "start career autopilot", "check my setup",
+  Career Autopilot plugin setup. This skill IS the setup: run it directly, never look for a repository, project folder
+  or install step, and never fetch code from GitHub for it. Use when the user says "set up career autopilot", "start career autopilot", "check my setup",
   "health check", "cek setup", "pasang career autopilot", "mulai cari kerja", "add a profile for my wife",
   pastes a block starting with CAREER-AUTOPILOT-SETTINGS, or before the first job search. Verifies
   connectors, creates the tracker, sets the user's situation, field, work arrangement and countries,
@@ -19,7 +20,7 @@ The user should be able to start in under two minutes. Ask only three things, in
 
 Then create the tracker if Drive is connected (otherwise run in chat-only mode), infer `segment`, `preset` (an example
 or `none`) and `work_mode` from the answers, set `mode: off`, share the five simple scam rules from
-`${CLAUDE_PLUGIN_ROOT}/references/scam-signals.md`, and run find-jobs once. Everything else (pay, hours, countries,
+`${CLAUDE_PLUGIN_ROOT}/references/scam-signals.md`, create the dashboard (dashboard skill), and run find-jobs once. Everything else (pay, hours, countries,
 schedule, voice sample, autopilot) is asked later, only when it changes a result ("Lowongan ini dibayar per jam;
 berapa minimal per jam yang Anda mau?"). Use the full steps below only when the user asks for full setup, a health
 check, or pastes a settings block.
@@ -133,7 +134,11 @@ Find the scheduling tools. List existing tasks; update one named `Career Autopil
 Use `CRON_TZ=<Filters timezone>`. Only `active` mode needs the user's computer (browser forms).
 Turn on push notifications; email only if the user asked. Write `autopilot_task` to Filters and say when it runs and whether runs ask for approval.
 
-## 10. Summary
+## 10. Dashboard
+
+Run the dashboard skill (Create) so the user has their private dashboard page. Add a row "Dashboard" with its link to the summary table.
+
+## 11. Summary
 
 The table, then one line: "Siap" / "Ready" when everything needed for the chosen mode passes, otherwise the single most important fix.
 Do not change account settings yourself.

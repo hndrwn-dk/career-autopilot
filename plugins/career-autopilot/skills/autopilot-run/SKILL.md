@@ -36,6 +36,8 @@ For each queued job follow apply-assist steps 2–7, except: the mode is the app
 Append to Applications with Status `Ready to submit`, Applied On empty, Next Action naming the tab and what is left.
 A form that cannot be filled: Status `Needs manual apply` with the reason.
 
+Dashboard: keep `meta/run` current at every step and sync all rows touched in this run (dashboard skill, Sync).
+
 ## 4. Summary (the notification / email)
 
 In Filters `language`. Leave out empty sections. No tool names.
@@ -56,7 +58,7 @@ Replies
 
 Skipped: <n> (<top reasons>) · Scams skipped: <n> · Waiting for reply: <n>
 Platforms: <platform> <used>/<cap> · paused: <platform until date>
-Tracker: <sheet link>
+Tracker: <sheet link> · Dashboard: <dashboard_url>
 ```
 
 Mention `Ready to submit` rows older than 3 days without a confirmation email.

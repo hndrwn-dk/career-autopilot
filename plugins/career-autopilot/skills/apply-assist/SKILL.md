@@ -29,6 +29,8 @@ description: >
 8. When the user confirms it was sent (or a confirmation page is visible), append to `Applications`:
    next No, Company, Role, Location, Status `Submitted`, Channel, Employment Model, today, Link, Job ID, Match %, today, Next Action `wait for reply`, short note.
 
+Dashboard: if Filters has `dashboard_url`, mirror each job's status and next_action there as you go (dashboard skill, Sync).
+
 ## Batches
 
 Freelance marketplaces: draft the proposal in chat for the user to paste; do not submit on the platform.

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Career Autopilot</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#f5f3ee;--panel:#ffffff;--ink:#13202b;--ink2:#4a5864;--muted:#7b8893;--line:#e2ded4;
+  --accent:#e8622a;--accent-soft:#fde8dd;--teal:#2f7f86;--teal-soft:#dcefef;--good:#1f7a4d;--good-soft:#dcf1e5;
+  --warn:#a86a00;--warn-soft:#fbefd6;--bad:#b23b2e;--bad-soft:#f8dedb;--r:14px;
+  --fd:"Space Grotesk",system-ui,sans-serif;--fb:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0f171e;--panel:#17222c;--ink:#eef1ee;--ink2:#c3ccd3;--muted:#8a98a3;--line:#26333f;
+  --accent:#ff7a45;--accent-soft:#3a2216;--teal:#5fb3ba;--teal-soft:#16302f;--good:#56c98b;--good-soft:#173226;
+  --warn:#f0b54a;--warn-soft:#33291a;--bad:#ff7b6b;--bad-soft:#3a1d1a;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--fb)}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 20px 48px;display:flex;flex-direction:column;gap:20px}
+header{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-end;justify-content:space-between}
+h1{font:700 30px/1.1 var(--fd);margin:0}
+.sub{color:var(--muted);font-size:14px;margin-top:6px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:var(--panel);border:1px solid var(--line);color:var(--ink2)}
+.chip.mode-active{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.chip.mode-watch{background:var(--teal-soft);color:var(--teal);border-color:transparent}
+.run{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px 16px;font-size:14px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--muted);flex:none}
+.dot.on{background:var(--accent);animation:pulse 1.4s infinite}
+@keyframes pulse{50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.dot.on{animation:none}}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.kpi b{display:block;font:700 34px/1 var(--fd)}
+.kpi span{display:block;margin-top:8px;color:var(--ink2);font-size:13px}
+.kpi.hl{border-top:4px solid var(--accent)}
+.grid{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px;min-width:0}
+.card h2{font:700 18px/1.2 var(--fd);margin:0 0 12px}
+.board{display:grid;grid-template-columns:repeat(5,minmax(170px,1fr));gap:12px;overflow-x:auto;padding-bottom:4px}
+.col{background:var(--bg);border-radius:12px;padding:10px;min-height:120px}
+.col h3{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:2px 4px 10px;display:flex;justify-content:space-between}
+.job{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px}
+.job .co{font-weight:600;font-size:14px}
+.job .ro{font-size:13px;color:var(--ink2)}
+.job .meta{font-size:12px;color:var(--muted);margin-top:4px;display:flex;flex-wrap:wrap;gap:4px 8px}
+.match{font-weight:700;color:var(--teal)}
+.flag{font-size:11px;background:var(--warn-soft);color:var(--warn);border-radius:6px;padding:1px 6px}
+.next{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.next li{border-left:4px solid var(--accent);padding:4px 0 4px 10px}
+.next li small{display:block;color:var(--muted)}
+.bars{display:flex;flex-direction:column;gap:12px}
+.bar label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}
+.track{height:8px;background:var(--bg);border-radius:4px;overflow:hidden}
+.fill{height:100%;background:var(--teal)}
+.fill.hot{background:var(--accent)}
+.paused{font-size:12px;color:var(--bad)}
+.safety{display:flex;gap:12px;margin-top:14px}
+.safety div{flex:1;background:var(--bad-soft);color:var(--bad);border-radius:10px;padding:10px;font-size:13px}
+.safety b{display:block;font:700 24px/1 var(--fd)}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+input[type=search],select{font:inherit;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+input[type=search]{flex:1;min-width:180px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:8px;border-bottom:1px solid var(--line)}
+td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.st{font-size:12px;font-weight:600;border-radius:6px;padding:2px 8px;white-space:nowrap}
+.st.worth_a_look{background:var(--teal-soft);color:var(--teal)}
+.st.ready,.st.queued{background:var(--accent-soft);color:var(--accent)}
+.st.submitted,.st.in_review{background:var(--bg);color:var(--ink2)}
+.st.assessment,.st.interview{background:var(--warn-soft);color:var(--warn)}
+.st.offer{background:var(--good-soft);color:var(--good)}
+.st.rejected,.st.withdrawn,.st.closed,.st.skipped{background:var(--bg);color:var(--muted)}
+.st.scam{background:var(--bad-soft);color:var(--bad)}
+a{color:var(--teal)}
+.empty{color:var(--muted);font-size:14px;padding:8px 0}
+.note{font-size:13px;color:var(--muted)}
+.banner{background:var(--warn-soft);color:var(--warn);border-radius:10px;padding:10px 14px;font-size:14px}
+.tablewrap{overflow-x:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1 id="title">Career Autopilot</h1>
+      <div class="sub" id="subtitle"></div>
+    </div>
+    <div class="chips" id="chips"></div>
+  </header>
+  <div class="banner" id="banner" hidden></div>
+  <div class="run"><span class="dot" id="runDot"></span><span id="runText"></span></div>
+
+  <section class="kpis" id="kpis"></section>
+
+  <section class="card">
+    <h2 id="hPipeline"></h2>
+    <div class="board" id="board"></div>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <h2 id="hNext"></h2>
+      <ul class="next" id="next"></ul>
+    </div>
+    <div class="card">
+      <h2 id="hPlatforms"></h2>
+      <div class="bars" id="bars"></div>
+      <div class="safety">
+        <div><b id="scamCount">0</b><span id="lScams"></span></div>
+        <div style="background:var(--bg);color:var(--ink2)"><b id="skipCount">0</b><span id="lSkipped"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 id="hAll"></h2>
+    <div class="tools">
+      <input type="search" id="q">
+      <select id="fStatus"></select>
+    </div>
+    <div class="tablewrap"><table>
+      <thead><tr><th id="thCo"></th><th id="thLoc"></th><th id="thMatch"></th><th id="thStatus"></th><th id="thNext"></th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+  </section>
+  <p class="note" id="foot"></p>
+</div>
+<script>
+(function(){
+  "use strict";
+  var T={
+    en:{sub:"Job search dashboard",mode:{active:"Active",watch:"Watch",off:"Off"},idle:"Idle",running:"Running",lastRun:"Last run",nextRun:"Next run",never:"not yet",
+      k:{worth:"Worth a look",ready:"Ready to submit",open:"Applications open",interview:"Interviews & tests",offer:"Offers",closed:"Closed"},
+      pipeline:"Pipeline",next:"Next actions",platforms:"Platform safety today",scams:"scams skipped",skipped:"postings skipped",
+      all:"All jobs",search:"Search company, role, city…",allStatus:"All statuses",co:"Company · Role",loc:"Location · Mode",match:"Match",status:"Status",nextA:"Next action",
+      empty:"Nothing here yet.",noNext:"No actions waiting. Nice.",noPlat:"No account platforms used today.",paused:"paused until",
+      loading:"Loading…",stale:"Can't reach the data right now; showing what was last loaded.",nodb:"This view can't load the dashboard data. Open it on claude.ai while signed in.",
+      firstRun:"No data yet. In Claude, say “find jobs” or “update my dashboard”.",foot:"Updated by Claude each time Career Autopilot runs. Personal details (phone, email, salary) are never shown here.",
+      st:{worth_a_look:"Worth a look",queued:"Queued",ready:"Ready to submit",submitted:"Submitted",in_review:"In review",assessment:"Assessment",interview:"Interview",offer:"Offer",rejected:"Rejected",withdrawn:"Withdrawn",closed:"Closed",skipped:"Skipped",scam:"Scam"}},
+    id:{sub:"Dashboard pencarian kerja",mode:{active:"Aktif",watch:"Pantau",off:"Mati"},idle:"Diam",running:"Berjalan",lastRun:"Terakhir jalan",nextRun:"Jadwal berikutnya",never:"belum",
+      k:{worth:"Layak dilihat",ready:"Siap submit",open:"Lamaran berjalan",interview:"Interview & tes",offer:"Offer",closed:"Selesai"},
+      pipeline:"Alur lamaran",next:"Yang perlu Anda lakukan",platforms:"Keamanan platform hari ini",scams:"penipuan dilewati",skipped:"lowongan dilewati",
+      all:"Semua lowongan",search:"Cari perusahaan, posisi, kota…",allStatus:"Semua status",co:"Perusahaan · Posisi",loc:"Lokasi · Mode",match:"Cocok",status:"Status",nextA:"Langkah berikutnya",
+      empty:"Belum ada.",noNext:"Tidak ada yang menunggu. Mantap.",noPlat:"Belum ada platform akun yang dipakai hari ini.",paused:"dijeda sampai",
+      loading:"Memuat…",stale:"Data belum bisa dijangkau; yang tampil adalah data terakhir.",nodb:"Tampilan ini tidak bisa memuat data dashboard. Buka di claude.ai dalam keadaan login.",
+      firstRun:"Belum ada data. Di Claude, ketik “cari lowongan” atau “update dashboard saya”.",foot:"Diperbarui Claude setiap kali Career Autopilot berjalan. Data pribadi (HP, email, gaji) tidak pernah ditampilkan di sini.",
+      st:{worth_a_look:"Layak dilihat",queued:"Antre",ready:"Siap submit",submitted:"Terkirim",in_review:"Ditinjau",assessment:"Tes",interview:"Interview",offer:"Offer",rejected:"Ditolak",withdrawn:"Dibatalkan",closed:"Ditutup",skipped:"Dilewati",scam:"Penipuan"}}
+  };
+  var COLS=[["worth",["worth_a_look"]],["ready",["queued","ready"]],["open",["submitted","in_review"]],["interview",["assessment","interview"]],["offer",["offer"]]];
+  var CLOSED=["rejected","withdrawn","closed"];
+  var state={jobs:[],summary:{},run:{},loaded:false};
+  var L=T.en;
+  function $(id){return document.getElementById(id)}
+  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+  function safeUrl(u){u=String(u||"");return /^https:\/\//i.test(u)?u:""}
+  function fmtTime(s){if(!s)return L.never;var d=new Date(s);if(isNaN(d))return esc(s);return d.toLocaleString(undefined,{dateStyle:"medium",timeStyle:"short"})}
+  function num(n){n=Number(n);return isFinite(n)?n:0}
+
+  function labels(){
+    var lang=(state.summary.language||"").toLowerCase().indexOf("id")===0?"id":"en";
+    L=T[lang];document.documentElement.lang=lang;
+    $("hPipeline").textContent=L.pipeline;$("hNext").textContent=L.next;$("hPlatforms").textContent=L.platforms;
+    $("lScams").textContent=" "+L.scams;$("lSkipped").textContent=" "+L.skipped;$("hAll").textContent=L.all;
+    $("q").placeholder=L.search;$("thCo").textContent=L.co;$("thLoc").textContent=L.loc;$("thMatch").textContent=L.match;
+    $("thStatus").textContent=L.status;$("thNext").textContent=L.nextA;$("foot").textContent=L.foot;
+    var sel=$("fStatus"),cur=sel.value;sel.innerHTML='<option value="">'+esc(L.allStatus)+'</option>'+Object.keys(L.st).map(function(k){return '<option value="'+k+'">'+esc(L.st[k])+'</option>'}).join("");sel.value=cur;
+  }
+  function render(){
+    labels();
+    var s=state.summary,r=state.run,jobs=state.jobs;
+    $("title").textContent=s.profile?"Career Autopilot · "+s.profile:"Career Autopilot";
+    $("subtitle").textContent=L.sub+(s.segment?" · "+s.segment:"");
+    var mode=String(s.mode||"off");
+    $("chips").innerHTML='<span class="chip mode-'+esc(mode)+'">'+esc(L.mode[mode]||mode)+'</span>'+
+      (s.tracker_url&&safeUrl(s.tracker_url)?'<a class="chip" href="'+esc(safeUrl(s.tracker_url))+'" target="_blank" rel="noopener">Tracker ↗</a>':"");
+    var running=r.state==="running";
+    $("runDot").className="dot"+(running?" on":"");
+    $("runText").textContent=(running?L.running+": "+(r.activity||""):L.idle+(r.activity?" · "+r.activity:""))+" · "+L.lastRun+": "+fmtTime(s.last_run)+(s.next_run?" · "+L.nextRun+": "+fmtTime(s.next_run):"");
+
+    var by={};jobs.forEach(function(j){(by[j.status]=by[j.status]||[]).push(j)});
+    function count(arr){return arr.reduce(function(n,k){return n+(by[k]?by[k].length:0)},0)}
+    var k=[["worth",count(["worth_a_look"]),true],["ready",count(["queued","ready"]),true],["open",count(["submitted","in_review"])],["interview",count(["assessment","interview"])],["offer",count(["offer"])],["closed",count(CLOSED)]];
+    $("kpis").innerHTML=k.map(function(x){return '<div class="kpi'+(x[2]&&x[1]?" hl":"")+'"><b>'+x[1]+'</b><span>'+esc(L.k[x[0]])+'</span></div>'}).join("");
+
+    $("board").innerHTML=COLS.map(function(c){
+      var list=[];c[1].forEach(function(st){if(by[st])list=list.concat(by[st])});
+      list.sort(function(a,b){return num(b.match)-num(a.match)});
+      return '<div class="col"><h3><span>'+esc(L.k[c[0]])+'</span><span>'+list.length+'</span></h3>'+
+        (list.length?list.slice(0,8).map(card).join("")+(list.length>8?'<div class="note">+'+(list.length-8)+'</div>':""):'<div class="empty">'+esc(L.empty)+'</div>')+'</div>';
+    }).join("");
+
+    var acts=jobs.filter(function(j){return j.next_action&&CLOSED.indexOf(j.status)<0&&j.status!=="skipped"&&j.status!=="scam"});
+    var prio={interview:0,assessment:0,offer:0,ready:1,queued:1,worth_a_look:2,in_review:3,submitted:3};
+    acts.sort(function(a,b){return (prio[a.status]==null?9:prio[a.status])-(prio[b.status]==null?9:prio[b.status])});
+    $("next").innerHTML=acts.length?acts.slice(0,10).map(function(j){return '<li>'+esc(j.next_action)+'<small>'+esc(j.company)+' · '+esc(j.role)+'</small></li>'}).join(""):'<li style="border:0;padding:0" class="empty">'+esc(L.noNext)+'</li>';
+
+    var pl=s.platforms||{},names=Object.keys(pl);
+    $("bars").innerHTML=names.length?names.map(function(n){
+      var p=pl[n]||{},used=num(p.used),cap=Math.max(1,num(p.cap)),pct=Math.min(100,Math.round(used/cap*100));
+      return '<div class="bar"><label><span>'+esc(n)+'</span><span>'+used+' / '+cap+'</span></label><div class="track"><div class="fill'+(pct>=80?" hot":"")+'" style="width:'+pct+'%"></div></div>'+
+        (p.paused_until?'<div class="paused">'+esc(L.paused)+' '+esc(fmtTime(p.paused_until))+'</div>':"")+'</div>';
+    }).join(""):'<div class="empty">'+esc(L.noPlat)+'</div>';
+    $("scamCount").textContent=num(s.scams_skipped_total);
+    $("skipCount").textContent=num(s.skipped_total);
+
+    var q=$("q").value.trim().toLowerCase(),fs=$("fStatus").value;
+    var rows=jobs.filter(function(j){
+      if(fs&&j.status!==fs)return false;
+      if(!q)return true;
+      return [j.company,j.role,j.city,j.country].join(" ").toLowerCase().indexOf(q)>=0;
+    }).sort(function(a,b){return String(b.updated||"").localeCompare(String(a.updated||""))});
+    $("rows").innerHTML=rows.length?rows.map(function(j){
+      var u=safeUrl(j.link);
+      return '<tr><td><b>'+(u?'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(j.company)+'</a>':esc(j.company))+'</b><br>'+esc(j.role)+'</td>'+
+        '<td>'+esc([j.city,j.country].filter(Boolean).join(", "))+'<br><span class="note">'+esc(j.work_mode||"")+(j.pay?" · "+esc(j.pay):"")+'</span></td>'+
+        '<td>'+(j.match!=null&&j.match!==""?'<span class="match">'+num(j.match)+'%</span>':"")+'</td>'+
+        '<td><span class="st '+esc(j.status)+'">'+esc(L.st[j.status]||j.status)+'</span>'+(j.reason?'<br><span class="note">'+esc(j.reason)+'</span>':"")+'</td>'+
+        '<td>'+esc(j.next_action||"")+'</td></tr>';
+    }).join(""):'<tr><td colspan="5" class="empty">'+esc(state.loaded&&!jobs.length?L.firstRun:L.empty)+'</td></tr>';
+  }
+  function card(j){
+    var u=safeUrl(j.link);
+    return '<div class="job"><div class="co">'+(u?'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(j.company)+'</a>':esc(j.company))+'</div>'+
+      '<div class="ro">'+esc(j.role)+'</div><div class="meta">'+(j.match!=null&&j.match!==""?'<span class="match">'+num(j.match)+'%</span>':"")+
+      '<span>'+esc([j.city,j.work_mode].filter(Boolean).join(" · "))+'</span>'+
+      (Array.isArray(j.flags)?j.flags.slice(0,2).map(function(f){return '<span class="flag">'+esc(f)+'</span>'}).join(""):"")+'</div></div>';
+  }
+  $("q").addEventListener("input",render);
+  $("fStatus").addEventListener("change",render);
+  render();
+  $("runText").textContent=L.loading;
+
+  var timer=setTimeout(function(){var b=$("banner");b.textContent=L.stale;b.hidden=false},10000);
+  function clearWait(){clearTimeout(timer)}
+  function fail(){clearWait();var b=$("banner");b.textContent=L.stale;b.hidden=false}
+  if(!window.claude||typeof window.claude.use!=="function"){clearWait();var b0=$("banner");b0.textContent=L.nodb;b0.hidden=false;return}
+  window.claude.use("db").then(function(db){
+    if(!db){clearWait();var b=$("banner");b.textContent=L.nodb;b.hidden=false;return}
+    db.collection("jobs").onSnapshot(function(snap){
+      state.jobs=snap.docs.map(function(d){var o=Object.assign({},d.data());o._id=d.id;return o});
+      state.loaded=true;if(!snap.metadata.fromCache){clearWait();$("banner").hidden=true}render();
+    },fail);
+    db.doc("meta/summary").onSnapshot(function(d){state.summary=d.exists?d.data():{};render()},fail);
+    db.doc("meta/run").onSnapshot(function(d){state.run=d.exists?d.data():{};render()},fail);
+  },function(){fail()});
+})();
+</script>
+</body>
+</html>

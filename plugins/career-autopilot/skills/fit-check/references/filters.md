@@ -44,6 +44,7 @@
 | timezone | Asia/Singapore | IANA zone |
 | language | id / en | language for summaries and drafts to the user |
 | availability | weekdays after 18:00 SGT | used when proposing interview slots |
+| dashboard_url | https://claude.ai/artifact/… | the user's private dashboard (dashboard skill) |
 | last_inbox_sync | 2026-11-01 | set by inbox-sync |
 
 # Default salary floors (when the user gives none)
