@@ -24,6 +24,7 @@
 | needs_sponsorship | singapore: yes | per country |
 | languages_spoken | English, Indonesian | any other required language is a blocker |
 | salary_floor_<region> | salary_floor_sg: SGD 5,600/month | exclude below; see "Default salary floors" when the user has none |
+| | salary_floor_id: IDR 15,000,000/month · salary_floor_au: AUD 9,000/month · salary_floor_eu: EUR 4,500/month · salary_floor_remote: USD 3,000/month | one line per target country, in that country's currency. Key = lowercase ISO country code (sg, id, my, au, gb, us, ca, de…), a region (eu, gcc) or `remote`. The most specific key wins: country, then region, then remote. A country with no key gets the official default after the user agrees. |
 | seniority | senior, staff, lead | allowed levels |
 | exclude_keywords | intern, junior | title words to skip |
 | employment_types | permanent, contract (direct), part-time, freelance / project, casual / gig, internship, graduate programme, returnship | allowed models |
