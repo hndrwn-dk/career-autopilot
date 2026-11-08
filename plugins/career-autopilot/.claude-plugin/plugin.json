@@ -1,6 +1,6 @@
 {
   "name": "career-autopilot",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Job search help for anyone: professionals, fresh graduates, returners, side income and career switchers, in any field, any country, remote or onsite. Finds and scores jobs, skips scams, prefills applications for you to submit, writes emails in your voice, builds a CV, tracks replies and prepares interviews.",
   "author": {
     "name": "Tursina Labs"
@@ -10,12 +10,11 @@
     "job search",
     "career",
     "cv",
+    "interview",
+    "scam check",
     "fresh graduate",
     "part-time",
-    "freelance",
-    "remote",
-    "scam check",
-    "interview"
+    "remote work"
   ],
   "license": "MIT",
   "repository": "https://github.com/hndrwn-dk/career-autopilot"
