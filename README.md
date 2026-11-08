@@ -50,11 +50,11 @@ Keep the browser (and, for scheduled `active` runs, the Claude desktop app) open
 
 ## First run
 
-Quick start: say **"mulai cari kerja"** and answer three questions (what work, where or remote, CV or no CV). Claude shows matching jobs right away and asks for anything else only when it matters.
+Quick start: say **"mulai cari kerja"** (or pick **career-setup** from the `/` menu) and answer three questions (what work, where or remote, CV or no CV). Claude shows matching jobs right away and asks for anything else only when it matters.
 
 Full setup:
 
-1. Say **"set up career autopilot"** (or "mulai cari kerja"). Claude checks Gmail, Google Drive and the browser and creates your tracker.
+1. Say **"mulai cari kerja"** or **"set up career autopilot"**, or pick **career-setup** from the `/` menu. Claude checks Gmail, Google Drive and the browser and creates your tracker.
 2. Answer a few plain questions: your situation, the kind of work, remote or onsite, hours, pay, countries.
 3. Upload your CV and say **"build my profile"**, or say **"buatkan CV"** if you do not have one.
 4. Optional: paste 1–2 emails you wrote so drafts sound like you.

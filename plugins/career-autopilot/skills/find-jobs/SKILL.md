@@ -5,8 +5,8 @@ description: "Use when the user says \"find jobs\", \"scan jobs\", \"any new rol
 
 # Find matching jobs
 
-Load `Profile`, `Filters`, `Applications` and `Skip` from the active profile's tracker (setup step 0), and the segment file `${CLAUDE_PLUGIN_ROOT}/segments/<segment>.md` for extra sources and search terms.
-Profile or Filters empty → run profile-builder or setup instead.
+Load `Profile`, `Filters`, `Applications` and `Skip` from the active profile's tracker (career-setup step 0), and the segment file `${CLAUDE_PLUGIN_ROOT}/segments/<segment>.md` for extra sources and search terms.
+Profile or Filters empty → run profile-builder or career-setup instead.
 
 ## Sources, in order
 
@@ -34,5 +34,5 @@ Table, best first: # | Company | Role | Location | Work mode | Pay | Model | Mat
 For non-technical users, also give a two-line plain summary of the top 3.
 Then one "Excluded" line grouped by reason. Write excluded postings with a reason to `Skip`.
 Save the shortlist to Drive `Career Autopilot/shortlists/<YYYY-MM-DD>.md`.
-Sync the dashboard (`${CLAUDE_PLUGIN_ROOT}/skills/dashboard/SKILL.md`, Sync) if Filters has `dashboard_url`.
+Sync the dashboard (`${CLAUDE_PLUGIN_ROOT}/skills/career-dashboard/SKILL.md`, Sync) if Filters has `dashboard_url`.
 Ask which to apply to. Never start applying without the user's go-ahead in this conversation (autopilot-run in `active` mode is the only exception).

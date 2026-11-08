@@ -53,7 +53,7 @@ Never store: ID or passport numbers, bank or card details, passwords, date of bi
 3. After the user confirms, write to `Profile` (overwrite only changed keys).
 4. Save the CV in Drive folder `Career Autopilot/CV` if missing; set `cv_default`.
 5. Turn each strong achievement into a STAR row in `Stories` (Situation, Task, Action, Result, Skills) using only CV facts; mark `Source: CV`. Ask the user to fill any missing Result numbers rather than inventing them.
-6. Suggest target roles and keywords that the CV supports, in whatever field the CV is in. If no preset is set, offer an example preset that fits or a custom preset (setup step 3).
+6. Suggest target roles and keywords that the CV supports, in whatever field the CV is in. If no preset is set, offer an example preset that fits or a custom preset (career-setup step 3).
 
 ## Several CVs
 

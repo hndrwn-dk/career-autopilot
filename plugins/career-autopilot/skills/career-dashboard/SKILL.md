@@ -1,5 +1,5 @@
 ---
-name: dashboard
+name: career-dashboard
 description: "Use when the user says \"open my dashboard\", \"buka dashboard\", \"show my job search\", \"lihat progres lamaran\", \"update my dashboard\", \"dashboard saya\", or at the end of setup. Creates the user's private Career Autopilot dashboard page once, and keeps it in sync with the tracker. Other skills call this skill's \"Sync\" section."
 ---
 
@@ -16,7 +16,7 @@ actions, e.g. `db_write` / `db_get` or the Artifact tool's `write_db` / `read_db
 ## Create (once per profile)
 
 1. Filters has `dashboard_url` → it exists: open it with the Artifact tool and go to Sync. If it no longer loads, recreate.
-2. Copy `${CLAUDE_PLUGIN_ROOT}/skills/dashboard/assets/dashboard.html` to the working folder unchanged. Publish it as a new
+2. Copy `${CLAUDE_PLUGIN_ROOT}/skills/career-dashboard/assets/dashboard.html` to the working folder unchanged. Publish it as a new
    artifact: title `Career Autopilot` (default profile) or `Career Autopilot · <profile>`, icon `chart`.
 3. Declare its capabilities as exactly:
    `{"db":{"rules":[{"path":"","read":"view","write":"owner"}]},"user":{}}`

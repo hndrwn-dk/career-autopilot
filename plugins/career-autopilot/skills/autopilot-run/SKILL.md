@@ -11,7 +11,7 @@ Turning on `active` mode approves searching and prefilling forms. It never appro
 
 ## 0. Load
 
-Read Profile, Filters, Applications, Skip from the tracker of the profile the prompt names (setup step 0; default profile when none is named).
+Read Profile, Filters, Applications, Skip from the tracker of the profile the prompt names (career-setup step 0; default profile when none is named).
 - `mode` is `off` → stop: "Autopilot is off."
 - Profile empty → stop: "Profile is empty. Upload your CV and say: build my profile."
 - The prompt names a mode that differs from Filters → use Filters and mention it.
@@ -33,7 +33,7 @@ For each queued job follow apply-assist steps 2–7, except: the mode is the app
 Append to Applications with Status `Ready to submit`, Applied On empty, Next Action naming the tab and what is left.
 A form that cannot be filled: Status `Needs manual apply` with the reason.
 
-Dashboard: keep `meta/run` current at every step and sync all rows touched in this run (dashboard skill, Sync).
+Dashboard: keep `meta/run` current at every step and sync all rows touched in this run (career-dashboard skill, Sync).
 
 ## 4. Summary (the notification / email)
 

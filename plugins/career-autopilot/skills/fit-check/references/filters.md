@@ -2,7 +2,7 @@
 
 | Key | Example | Meaning |
 |---|---|---|
-| profile | Siti | which person this tracker belongs to (setup step 0) |
+| profile | Siti | which person this tracker belongs to (career-setup step 0) |
 | segment | experienced / fresh-graduate / career-returner / side-income / career-switcher | the user's situation |
 | preset | finance-accounting, custom:barista | role presets in use |
 | mode | active / watch / off | how autopilot behaves |
@@ -44,7 +44,7 @@
 | timezone | Asia/Singapore | IANA zone |
 | language | id / en | language for summaries and drafts to the user |
 | availability | weekdays after 18:00 SGT | used when proposing interview slots |
-| dashboard_url | https://claude.ai/artifact/… | the user's private dashboard (dashboard skill) |
+| dashboard_url | https://claude.ai/artifact/… | the user's private dashboard (career-dashboard skill) |
 | last_inbox_sync | 2026-11-01 | set by inbox-sync |
 
 # Default salary floors (when the user gives none)
