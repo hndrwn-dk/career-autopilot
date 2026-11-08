@@ -93,3 +93,7 @@ LinkedIn, JobStreet/JobsDB, SEEK, Indeed, Glassdoor, Glints, Kalibrr, Naukri, XI
 - unattended runs use only the platforms you list in `use_platforms`, at half the caps
 
 Sources without an account (company career sites, official portals, remote boards) are always tried first.
+
+## License
+
+MIT © Hendrawan Daryono Karso. See `LICENSE`.
