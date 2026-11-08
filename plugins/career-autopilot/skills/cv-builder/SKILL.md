@@ -1,9 +1,6 @@
 ---
 name: cv-builder
-description: >
-  Use when the user has no CV or an outdated one and says "buatkan CV", "saya belum punya CV",
-  "make me a resume", "update my CV", "CV untuk fresh graduate", "CV untuk kembali bekerja",
-  or when profile-builder finds no CV. Builds a CV and the Profile through a short interview.
+description: "Use when the user has no CV or an outdated one and says \"buatkan CV\", \"saya belum punya CV\", \"make me a resume\", \"update my CV\", \"CV untuk fresh graduate\", \"CV untuk kembali bekerja\", or when profile-builder finds no CV. Builds a CV and the Profile through a short interview."
 ---
 
 # Build a CV by interview

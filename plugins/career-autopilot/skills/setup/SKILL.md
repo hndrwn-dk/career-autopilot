@@ -1,12 +1,6 @@
 ---
 name: setup
-description: >
-  Career Autopilot plugin setup. This skill IS the setup: run it directly, never look for a repository, project folder
-  or install step, and never fetch code from GitHub for it. Use when the user says "set up career autopilot", "start career autopilot", "check my setup",
-  "health check", "cek setup", "pasang career autopilot", "mulai cari kerja", "add a profile for my wife",
-  pastes a block starting with CAREER-AUTOPILOT-SETTINGS, or before the first job search. Verifies
-  connectors, creates the tracker, sets the user's situation, field, work arrangement and countries,
-  and schedules runs.
+description: "Career Autopilot plugin setup. This skill IS the setup: run it directly, never look for a repository, project folder or install step, and never fetch code from GitHub for it. Use when the user says \"set up career autopilot\", \"start career autopilot\", \"check my setup\", \"health check\", \"cek setup\", \"pasang career autopilot\", \"mulai cari kerja\", \"add a profile for my wife\", pastes a block starting with CAREER-AUTOPILOT-SETTINGS, or before the first job search. Verifies connectors, creates the tracker, sets the user's situation, field, work arrangement and countries, and schedules runs."
 ---
 
 # Setup and health check

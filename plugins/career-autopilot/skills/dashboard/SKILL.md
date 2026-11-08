@@ -1,9 +1,6 @@
 ---
 name: dashboard
-description: >
-  Use when the user says "open my dashboard", "buka dashboard", "show my job search", "lihat progres lamaran",
-  "update my dashboard", "dashboard saya", or at the end of setup. Creates the user's private Career Autopilot
-  dashboard page once, and keeps it in sync with the tracker. Other skills call this skill's "Sync" section.
+description: "Use when the user says \"open my dashboard\", \"buka dashboard\", \"show my job search\", \"lihat progres lamaran\", \"update my dashboard\", \"dashboard saya\", or at the end of setup. Creates the user's private Career Autopilot dashboard page once, and keeps it in sync with the tracker. Other skills call this skill's \"Sync\" section."
 ---
 
 # Dashboard

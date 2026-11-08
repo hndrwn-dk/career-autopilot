@@ -1,9 +1,6 @@
 ---
 name: interview-prep
-description: >
-  Use when the user says "prep me for the <company> interview", "interview prep", "persiapan interview",
-  "what will they ask", "siapkan jawaban interview", or when inbox-sync finds an interview invite
-  and the user accepts the offer to prepare.
+description: "Use when the user says \"prep me for the <company> interview\", \"interview prep\", \"persiapan interview\", \"what will they ask\", \"siapkan jawaban interview\", or when inbox-sync finds an interview invite and the user accepts the offer to prepare."
 ---
 
 # Interview brief

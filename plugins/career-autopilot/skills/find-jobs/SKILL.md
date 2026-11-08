@@ -1,9 +1,6 @@
 ---
 name: find-jobs
-description: >
-  Use when the user says "find jobs", "scan jobs", "any new roles", "search jobs in <country>",
-  "cari lowongan", "carikan loker", "scan lowongan", or asks for roles matching their CV and
-  filters on company career sites, job portals, recruiter emails, LinkedIn or similar platforms.
+description: "Use when the user says \"find jobs\", \"scan jobs\", \"any new roles\", \"search jobs in <country>\", \"cari lowongan\", \"carikan loker\", \"scan lowongan\", or asks for roles matching their CV and filters on company career sites, job portals, recruiter emails, LinkedIn or similar platforms."
 ---
 
 # Find matching jobs

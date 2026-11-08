@@ -1,9 +1,6 @@
 ---
 name: profile-builder
-description: >
-  Use when the user uploads or shares a CV/resume and says "build my profile", "read my CV",
-  "update my profile", "baca CV saya", "buat profil dari CV", "add a story", or when another
-  Career Autopilot skill needs profile data that is missing.
+description: "Use when the user uploads or shares a CV/resume and says \"build my profile\", \"read my CV\", \"update my profile\", \"baca CV saya\", \"buat profil dari CV\", \"add a story\", or when another Career Autopilot skill needs profile data that is missing."
 ---
 
 # Build the profile from a CV

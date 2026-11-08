@@ -1,9 +1,6 @@
 ---
 name: apply-assist
-description: >
-  Use when the user says "apply to this job", "apply to 1 and 3", "lanjut apply", "isi form lamaran",
-  "fill the application", or approves jobs from a shortlist. Prefills application forms in the
-  user's browser from Profile and logs them; the user submits.
+description: "Use when the user says \"apply to this job\", \"apply to 1 and 3\", \"lanjut apply\", \"isi form lamaran\", \"fill the application\", or approves jobs from a shortlist. Prefills application forms in the user's browser from Profile and logs them; the user submits."
 ---
 
 # Prefill applications; the user submits

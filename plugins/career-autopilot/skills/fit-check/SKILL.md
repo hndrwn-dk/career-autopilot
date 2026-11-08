@@ -1,9 +1,6 @@
 ---
 name: fit-check
-description: >
-  Use when the user asks "is this job a fit", "check this job", "how well do I match",
-  "cek kecocokan", "cocok gak", pastes a job link, description or a chat message with a job offer, asks "apakah ini penipuan?", "ini scam bukan?", "is this offer legit", or when find-jobs or
-  autopilot-run needs to score a posting against the profile and filters.
+description: "Use when the user asks \"is this job a fit\", \"check this job\", \"how well do I match\", \"cek kecocokan\", \"cocok gak\", pastes a job link, description or a chat message with a job offer, asks \"apakah ini penipuan?\", \"ini scam bukan?\", \"is this offer legit\", or when find-jobs or autopilot-run needs to score a posting against the profile and filters."
 ---
 
 # Check fit

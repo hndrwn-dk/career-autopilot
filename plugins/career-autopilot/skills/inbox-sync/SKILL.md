@@ -1,9 +1,6 @@
 ---
 name: inbox-sync
-description: >
-  Use when the user says "check my application emails", "sync my inbox", "any replies",
-  "update tracker", "cek email lamaran", "ada balasan?", or at the start of an autopilot run,
-  to match recruiter and ATS emails to applications and update their status.
+description: "Use when the user says \"check my application emails\", \"sync my inbox\", \"any replies\", \"update tracker\", \"cek email lamaran\", \"ada balasan?\", or at the start of an autopilot run, to match recruiter and ATS emails to applications and update their status."
 ---
 
 # Sync statuses from Gmail

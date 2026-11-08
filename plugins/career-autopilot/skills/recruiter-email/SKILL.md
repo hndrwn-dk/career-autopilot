@@ -1,10 +1,6 @@
 ---
 name: recruiter-email
-description: >
-  Use when a posting says to apply by email, or the user says "email the recruiter",
-  "draft an application email", "reply to this recruiter", "buatkan email lamaran",
-  "balas email rekruter", "follow up on my application", or when inbox-sync finds a
-  recruiter message that needs a reply.
+description: "Use when a posting says to apply by email, or the user says \"email the recruiter\", \"draft an application email\", \"reply to this recruiter\", \"buatkan email lamaran\", \"balas email rekruter\", \"follow up on my application\", or when inbox-sync finds a recruiter message that needs a reply."
 ---
 
 # Recruiter email: draft, then send on approval

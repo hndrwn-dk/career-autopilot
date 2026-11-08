@@ -1,9 +1,6 @@
 ---
 name: autopilot-run
-description: >
-  Use when a scheduled Career Autopilot run starts, or the user says "run career autopilot",
-  "run autopilot now", "jalankan autopilot", "jalankan sekarang". One unattended pass in the
-  mode set in Filters (active or watch), ending with a short summary.
+description: "Use when a scheduled Career Autopilot run starts, or the user says \"run career autopilot\", \"run autopilot now\", \"jalankan autopilot\", \"jalankan sekarang\". One unattended pass in the mode set in Filters (active or watch), ending with a short summary."
 ---
 
 # Scheduled run
