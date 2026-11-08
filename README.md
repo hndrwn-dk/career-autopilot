@@ -105,4 +105,4 @@ Sources without an account (company career sites, official portals, remote board
 
 ## License
 
-MIT © Hendrawan Daryono Karso. See `LICENSE`.
+MIT © Tursina Labs. See `LICENSE`.
