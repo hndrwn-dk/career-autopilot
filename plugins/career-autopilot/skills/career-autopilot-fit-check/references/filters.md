@@ -26,7 +26,7 @@
 | relocation | none / alone / family | whether the user would move for the job |
 | family | spouse, children | who moves along: spouse, children, parents. Never the number, names or ages of children (profile-builder privacy rule) |
 | relocation_support | required / preferred / none | relocation package: flights, shipping, temporary housing, visa costs for the family |
-| living_cost_<code> | living_cost_sg: SGD 9,000–12,400/month + school SGD 3,100/child | monthly living cost for the household in that country (Cost of living below); saved when the user moves alone or with family |
+| living_cost_<code> | living_cost_sg: SGD 9,000–13,000/month + school SGD 3,100/child | monthly living cost for the household in that country (Cost of living below); saved when the user moves alone or with family |
 | rotation_pattern | 14/14, 28/28 | days on / days off for rotation work (offshore, mining, remote sites) |
 | rotation_region | Asia Pacific, Middle East | where the user accepts to fly in for rotations; crew-change point travel |
 | languages_spoken | English, Indonesian | any other required language is a blocker |
@@ -121,13 +121,21 @@ Household = one adult (alone) or 2 adults + 2 children (family; the real number 
 
 | Country (city) | Alone | Family | School note |
 |---|---|---|---|
-| Singapore | SGD 3,500–4,900 | SGD 9,000–12,400 | international school ≈ SGD 3,100 per child a month (local places for foreign children are scarce) |
+| Singapore | SGD 3,500–4,900 | SGD 9,000–13,000 | international school ≈ SGD 3,100 per child a month (local places for foreign children are scarce) |
 | Australia (Sydney) | AUD 4,300–5,500 | AUD 11,000–13,700 | public schools may charge temporary visa holders in some states |
 | Netherlands (Amsterdam) | EUR 3,000–3,500 | EUR 6,000–7,800 | public school free; international ≈ EUR 1,500 per child a month |
 | Malaysia (Kuala Lumpur) | RM 5,500–8,500 | RM 10,000–15,000 | international school adds ≈ RM 8,000–16,000 a month for 2 children |
 
-Sources: Numbeo via Expatica (1 June 2026: single and family-of-four costs excluding rent, 1- and 3-bedroom rents), 2026 relocation
-guides for school fees. Other countries and cities: look up the same items for the posting's city when a job comes up.
+Sources, in this order (the user's preferred sources first):
+1. livingcost.org city page `https://livingcost.org/cost/<country>/<city>` (or `/cost/<country>` for the national figure): one person and
+   family of 4, with and without rent, 1- and 3-bedroom rent, preschool and international primary school. Figures are in USD: convert with
+   the day's rate and say so. Singapore, June 2026: family of 4 about USD 7,055 a month with rent, one person about USD 3,098.
+2. Expat Focus country guide `https://www.expatfocus.com/<country>/guide/<country>-cost-of-living`: household ranges for single, couple and
+   family, with and without private schooling, plus rent bands and practical notes. Singapore: family of four SGD 8,000–13,000 without
+   private schooling, SGD 15,000–25,000+ with it.
+3. Numbeo (directly or via Expatica) as a cross-check.
+When the sources disagree, show the range that covers them and name them. Other countries and cities: look up the same items for the
+posting's city when a job comes up.
 
 In career-autopilot-fit-check, per posting abroad:
 1. Living cost for the posting's city and household (rent for 1 or 3 bedrooms, living costs, school when children come and local school is not open to them).
