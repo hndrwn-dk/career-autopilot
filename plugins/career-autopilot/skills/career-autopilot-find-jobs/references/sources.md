@@ -32,7 +32,7 @@ Portals change: if one no longer works, search for its replacement and update `c
 | Country | Starting points |
 |---|---|
 | Malaysia | MYFutureJobs (official), JobStreet MY |
-| Indonesia | Karirhub Kemnaker (official), JobStreet ID, Glints, Kalibrr |
+| Indonesia | Karirhub Kemnaker (official), JobStreet ID, Glints, Kalibrr, Dealls; jobs abroad for Indonesian citizens: SISKOP2MI (official, Kementerian P2MI) |
 | Australia | Workforce Australia (official), SEEK |
 | New Zealand | SEEK NZ, Trade Me Jobs |
 | Japan | Hello Work (official), Daijob and CareerCross (English-friendly) |
@@ -59,7 +59,7 @@ Portals change: if one no longer works, search for its replacement and update `c
 
 ## Remote and freelance
 
-Remote job boards (check each posting's location restriction):
+Remote job boards (check each posting's location restriction; for `remote_scope: worldwide` keep only "anywhere" or the user's region, and note when the role is contractor-only):
 - Remotive (public API `https://remotive.com/api/remote-jobs?search=<keywords>`; unofficial for automation, confirm the shape on first use), We Work Remotely, Remote OK, Working Nomads, Himalayas: browser or WebFetch, read only.
 - ATS discovery with `"remote" "<region or country>"` (see above).
 
@@ -75,6 +75,20 @@ Graduate and entry level:
 - Company graduate programmes (search `graduate programme <company or industry> <country> <year>`), country portals' entry-level filters, university career portals the user names.
 
 Prefer official portals and company sites for side-income searches; marketplace and social-media listings get the scam check every time.
+
+## Moving abroad (Filters `relocation` alone or family)
+
+- Search terms: `"visa sponsorship"`, `"relocation package"`, `"relocation support"`, `"open to international candidates"` with the role and country; on ATS boards check the location and "work authorisation" questions.
+- Official portals that show sponsor-ready roles: Canada Job Bank (LMIA), UK GOV.UK Find a job plus the Home Office register of licensed sponsors, Netherlands IND recognised sponsors, Singapore MyCareersFuture (roles open to work-pass holders).
+- Skip postings that say "citizens/PR only", "no sponsorship", "local candidates only".
+
+## Offshore and rotation work (Filters `employment_types` has rotation, or `work` has energy)
+
+- Energy and offshore boards: Rigzone, Oil and Gas Job Search, Energy Jobline; offshore wind roles on the same boards and on developers' careers pages.
+- Company careers pages and ATS boards of operators, drilling contractors and service companies in the user's region (search `"rotation" "14/14" <role> careers`, `"28/28" offshore <role> <region>`).
+- Mining and remote-site roles: country portals with `FIFO` / `rotation` / `roster` (Australia SEEK: `FIFO`; Indonesia: `rotasi`, `roster 2:2`).
+- Ships and offshore vessels: company fleets and licensed crewing agencies only (Indonesia: Kemenhub SIUPPAK licence; abroad via SISKOP2MI).
+- Always run the scam check: fake rig and ship offers are common.
 
 ## Gmail queries for recruiter outreach
 

@@ -52,8 +52,9 @@ and `settings/filters`, which only the owner can read. `pay` is only what the po
 ## Onboarding answers (written by the page)
 
 The user answers the Start tab by clicking; the page saves one document, `onboarding/answers`:
-`language` (id/en), `segment`, `work` (list of: admin, retail, fnb, logistics, teaching, health, finance, marketing, design, it, cs, driver), `work_other`,
-`work_mode` (remote/hybrid/onsite/any), `area`, `countries` (list), `countries_other`, `employment` (full-time/part-time/freelance/any), `hours_per_week`,
+`language` (id/en), `segment`, `work` (list of: admin, retail, fnb, logistics, teaching, health, finance, marketing, design, it, cs, driver, engineering, energy), `work_other`,
+`work_mode` (remote/hybrid/onsite/any), `area`, `countries` (list, may include `Worldwide`), `countries_other`, `move` (none/alone/family), `family_text`,
+`employment` (full-time/part-time/freelance/internship/rotation/any), `hours_per_week`, `rotation`,
 `pay` (official/custom), `pay_text`, `cv` (have/build), `mode` (off/watch/active), `submitted_at`, `applied`.
 
 When the user pastes the copied text ("Lanjutkan setup Career Autopilot dari dashboard" + "Jawaban saya: …", or the English version) or says "sudah" / "done":
@@ -62,7 +63,13 @@ When the user pastes the copied text ("Lanjutkan setup Career Autopilot dari das
 2. Map it into Filters: `language`, `segment` (then apply the segment defaults), `target_roles` and `keywords` from `work` + `work_other` in the
    user's language and the target countries' usual job titles, `work_mode`, `home_area` from `area`, `countries` (+ `countries_other`; "Middle East",
    "Europe" and "US/Canada" become regions; ask which countries only if it matters for permits or pay), `employment_types` from `employment`,
-   `hours_per_week`, `mode`. `pay: official` → propose each country's official floor (career-autopilot-setup step 5) in one message;
+   `hours_per_week`, `mode`. `Worldwide` → add `remote` to `countries`, set `remote_scope: worldwide` (ask the user's timezone once for `remote_timezones`) and add
+   `contract (direct), contract via agency` to `employment_types`: most remote roles abroad are contractor roles (fit-check flags them).
+   `employment: internship` → `employment_types: internship, graduate programme`; `employment: rotation` → add `rotation` to `employment_types`
+   and save `rotation` as `rotation_pattern` (e.g. 14/14); `work: energy` also adds offshore sources (find-jobs sources.md, Offshore and rotation).
+   `move` → `relocation` (none/alone/family); `family_text` → `family` (who comes along, as typed). For `alone` or `family`, ask once in one
+   message: the user's citizenship (for `needs_sponsorship` per country) and whether a relocation package is required (`relocation_support`). `pay: official` → propose each country's official floor (career-autopilot-setup step 5) in one message; with `relocation: family`
+   the floor is the higher of that and the country's minimum for bringing family (fit-check filters.md, Family relocation);
    `pay: custom` → parse `pay_text` into `salary_floor_<code>` lines and confirm them in one line.
 3. `cv: build` → run career-autopilot-cv-builder; `cv: have` → ask for the file.
 4. Write `applied: true` into `onboarding/answers` and `onboarded: true` into `meta/summary`, then continue with

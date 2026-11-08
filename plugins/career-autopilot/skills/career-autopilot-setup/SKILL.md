@@ -105,6 +105,10 @@ MOM EP or S Pass qualifying salary when a work pass is needed, otherwise the Loc
 `salary_floor_<code>` line per country with the user's figure, or the default if they accept it.
 When a country is added later ("cari juga di Jepang"), ask for its floor the same way before searching there.
 Remote: ask which countries' employers they can legally work for (`remote_scope`) and their timezone overlap (`remote_timezones`).
+Moving abroad (`relocation` alone or family): ask citizenship, who moves along (`family`), and whether a relocation package is required
+(`relocation_support`); with family, the floor per country is at least the family minimum (fit-check filters.md, Family relocation).
+Rotation work: ask the pattern (`rotation_pattern`, e.g. 14/14), where they accept to fly in (`rotation_region`), and which safety
+certificates and medicals they hold (to Profile `certifications`).
 
 ## 6. Countries
 

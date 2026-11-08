@@ -20,20 +20,22 @@ Apply `${CLAUDE_PLUGIN_ROOT}/references/scam-signals.md` before anything else. A
 
 Read the full description:
 - Required language the user does not speak. "Nice to have" is not a blocker; mention it.
+- Relocation: when `relocation` is alone or family and the user needs a permit there, "no sponsorship", "no relocation" or "local candidates only" excludes. With `relocation: family`, posted fixed pay below the family minimum for that country (`references/filters.md`, Family relocation; e.g. Singapore SGD 6,000) excludes, with the reason.
 - Work rights the user cannot meet ("citizens/PR only", "no sponsorship", "must hold a valid work pass", "security clearance required") when Profile says they need sponsorship there.
-- Posted pay below the user's floor for the posting's country: `salary_floor_<country code>`, else the region key (e.g. `eu`), else `salary_floor_remote` for remote roles, else `pay_floor` in `pay_unit`. Compare in the posting's currency; convert only with a rate looked up that day and say so. No floor at all for that country → do not exclude on pay; ask the user for one (career-autopilot-setup step 5). Convert units only when the posting gives hours or days; otherwise compare like with like and flag when unsure.
-- Work arrangement outside `work_mode`: e.g. onsite-only when the user wants remote; hybrid/onsite beyond `max_commute_minutes` from the user's area (estimate with a quick map or transit lookup when the address is given).
+- Posted pay below the user's floor for the posting's country: `salary_floor_<country code>`, else the region key (e.g. `eu`), else `salary_floor_remote` for remote roles, else `pay_floor` in `pay_unit`. Compare in the posting's currency; convert only with a rate looked up that day and say so. Internships and graduate programmes: no wage floor (`references/filters.md`, Internships). No floor at all for that country → do not exclude on pay; ask the user for one (career-autopilot-setup step 5). Convert units only when the posting gives hours or days; otherwise compare like with like and flag when unsure.
+- Work arrangement outside `work_mode`: e.g. onsite-only when the user wants remote; hybrid/onsite beyond `max_commute_minutes` from the user's area (estimate with a quick map or transit lookup when the address is given). The commute check is for jobs near `home_area` only; for jobs in another city or country, `relocation` decides (none → exclude, alone/family → allowed).
 - Remote roles restricted to countries or timezones outside `remote_scope` / `remote_timezones` ("US residents only", "must overlap 9–5 EST").
 - Hours or schedule that cannot fit `hours_per_week` / `schedule` (e.g. weekend shifts when the user said weekdays only).
 - A professional licence or registration the posting requires in that country (e.g. nursing, medical, legal, engineering, teaching, accounting) that Profile does not hold → exclude when it is a must-hold now; flag "licence conversion needed" when it can be obtained after hire.
 - Seniority outside `seniority`, or title words in `exclude_keywords`.
-- Employment model not allowed by `employment_types` (see 2).
+- Employment model not allowed by `employment_types` (see 2). Rotation work: apply `references/filters.md`, Rotation and offshore work.
+- Remote for an employer abroad: apply `references/filters.md`, Remote for employers abroad.
 - Company in `exclude_companies`, already in `Applications` or `Skip`, posting closed.
 - Posting forbids AI assistance in applications → do not prefill; tell the user to apply personally.
 
 ## 2. Employment model
 
-Classify: `permanent` · `contract (direct)` · `contract via agency` · `vendor placement` (on a client's site through a vendor) · `part-time` · `freelance / project` · `casual / gig` · `internship` · `graduate programme` · `returnship`.
+Classify: `permanent` · `contract (direct)` · `contract via agency` · `vendor placement` (on a client's site through a vendor) · `part-time` · `freelance / project` · `casual / gig` · `internship` · `graduate programme` · `returnship` · `rotation` (note the pattern, e.g. 14/14).
 Work mode: `remote` · `hybrid` · `onsite`; note the remote scope when stated.
 Flag, do not exclude, unless `employment_types` rules it out:
 - Promised "conversion to permanent" with no timeframe or criteria → flag "conversion not defined".
@@ -56,6 +58,8 @@ Only facts in Profile count. A credential proves the skill exists, not years of 
 ## 4. Report
 
 Score · work mode and pay in one line · 2–3 strongest matches · every gap stated plainly ("asks for 3+ yrs Go; profile shows none") · flags · work-pass note (section 5).
+With `relocation: family`, add one "Keluarga" line: family visa possible (yes/no/unknown, with the rule) and what the offer covers (visa, flights, housing, school, insurance) or "tidak disebut".
+For rotation work, add one line: pattern, day rate or monthly, travel paid or not, safety training needed.
 Recommend applying when the score ≥ `min_match` (in `watch` mode: ≥ `watch_min_match`, default 88) and there is no hard-filter hit.
 
 ## 5. Work-pass note

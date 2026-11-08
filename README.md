@@ -15,6 +15,7 @@ Nothing about you is in the plugin. Your data stays in your own private dashboar
 | | |
 |---|---|
 | For everyone | Five situations (segments) change scoring, sources and tone: `experienced`, `fresh-graduate`, `career-returner`, `side-income`, `career-switcher`. A fresh graduate is scored on education and projects, not years; a returner's career break is not penalised; side income is scored on schedule, pay per hour and safety. |
+| Remote, relocation and rotation | Remote for employers anywhere (contractor roles flagged, location rules checked), moving abroad with family (dependant-visa salary minimum and relocation package checked, e.g. Singapore Dependant's Pass at SGD 6,000 fixed salary), and rotation work such as offshore 14/14 (pattern, travel, safety certificates, "single status"). Indonesian citizens going abroad are pointed to SISKOP2MI and licensed P3MI agencies. |
 | Any field | Example presets for finance, nursing, marketing, supply chain and tech, plus custom presets Claude drafts for any other field. |
 | Any country, any work mode | Remote, hybrid or onsite, with commute limit, hours per week, schedule and pay per hour, day, project or month. Built-in sources for Singapore, APAC, EMEA and US/Canada; other countries' portals are found on first use. |
 | Account safety | A reminder mode for LinkedIn, JobStreet, Indeed, Upwork and similar platforms: you confirm the risk once, Claude stays under daily caps, warns at 80%, and pauses at the first warning sign. |
@@ -124,7 +125,7 @@ Run this after every change to setup or onboarding:
 1. Use a fresh account, or a new profile: say **"add a profile for Test"**.
 2. In a new chat, type **"mulai cari kerja"**.
    Expected: only the dashboard link and one sentence ("Buka halaman ini, klik pilihan di tab Mulai, tekan Simpan, lalu Salin, dan tempel di sini."). No questions in chat, no job search.
-3. Open the link, answer the 9 questions in the Start tab, press **Simpan**, then **Salin**.
+3. Open the link, answer the questions in the Start tab (10, or 9 when you pick remote), press **Simpan**, then **Salin**.
 4. Paste the copied text into the chat.
    Expected: Filters filled from your answers (Claude lists them), the dashboard's Start tab no longer opens by default, and a first shortlist appears in the chat and in the Dashboard tab.
 5. Type **"cari lowongan"** in a profile whose onboarding is not finished.

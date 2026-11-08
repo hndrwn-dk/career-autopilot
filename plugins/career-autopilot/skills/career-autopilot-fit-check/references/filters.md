@@ -22,12 +22,18 @@
 | pay_unit | hour / day / project / month | unit for `pay_floor` |
 | pay_floor | IDR 50,000 | minimum pay in `pay_unit` |
 | needs_sponsorship | singapore: yes | per country |
+| citizenship | Indonesia | decides work rights per country; asked only when the user looks abroad |
+| relocation | none / alone / family | whether the user would move for the job |
+| family | spouse + 2 children | who moves along (as the user typed it; no names or ages needed) |
+| relocation_support | required / preferred / none | relocation package: flights, shipping, temporary housing, visa costs for the family |
+| rotation_pattern | 14/14, 28/28 | days on / days off for rotation work (offshore, mining, remote sites) |
+| rotation_region | Asia Pacific, Middle East | where the user accepts to fly in for rotations; crew-change point travel |
 | languages_spoken | English, Indonesian | any other required language is a blocker |
 | salary_floor_<region> | salary_floor_sg: SGD 5,600/month | exclude below; see "Default salary floors" when the user has none |
 | | salary_floor_id: IDR 15,000,000/month · salary_floor_au: AUD 9,000/month · salary_floor_eu: EUR 4,500/month · salary_floor_remote: USD 3,000/month | one line per target country, in that country's currency. Key = lowercase ISO country code (sg, id, my, au, gb, us, ca, de…), a region (eu, gcc) or `remote`. The most specific key wins: country, then region, then remote. A country with no key gets the official default after the user agrees. |
 | seniority | senior, staff, lead | allowed levels |
 | exclude_keywords | intern, junior | title words to skip |
-| employment_types | permanent, contract (direct), part-time, freelance / project, casual / gig, internship, graduate programme, returnship | allowed models |
+| employment_types | permanent, contract (direct), part-time, freelance / project, casual / gig, internship, graduate programme, returnship, rotation | allowed models |
 | min_contract_months | 12 | shorter contracts get flagged |
 | min_match | 75 | apply threshold in active mode |
 | watch_min_match | 88 | threshold in watch mode |
@@ -64,9 +70,48 @@ Singapore has no national minimum wage. Reference points:
 
 For a work-pass holder the EP or S Pass figure is a hard floor: an employer cannot get the pass approved below it. Always state that meeting it does not guarantee approval (EP also needs COMPASS points).
 
+## Internships and graduate programmes
+
+The minimum wage floor does not apply to an internship: interns usually get an allowance (Indonesia: uang saku under the
+pemagangan rules), not a wage. Do not exclude an internship on pay; ask the user once for a minimum allowance or "tidak
+masalah", and flag unpaid internships (segment fresh-graduate, Checks).
+
 ## Other countries
 
 Use the official national minimum wage or the work-permit salary threshold for that country (e.g. Malaysia national minimum wage, Indonesia provincial UMP/UMK, Australia national minimum wage and skilled-visa income thresholds, UK National Living Wage and Skilled Worker thresholds, EU Blue Card thresholds per country, US state minimum wage). Look up the current figure on the government site, show it with its source and date, and save it as the default floor only after the user agrees.
+
+# Family relocation (when `relocation: family`)
+
+Moving with a spouse and children needs a work route that allows dependants, and usually a higher salary than the work
+permit alone. Treat the family minimum as part of the floor for that country, and check the current rule once per month.
+
+| Country | Family rule | Source |
+|---|---|---|
+| Singapore | Dependant's Pass for a legally married spouse and unmarried children under 21: the EP or S Pass holder must earn a fixed monthly salary of at least SGD 6,000 (own salary, not household income; fixed allowances count, bonuses and overtime do not). Parents on a Long-Term Visit Pass: SGD 12,000. Meeting it allows an application, not approval. | MOM Dependant's Pass eligibility |
+| Other countries | Look up the dependant or family visa rule for the work route (e.g. Malaysia EP category, Australia employer-sponsored visa, UK Skilled Worker dependants, Gulf family residence visa salary minimum, Japan dependent visa) on the government site, show it with source and date, and save it only after the user agrees. | government site |
+
+Also weigh, and show in the report, whether the offer covers: visas for the family, flights, shipping, temporary housing,
+school fees or international-school allowance, health insurance for dependants. A posting that says "local candidates only",
+"no relocation" or "no visa sponsorship" is a hard exclude when `relocation` is alone or family and the user needs a permit.
+
+For Indonesian citizens going abroad: work through the employer directly (jalur mandiri) or a P3MI agency listed as active in
+SISKOP2MI (siskop2mi.bp2mi.go.id, Kementerian P2MI). Official placement charges no registration or recruitment fee to the candidate.
+Register the job in SISKOP2MI before leaving, so the worker is protected.
+
+# Rotation and offshore work (when `employment_types` has rotation)
+
+- Pattern: compare the posting's rotation (14/14, 21/21, 28/28, 4/4 weeks) with `rotation_pattern`; a different pattern is a flag, not an exclude, unless the user says it is fixed.
+- Pay: day rate or monthly; rotation roles often pay only for days on. Compare like with like; say which one the posting uses.
+- Travel: who pays the flight to the crew-change point (heliport, port, mine site) and whether travel days are paid.
+- Safety training and medicals often required before mobilisation: e.g. BOSIET/FOET with CA-EBS, HUET, an offshore medical (OEUK or national equivalent), H2S, GWO for offshore wind, STCW for vessels. Missing ones are a flag "pelatihan keselamatan perlu"; exclude only when the posting says they must be valid now and the job starts within weeks.
+- "Single status" or "bachelor status" means the family cannot come: exclude when `relocation: family`.
+- Employer: operator, drilling contractor, service company or manpower/crewing agency. Agency → check its licence (Indonesia: P3MI in SISKOP2MI for jobs abroad; crewing agencies for ships hold a Kemenhub SIUPPAK licence).
+
+# Remote for employers abroad (when `remote_scope` is wider than the user's country)
+
+- Classify how the user would be paid: employee through an Employer of Record (Deel, Remote.com, Oyster and similar), or independent contractor.
+- Contractor → flag "kontraktor: pajak dan jaminan sosial Anda urus sendiri" and note that pay should be in a normal bank transfer or a known payment service, never crypto (scam-signals).
+- Check the posting's location rule ("anywhere", "APAC only", "must reside in the US") against `remote_scope`, and working hours against `remote_timezones`.
 
 # Work-permit notes (orientation only; check the current rule with a web search whenever a threshold decides the outcome)
 

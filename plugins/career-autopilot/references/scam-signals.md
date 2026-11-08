@@ -44,6 +44,9 @@ Do not open their links or reply to them.
 - Medical check, training or uniform that must be done or bought through a provider the recruiter names, even if "refunded later".
 - Interview in a private place (hotel room, home, car) or at night: flag; suggest a public place, a video call, or bringing someone along.
 - Company exists but the contact is not on its domain or official page (impersonation of a real company).
+- Offshore, oil-rig, mining or ship (ABK) job offered with no interview, or a "letter of employment" from a big energy or shipping company sent from a free email or a lookalike domain. Any fee for visa, work permit, "offshore certificate" or flights through a named agent or "legal department" is pay-first: skip.
+- Overseas job through an agency: for Indonesian citizens, check the agency is listed as an active P3MI in SISKOP2MI (siskop2mi.bp2mi.go.id) and the job appears there. Not listed → flag; asks for money → skip.
+- Remote job "for anyone, anywhere" that pays well for simple tasks and asks to be paid out in crypto or through an unknown "payment platform".
 
 ## Check (one or two quick lookups, only when a flag fires)
 
