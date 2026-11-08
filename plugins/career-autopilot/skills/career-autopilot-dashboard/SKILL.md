@@ -39,7 +39,7 @@ The page shows only `jobs`, `meta/summary` and `meta/run` (full document list: s
 
 | Path | Fields the page reads |
 |---|---|
-| `jobs/<id>` | `company`, `role`, `city`, `country`, `work_mode`, `pay` (as posted, short), `model`, `status`, `match` (0–100), `channel`, `link` (https posting URL), `next_action`, `flags` (up to 3 short strings), `reason` (skip/scam reason, short), `ready_to_send` (true/false), `updated` (ISO time with offset) |
+| `jobs/<id>` | `company`, `role`, `city`, `country`, `work_mode`, `pay` (as posted, short), `model`, `status`, `match` (0–100), `channel`, `link` (https posting URL), `next_action`, `flags` (up to 3 short strings), `reason` (skip/scam reason, short), `ready_to_send`, `invite_pending`, `follow_up_ready`, `reached_interview`, `reached_offer` (true/false), `updated` (ISO time with offset) |
 | `meta/summary` | `profile`, `mode`, `segment`, `language` (`id`/`en`), `onboarded`, `last_run`, `next_run`, `scams_skipped_total`, `skipped_total`, `platforms` (`{"<name>":{"used":n,"cap":n,"paused_until":"ISO or empty"}}`, today only) |
 | `meta/run` | `state` (`running`/`idle`), `activity` (one short line), `updated` |
 
@@ -51,11 +51,17 @@ living costs or take-home pay. Write those comparisons (the "Biaya hidup" and "K
 say neutral facts about the posting ("Visa keluarga disponsori", "Gaji tidak disebut", "Di bawah syarat visa"). Those stay in `settings/profile`
 and `settings/filters`, which only the owner can read. `pay` is only what the posting itself states.
 
+## Tabs on the page
+
+Mulai (onboarding), Dashboard (pipeline, funnel line, buttons: Apply, Kirim, Balas undangan, Persiapan interview, Cek offer, Kirim
+follow-up), Perintah cepat, Kalkulator (take-home and living cost for any listed country, any time), Pengaturan (owner-only view of
+Filters and Profile, with "ubah pengaturan saya" and "hapus semua data saya" buttons). Every button copies a command to paste in Claude.
+
 ## Onboarding answers (written by the page)
 
 The user answers the Start tab by clicking; the page saves one document, `onboarding/answers`:
 `language` (id/en), `segment`, `work` (list of: admin, retail, fnb, logistics, teaching, health, finance, marketing, design, it, cs, driver, engineering, energy), `work_other`,
-`work_mode` (remote/hybrid/onsite/any), `area`, `countries` (list, may include `Worldwide`), `countries_other`, `move` (none/alone/family), `family_text`,
+`work_mode` (remote/hybrid/onsite/any), `area`, `countries` (list, may include `Worldwide`), `countries_other`, `move` (none/alone/family), `family_text`, `citizenship`, `relocation_support`,
 `employment` (full-time/part-time/freelance/internship/rotation/any), `hours_per_week`, `rotation`,
 `pay` (official/custom), `pay_text`, `cv` (have/build), `mode` (off/watch/active), `submitted_at`, `applied`.
 
@@ -70,9 +76,9 @@ When the user pastes the copied text ("Lanjutkan setup Career Autopilot dari das
    `employment: internship` → `employment_types: internship, graduate programme`; `employment: rotation` → add `rotation` to `employment_types`
    and save `rotation` as `rotation_pattern` (e.g. 14/14); `work: energy` also adds offshore sources (find-jobs sources.md, Offshore and rotation).
    `move` → `relocation` (none/alone/family); `family_text` → `family` as who comes along only (spouse, children, parents): drop any
-   number, names or ages, and write the same cleaned text back to `onboarding/answers`. For `alone` or `family`, ask once in one
-   message: the user's citizenship (for `needs_sponsorship` per country) and whether a relocation package is required (`relocation_support`).
-   Unanswered → `relocation_support: preferred` (flag, not exclude) and say so in one line. `Europe` with no countries named → search
+   number, names or ages, and write the same cleaned text back to `onboarding/answers`. For `alone` or `family`, the page also saves
+   `citizenship` and `relocation_support` (required/preferred/none): copy them to Filters and set `needs_sponsorship` per country from the
+   citizenship. Missing (older pages) → ask once in one message; unanswered → `relocation_support: preferred` and say so in one line. `Europe` with no countries named → search
    EU-wide (EURES and visa-sponsor boards) and apply each posting country's threshold; do not ask again before the first search. `pay: official` → the page already showed the suggested floors and the user agreed: save them as `salary_floor_<code>` without asking
    again, and ask in one message only for countries the page gives no figure for (Middle East, US/Canada, Japan, other); with `relocation: family`
    the floor is the higher of that and the country's minimum for bringing family (fit-check filters.md, Family relocation). With `move`

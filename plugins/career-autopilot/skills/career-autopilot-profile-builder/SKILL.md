@@ -27,7 +27,7 @@ Source: CV = from the CV · ask = ask the user · calc = computed from CV dates.
 | years_total | calc | |
 | years_<skill> | calc | show the arithmetic per skill so the user can correct it |
 | skills | CV | comma list |
-| certifications | CV | one per line: name, issuer, year if given |
+| certifications | CV/ask | one per line: name, issuer, year, `expires` date when it has one (safety training, medicals, licences); ask once for expiry dates the CV omits |
 | roles | CV | one line per role: title, company, city, start–end, employment model (permanent / contract via agency / vendor placement) |
 | achievements_<n> | CV | one quantified achievement per key |
 | education | CV | school, qualification, field, years; note equivalents only if the user states them |

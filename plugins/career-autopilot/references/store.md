@@ -34,7 +34,8 @@ List the user's artifacts whose title is `Career Autopilot` (default profile) or
 | Dashboard state | `meta/summary`, `meta/run`, `meta/ready` | see career-autopilot-dashboard; `meta/ready` = the numbered "Siap dikirim" list from the last run |
 
 `jobs/<id>` fields: `company`, `role`, `city`, `country`, `work_mode`, `pay`, `model`, `status`, `match`, `channel`,
-`link`, `job_id`, `applied_on`, `next_action`, `flags`, `reason`, `notes`, `source`, `date`, `updated`, `ready_to_send`.
+`link`, `job_id`, `applied_on`, `next_action`, `flags`, `reason`, `notes`, `source`, `date`, `updated`, `ready_to_send`,
+`invite_pending`, `follow_up_ready`, `reached_interview`, `reached_offer`.
 `<id>` = `<company>-<role>` lowercased, every character outside `a-z0-9` replaced by `-`, collapsed, at most 120 characters.
 "Append a row to Applications/Skip" means: write that `jobs/<id>` document. "Already in Applications or Skip" means:
 a `jobs` document with that id or link exists.
@@ -66,3 +67,11 @@ and tell the user the sheet is no longer updated.
 
 If the Artifact database tools are truly unavailable after a tool search (for example in Claude Code), work in
 chat-only mode: results stay in the conversation and nothing is remembered between conversations. Say this once.
+
+## 8. Delete all my data ("hapus semua data saya", "delete all my data")
+
+Confirm once in chat, naming the profile and what goes: every `jobs`, `stories`, `settings`, `onboarding` and `meta` document of this
+profile's dashboard. Then delete them with db_write delete ops (read versions first; at most 50 ops per call) and say how many were
+removed. The dashboard page stays (empty) unless the user also asks to delete the artifact: then use the Artifact delete tool, which
+asks the user to confirm. Drive files (CV, exports, presets) are not touched; list the folder and offer to move them to the trash.
+Never delete without that confirmation, and never for another profile than the one named.

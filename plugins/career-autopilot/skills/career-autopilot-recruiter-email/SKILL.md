@@ -23,7 +23,22 @@ Writing: `${CLAUDE_PLUGIN_ROOT}/references/writing-style.md` for every draft (ap
 
 - Same thread. Propose interview times only from Filters `availability` or what the user says now; check Google Calendar for clashes if connected.
 - Agency recruiter asking for the client name, rate or package: draft a reply that asks for the client, role scope, employment model, duration and conversion terms before sharing expectations. Include the user's expectation only if the user tells you to.
-- Follow-up: only when asked, at least 7 days after applying, one short message.
+- Follow-up: at least 7 days after applying, one short message. career-autopilot-run prepares it (`follow_up_ready: true`); the user
+  says "kirim follow-up <Company · Role> (<id>)" or presses the dashboard button, then Claude shows the draft and sends on approval.
+
+## Interview invite ("balas undangan interview <Company · Role> (<id>)")
+1. Read the invite (Gmail thread of that job): format, length, timezone, proposed times or a booking link, who is invited.
+2. Booking link (Calendly and similar) → do not book; list 3 suitable slots from the user's calendar and let the user book. Never sign in.
+3. Proposed times or "send your availability" → pick 2–3 slots that fit Filters `availability` and are free in Google Calendar (if
+   connected), in the recruiter's timezone with the user's in brackets. Prefer the earliest suitable ones.
+4. Draft the reply (accept one proposed time, or offer the slots), under 100 words, same thread. Create tentative calendar holds
+   ("HOLD: interview <Company>") for the offered slots if Calendar is connected, and say so.
+5. Send only on the user's "kirim". After sending: keep holds until the recruiter confirms; on confirmation (career-autopilot-inbox-sync),
+   turn the confirmed one into the event with the link and delete the other holds. Set `invite_pending: false`, `next_action`
+   "Interview <date time>", and offer career-autopilot-interview-prep.
+
+## Offer replies
+Drafts come from career-autopilot-offer-check (accept, ask/negotiate, decline). Same rule: Gmail draft, sent only on the user's word.
 
 ## Style
 

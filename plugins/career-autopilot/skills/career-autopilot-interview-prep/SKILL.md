@@ -26,7 +26,13 @@ Inputs: the Applications row (or a link/description the user gives), `Profile`, 
 4. **Likely questions** (10–15) split into technical, scenario/system design, behavioural, customer (for customer-facing roles). For each: the best-matching Story id and a 2–3 line answer outline.
 5. **Gaps to address**: from career-autopilot-fit-check gaps, with an honest framing for each ("not used X in production; used Y which solves the same problem; here's how I'd ramp").
 6. **Questions to ask them**: 5, specific to the role and the employment model (for agency/vendor roles: client, duration, conversion criteria and timeline, who manages performance).
-7. **Logistics**: time in the user's timezone, link/location, what to have open.
+7. **Logistics**: time in the user's timezone, link/location, what to have open. Online: test camera, microphone and the meeting app
+   10 minutes before; quiet place; CV and the posting open.
+8. **"Berapa ekspektasi gaji Anda?"**: a short answer with a range. Base: the user's floor for that country, the posted range, and for
+   jobs abroad the gross pay needed to cover living costs (career-autopilot-offer-check, step 3). Say whether the figure is monthly or
+   yearly, fixed or total, and give the reason in one line ("termasuk biaya hidup untuk keluarga di <kota>"). Show the figure only in chat.
+9. **Job abroad**: add the first part of the relocation checklist (`${CLAUDE_PLUGIN_ROOT}/references/relocation-checklist.md`, Before
+   accepting and Documents) so slow documents start early.
 
 Then offer a mock: ask one question at a time, wait for the user's answer, give short feedback (structure, specificity, missing result numbers), next question.
 Add any new story the user tells during the mock to `Stories` with `Source: user` after confirming the wording with them.

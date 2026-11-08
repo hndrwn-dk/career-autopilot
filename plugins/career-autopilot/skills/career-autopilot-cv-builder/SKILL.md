@@ -34,6 +34,22 @@ Never ask for or store: ID numbers, date of birth, marital status, religion, hea
 
 Show the draft as text, apply the user's corrections, then confirm.
 
+## Country formats
+
+Build the version for the country the user applies to (ask when Filters `countries` has several); keep one `cv_<country>` per format.
+
+| Country | Format |
+|---|---|
+| Indonesia | 1–2 pages; a professional photo is common but optional; no religion or marital status unless the user insists; Indonesian or English as the posting |
+| Singapore, Malaysia | 2 pages fine; no photo needed; state work pass status in one line if relevant (e.g. "Requires Employment Pass") |
+| Australia, New Zealand, UK, Ireland, US, Canada | no photo, no date of birth or marital status; ATS-friendly (single column, standard headings, no tables or text in images); Australia often uses 2–3 pages |
+| Germany, Austria, Switzerland | tabular Lebenslauf, reverse chronological, photo optional; dates as MM/YYYY; often with a cover letter |
+| Netherlands, Nordics | concise, 1–2 pages, no photo needed |
+| Japan | rirekisho (standard form, photo, handwritten or typed) plus shokumu keirekisho (work history); ask the employer which they want |
+| Gulf states | photo and nationality are commonly included; state visa status and notice period |
+
+Everywhere: same facts, only the layout changes. Never invent personal details a format usually asks for; leave them for the user.
+
 ## 3. Save
 
 - Make the CV as a document the user can edit and download (a Docs artifact where available, or a .docx when the user asks for Word). Also save a PDF copy to Drive `Career Autopilot/CV/` when a PDF export is available.

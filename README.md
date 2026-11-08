@@ -16,6 +16,7 @@ Nothing about you is in the plugin. Your data stays in your own private dashboar
 |---|---|
 | For everyone | Five situations (segments) change scoring, sources and tone: `experienced`, `fresh-graduate`, `career-returner`, `side-income`, `career-switcher`. A fresh graduate is scored on education and projects, not years; a returner's career break is not penalised; side income is scored on schedule, pay per hour and safety. |
 | Remote, relocation and rotation | Remote for employers anywhere (contractor roles flagged, location rules checked), moving abroad with family (dependant-visa salary minimum and relocation package checked, e.g. Singapore Dependant's Pass at SGD 6,000 fixed salary), and rotation work such as offshore 14/14 (pattern, travel, safety certificates, "single status"). Indonesian citizens going abroad are pointed to SISKOP2MI and licensed P3MI agencies. Moving abroad also shows the estimated monthly living cost (alone or family) per country during onboarding, and every job abroad gets a take-home-pay vs living-cost line. A calculator on the Start tab works out 2026 income tax, compulsory deductions, take-home pay and what is left after living costs (Singapore, Australia, Netherlands, Malaysia), plus the gross pay needed. |
+| After applying | Interview invites get slot suggestions from your calendar, offers get a full check (take-home, visa thresholds, what to negotiate), follow-ups are drafted after 7–10 days, certificates are reminded 60 days before expiry, CVs follow each country's format, and the dashboard shows your applications → interviews → offers funnel. |
 | Any field | Example presets for finance, nursing, marketing, supply chain and tech, plus custom presets Claude drafts for any other field. |
 | Any country, any work mode | Remote, hybrid or onsite, with commute limit, hours per week, schedule and pay per hour, day, project or month. Built-in sources for Singapore, APAC, EMEA and US/Canada; other countries' portals are found on first use. |
 | Account safety | A reminder mode for LinkedIn, JobStreet, Indeed, Upwork and similar platforms: you confirm the risk once, Claude stays under daily caps, warns at 80%, and pauses at the first warning sign. |
@@ -103,6 +104,12 @@ Steps 5 and 6 repeat as new jobs come in.
 | "check my application emails" | statuses updated in your dashboard, next actions, scams listed separately |
 | "buatkan CV" | CV made by interview, saved to your Drive if connected |
 | "prep me for the <company> interview" | interview brief and mock interview |
+| "balas undangan interview …" (dashboard button) | 2–3 free slots from your calendar, a reply draft and calendar holds; sent when you say "kirim" |
+| "cek offer" + the offer text | pay breakdown, visa thresholds, take-home and what is left after living costs, points to negotiate, accept/ask/decline drafts |
+| "hitung gaji bersih Singapura 8000" | take-home pay and what is left; also on the dashboard's Kalkulator tab |
+| "checklist dokumen pindah" | documents and steps for working abroad (passport, apostille, SKCK, family documents, SISKOP2MI, BPJS) |
+| "kirim follow-up …" (dashboard button) | follow-up drafted after 7–10 days without a reply; sent when you say so |
+| "hapus semua data saya" | deletes this profile's dashboard data after one confirmation |
 | "add a profile for my wife" | a separate dashboard and settings for another person |
 | "buka dashboard" / "open my dashboard" | your private dashboard: pipeline, next actions, platform safety, scams skipped |
 

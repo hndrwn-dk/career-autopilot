@@ -22,6 +22,13 @@ Data store: `${CLAUDE_PLUGIN_ROOT}/references/store.md`. Load the Artifact tools
 
 Run career-autopilot-inbox-sync. Set `ready` jobs to `submitted` when a confirmation email matches.
 
+## 1b. Follow-ups and reminders
+
+- `submitted` jobs with no reply after 7–10 days and no follow-up yet → draft one short follow-up (career-autopilot-recruiter-email),
+  set `follow_up_ready: true` and `next_action` "Follow-up siap: tekan Kirim follow-up". Never send it in the run.
+- Profile `certifications` with an `expires` date in the next 60 days (safety training, medicals, licences, work passes) → one line
+  in the summary ("BOSIET habis 12 Jan 2027: jadwalkan pelatihan ulang").
+
 ## 2. New roles
 
 Run career-autopilot-find-jobs without its final question. Account platforms only if listed in `use_platforms` and the user has a current `platform_ack_<platform>`, at half the daily caps, skipping paused ones (`career-autopilot-find-jobs/references/platforms.md`). A platform without an ack is skipped and named in the summary ("LinkedIn dilewati: belum ada persetujuan risiko akun").
@@ -58,7 +65,8 @@ Worth a look (<n>)                      ← watch mode
 - <Company> · <Role> · <City> · <match>% · <model> · <one-line why> · <link>
 
 Replies
-- Interview / assessment: <Company> · <Role> · <next step / deadline>
+- Interview / assessment: <Company> · <Role> · <next step / deadline> · "balas undangan …" when a reply is due
+- Follow-up siap: <n> (tekan Kirim follow-up di dashboard)
 - Offer: <Company> · <Role>
 - Rejected: <Company> · <Role>
 

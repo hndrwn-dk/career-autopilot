@@ -128,14 +128,19 @@ a{color:var(--teal)}
     <button class="tab" role="tab" data-tab="start" id="tStart"></button>
     <button class="tab" role="tab" data-tab="dash" id="tDash"></button>
     <button class="tab" role="tab" data-tab="quick" id="tQuick"></button>
+    <button class="tab" role="tab" data-tab="calc" id="tCalc"></button>
+    <button class="tab" role="tab" data-tab="set" id="tSet"></button>
   </nav>
   <div class="banner" id="banner" hidden></div>
   <section id="paneStart" hidden><div class="card"><div class="wiz" id="wiz"></div></div></section>
+  <section id="paneCalc" hidden><div class="card"><h2 id="hCalc"></h2><p class="note" id="calcHint"></p><div class="wiz" id="calcPane"></div></div></section>
+  <section id="paneSet" hidden><div class="card"><h2 id="hSet"></h2><div id="setBody"></div></div></section>
   <section id="paneQuick" hidden><div class="card"><h2 id="hQuick"></h2><p class="note" id="quickHint"></p><div class="quick" id="quick"></div></div></section>
   <div id="paneDash">
   <div class="run"><span class="dot" id="runDot"></span><span id="runText"></span></div>
 
   <section class="kpis" id="kpis"></section>
+  <p class="note" id="funnel"></p>
   <section class="card sendall" id="sendAll" hidden></section>
 
   <section class="card">
@@ -184,7 +189,7 @@ a{color:var(--teal)}
       empty:"Nothing here yet.",noNext:"No actions waiting. Nice.",noPlat:"No account platforms used today.",paused:"paused until",
       loading:"Loading…",stale:"Can't reach the data right now; showing what was last loaded.",nodb:"This view can't load the dashboard data. Open it on claude.ai while signed in.",
       firstRun:"No data yet. In Claude, say “find jobs” or “update my dashboard”.",foot:"Updated by Claude each time Career Autopilot runs. Personal details (phone, email, salary) are never shown here.",
-      apply:"Apply",prep:"Interview prep",copied:"Copied. Paste it in the Claude chat.",cmdApply:"apply to ",cmdPrep:"interview prep for ",send:"Send",sendAll:"Send all ready",cmdSend:"send ",cmdSendAll:"send all ready: ",sendH:"Ready to send",sendHint:"Forms are filled and checked. Copy, paste in the Claude chat, and Claude presses Submit for these only. LinkedIn and similar platforms: you submit yourself.",st:{worth_a_look:"Worth a look",queued:"Queued",ready:"Ready to submit",submitted:"Submitted",in_review:"In review",assessment:"Assessment",interview:"Interview",offer:"Offer",rejected:"Rejected",withdrawn:"Withdrawn",closed:"Closed",skipped:"Skipped",scam:"Scam"}},
+      apply:"Apply",prep:"Interview prep",copied:"Copied. Paste it in the Claude chat.",cmdApply:"apply to ",cmdPrep:"interview prep for ",reply:"Reply to invite",cmdReply:"reply to interview invite ",offerB:"Check offer",cmdOffer:"check this offer ",follow:"Send follow-up",cmdFollow:"send follow-up ",fun:["applications","interviews/tests","offers"],funTip:"Many applications but no interviews yet: say “review my CV and targets” in Claude.",send:"Send",sendAll:"Send all ready",cmdSend:"send ",cmdSendAll:"send all ready: ",sendH:"Ready to send",sendHint:"Forms are filled and checked. Copy, paste in the Claude chat, and Claude presses Submit for these only. LinkedIn and similar platforms: you submit yourself.",st:{worth_a_look:"Worth a look",queued:"Queued",ready:"Ready to submit",submitted:"Submitted",in_review:"In review",assessment:"Assessment",interview:"Interview",offer:"Offer",rejected:"Rejected",withdrawn:"Withdrawn",closed:"Closed",skipped:"Skipped",scam:"Scam"}},
     id:{sub:"Dashboard pencarian kerja",mode:{active:"Aktif",watch:"Pantau",off:"Mati"},idle:"Diam",running:"Berjalan",lastRun:"Terakhir jalan",nextRun:"Jadwal berikutnya",never:"belum",
       k:{worth:"Layak dilihat",ready:"Siap submit",open:"Lamaran berjalan",interview:"Interview & tes",offer:"Offer",closed:"Selesai"},
       pipeline:"Alur lamaran",next:"Yang perlu Anda lakukan",platforms:"Keamanan platform hari ini",scams:"penipuan dilewati",skipped:"lowongan dilewati",
@@ -192,7 +197,7 @@ a{color:var(--teal)}
       empty:"Belum ada.",noNext:"Tidak ada yang menunggu. Mantap.",noPlat:"Belum ada platform akun yang dipakai hari ini.",paused:"dijeda sampai",
       loading:"Memuat…",stale:"Data belum bisa dijangkau; yang tampil adalah data terakhir.",nodb:"Tampilan ini tidak bisa memuat data dashboard. Buka di claude.ai dalam keadaan login.",
       firstRun:"Belum ada data. Di Claude, ketik “cari lowongan” atau “update dashboard saya”.",foot:"Diperbarui Claude setiap kali Career Autopilot berjalan. Data pribadi (HP, email, gaji) tidak pernah ditampilkan di sini.",
-      apply:"Apply",prep:"Persiapan interview",copied:"Tersalin. Tempel di chat Claude.",cmdApply:"apply ke ",cmdPrep:"persiapan interview ",send:"Kirim",sendAll:"Kirim semua yang siap",cmdSend:"kirim ",cmdSendAll:"kirim semua yang siap: ",sendH:"Siap dikirim",sendHint:"Form sudah terisi dan dicek. Salin, tempel di chat Claude, lalu Claude menekan Submit hanya untuk lowongan ini. LinkedIn dan platform sejenis: Anda yang Submit.",st:{worth_a_look:"Layak dilihat",queued:"Antre",ready:"Siap submit",submitted:"Terkirim",in_review:"Ditinjau",assessment:"Tes",interview:"Interview",offer:"Offer",rejected:"Ditolak",withdrawn:"Dibatalkan",closed:"Ditutup",skipped:"Dilewati",scam:"Penipuan"}}
+      apply:"Apply",prep:"Persiapan interview",copied:"Tersalin. Tempel di chat Claude.",cmdApply:"apply ke ",cmdPrep:"persiapan interview ",reply:"Balas undangan",cmdReply:"balas undangan interview ",offerB:"Cek offer",cmdOffer:"cek offer ",follow:"Kirim follow-up",cmdFollow:"kirim follow-up ",fun:["lamaran","interview/tes","offer"],funTip:"Sudah banyak lamaran tapi belum ada interview: ketik “review CV dan target saya” di Claude.",send:"Kirim",sendAll:"Kirim semua yang siap",cmdSend:"kirim ",cmdSendAll:"kirim semua yang siap: ",sendH:"Siap dikirim",sendHint:"Form sudah terisi dan dicek. Salin, tempel di chat Claude, lalu Claude menekan Submit hanya untuk lowongan ini. LinkedIn dan platform sejenis: Anda yang Submit.",st:{worth_a_look:"Layak dilihat",queued:"Antre",ready:"Siap submit",submitted:"Terkirim",in_review:"Ditinjau",assessment:"Tes",interview:"Interview",offer:"Offer",rejected:"Ditolak",withdrawn:"Dibatalkan",closed:"Ditutup",skipped:"Dilewati",scam:"Penipuan"}}
   };
   var COLS=[["worth",["worth_a_look"]],["ready",["queued","ready"]],["open",["submitted","in_review"]],["interview",["assessment","interview"]],["offer",["offer"]]];
   var CLOSED=["rejected","withdrawn","closed"];
@@ -230,6 +235,9 @@ a{color:var(--teal)}
     var k=[["worth",count(["worth_a_look"]),true],["ready",count(["queued","ready"]),true],["open",count(["submitted","in_review"])],["interview",count(["assessment","interview"])],["offer",count(["offer"])],["closed",count(CLOSED)]];
     $("kpis").innerHTML=k.map(function(x){return '<div class="kpi'+(x[2]&&x[1]?" hl":"")+'"><b>'+x[1]+'</b><span>'+esc(L.k[x[0]])+'</span></div>'}).join("");
 
+    var applied=jobs.filter(function(j){return j.applied_on||["submitted","in_review","assessment","interview","offer","rejected","withdrawn"].indexOf(j.status)>=0}).length;
+    var ivs=jobs.filter(function(j){return ["assessment","interview","offer"].indexOf(j.status)>=0||j.reached_interview===true}).length,offs=jobs.filter(function(j){return j.status==="offer"||j.reached_offer===true}).length;
+    $("funnel").textContent=applied?applied+" "+L.fun[0]+" → "+ivs+" "+L.fun[1]+" ("+Math.round(ivs/applied*100)+"%) → "+offs+" "+L.fun[2]+(applied>=10&&ivs===0?" · "+L.funTip:""):"";
     var rs=jobs.filter(function(j){return j.status==="ready"&&j.ready_to_send===true}).sort(function(a,b){return num(b.match)-num(a.match)});
     var sa=$("sendAll");
     if(rs.length){
@@ -278,7 +286,9 @@ a{color:var(--teal)}
     var k=j._id||"",lab=(j.company||"")+" · "+(j.role||"");
     if(j.status==="worth_a_look"||j.status==="queued")return '<button class="act" data-cmd="'+esc(L.cmdApply+lab+" ("+k+")")+'">'+esc(L.apply)+'</button>';
     if(j.status==="ready"&&j.ready_to_send===true)return '<button class="act" data-cmd="'+esc(L.cmdSend+lab+" ("+k+")")+'">'+esc(L.send)+'</button>';
-    if(j.status==="interview"||j.status==="assessment")return '<button class="act alt" data-cmd="'+esc(L.cmdPrep+lab+" ("+k+")")+'">'+esc(L.prep)+'</button>';
+    if(j.status==="interview"||j.status==="assessment")return (j.invite_pending===true?'<button class="act" data-cmd="'+esc(L.cmdReply+lab+" ("+k+")")+'">'+esc(L.reply)+'</button> ':"")+'<button class="act alt" data-cmd="'+esc(L.cmdPrep+lab+" ("+k+")")+'">'+esc(L.prep)+'</button>';
+    if(j.status==="offer")return '<button class="act" data-cmd="'+esc(L.cmdOffer+lab+" ("+k+")")+'">'+esc(L.offerB)+'</button>';
+    if((j.status==="submitted"||j.status==="in_review")&&j.follow_up_ready===true)return '<button class="act alt" data-cmd="'+esc(L.cmdFollow+lab+" ("+k+")")+'">'+esc(L.follow)+'</button>';
     return "";
   }
   function card(j){
@@ -321,7 +331,7 @@ a{color:var(--teal)}
   function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
   var lang=(navigator.language||"").toLowerCase().indexOf("id")===0?"id":"en";
   var W={
-    id:{tabs:["Mulai","Dashboard","Perintah cepat"],step:"Langkah",of:"dari",back:"Kembali",next:"Lanjut",save:"Simpan",skip:"Lewati",
+    id:{tabs:["Mulai","Dashboard","Perintah cepat","Kalkulator","Pengaturan"],calcPaneH:"Kalkulator gaji bersih dan biaya hidup",calcPaneHint:"Pilih negara dan isi gaji kotor per bulan. Bisa dipakai kapan saja, misalnya saat dapat offer.",hhLabel:"Rumah tangga",hhAlone:"Sendiri",hhFam:"Keluarga (2 dewasa + 2 anak)",setH:"Pengaturan saya",setHint:"Hanya Anda (pemilik) yang bisa melihat bagian ini. Untuk mengubah, salin perintah di bawah dan tempel di chat Claude.",setNo:"Pengaturan hanya bisa dilihat oleh pemilik dashboard yang sedang login.",setEdit:"Ubah pengaturan",setEditCmd:"ubah pengaturan saya: ",setDel:"Hapus semua data saya",setDelCmd:"hapus semua data saya",setDelHint:"Claude akan meminta konfirmasi sekali lagi di chat sebelum menghapus.",setFilters:"Filter pencarian",setProfile:"Profil",cit:"Kewarganegaraan (mis. Indonesia)",relo:"Paket relokasi",reloO:[["required","Wajib ada"],["preferred","Lebih baik ada"],["none","Tidak perlu"]],step:"Langkah",of:"dari",back:"Kembali",next:"Lanjut",save:"Simpan",skip:"Lewati",
       saved:"Tersimpan. Kembali ke chat Claude, tempel pesan ini, dan lampirkan CV Anda kalau ada:",copy:"Salin",copied:"Tersalin. Tempel di chat Claude.",msg:"Lanjutkan setup Career Autopilot dari dashboard",
       redo:"Ubah jawaban",mine:"Jawaban saya: ",cantSave:"Belum bisa menyimpan dari tampilan ini. Buka halaman ini di claude.ai dalam keadaan login, atau jawab pertanyaannya langsung di chat Claude.",
       other:"Lainnya (tulis sendiri)",area:"Kota atau area (opsional)",hours:"Berapa jam per minggu?",payText:"Contoh: IDR 6 juta per bulan, SGD 5.000 per bulan",floorsH:"Gaji minimum yang disarankan untuk negara pilihan Anda:",costH:"Perkiraan biaya hidup",costFam:"keluarga 2 dewasa + 2 anak",costOne:"sendiri",calcH:"Hitung sisa gaji",calcCountry:"Negara",calcGross:"Gaji kotor per bulan",calc30:"Dapat 30% ruling (Belanda)",calcTax:"Pajak penghasilan",calcOther:"Potongan wajib lain",calcNet:"Gaji bersih",calcCost:"Biaya hidup",calcSchool:"sekolah internasional",calcLeft:"Sisa per bulan",calcNeed:"Agar biaya hidup tertutup, gaji kotor minimal",calcNote:"Perkiraan pajak 2026 sebagai penduduk pajak (tinggal ≥183 hari; Malaysia ≥182). Tahun pertama bisa lebih tinggi. Australia: termasuk Medicare 2%, super dibayar pemberi kerja di luar gaji. Malaysia: termasuk EPF 2%. Belanda: tanpa 30% ruling kecuali dicentang. Pajak Indonesia: cek DJP bila Anda tinggal di luar negeri lebih dari 183 hari.",costHint:"Belum termasuk pajak; gaji kotor perlu lebih tinggi. Sumber: livingcost.org, Expat Focus dan Numbeo (2026). Claude menghitung ulang untuk kota setiap lowongan.",floorsHint:"Setuju? Tekan Lanjut. Mau angka lain? Tekan Ubah angka.",edit:"Ubah angka",hu:"jam/minggu",rot:"Pola rotasi, contoh: 14/14, 28/28",fam:"Siapa yang ikut? Contoh: istri dan anak (tanpa jumlah atau usia)",
@@ -338,8 +348,8 @@ a{color:var(--teal)}
         {k:"cv",q:"Sudah punya CV?",o:[["have","Sudah, nanti saya kirim di chat"],["build","Belum, tolong buatkan"]]},
         {k:"mode",q:"Mau dibantu seberapa sering?",o:[["off","Saya cek sendiri kapan saja"],["watch","Kirim ringkasan seminggu sekali"],["active","Bantu setiap hari dan isi form lamaran"]]}
       ],
-      quick:[["cari lowongan","Cari lowongan","Daftar lowongan yang cocok untuk Anda"],["cek email lamaran","Cek balasan","Lihat balasan dari perusahaan"],["buatkan CV","Buatkan CV","Lewat tanya-jawab singkat"],["ini penipuan bukan? ","Cek penipuan","Tempel pesan tawaran setelahnya"],["persiapan interview","Persiapan interview","Perkiraan pertanyaan dan latihan"],["update dashboard saya","Perbarui dashboard","Sinkronkan data terbaru"]]},
-    en:{tabs:["Start","Dashboard","Quick commands"],step:"Step",of:"of",back:"Back",next:"Next",save:"Save",skip:"Skip",
+      quick:[["cari lowongan","Cari lowongan","Daftar lowongan yang cocok untuk Anda"],["cek email lamaran","Cek balasan","Lihat balasan dari perusahaan"],["buatkan CV","Buatkan CV","Lewat tanya-jawab singkat"],["ini penipuan bukan? ","Cek penipuan","Tempel pesan tawaran setelahnya"],["persiapan interview","Persiapan interview","Perkiraan pertanyaan dan latihan"],["update dashboard saya","Perbarui dashboard","Sinkronkan data terbaru"],["cek offer ","Cek offer","Tempel isi offer setelahnya"],["checklist dokumen pindah ","Checklist pindah","Dokumen untuk kerja di luar negeri"],["hitung gaji bersih ","Hitung gaji bersih","Tulis negara dan gajinya"]]},
+    en:{tabs:["Start","Dashboard","Quick commands","Calculator","Settings"],calcPaneH:"Take-home and living-cost calculator",calcPaneHint:"Pick a country and enter gross pay per month. Use it any time, for example when an offer arrives.",hhLabel:"Household",hhAlone:"On your own",hhFam:"Family (2 adults + 2 children)",setH:"My settings",setHint:"Only you (the owner) can see this. To change something, copy a command below and paste it in the Claude chat.",setNo:"Settings are visible only to the dashboard owner while signed in.",setEdit:"Change settings",setEditCmd:"change my settings: ",setDel:"Delete all my data",setDelCmd:"delete all my data",setDelHint:"Claude asks you to confirm once more in the chat before deleting.",setFilters:"Search filters",setProfile:"Profile",cit:"Citizenship (e.g. Indonesia)",relo:"Relocation package",reloO:[["required","Must have"],["preferred","Nice to have"],["none","Not needed"]],step:"Step",of:"of",back:"Back",next:"Next",save:"Save",skip:"Skip",
       saved:"Saved. Go back to the Claude chat, paste this message, and attach your CV if you have one:",copy:"Copy",copied:"Copied. Paste it in the Claude chat.",msg:"Continue Career Autopilot setup from the dashboard",
       redo:"Change answers",mine:"My answers: ",cantSave:"This view can't save yet. Open this page on claude.ai while signed in, or answer the questions in the Claude chat.",
       other:"Other (type it)",area:"City or area (optional)",hours:"How many hours per week?",payText:"For example: SGD 5,000 per month, IDR 6 million per month",floorsH:"Suggested minimum pay for the countries you picked:",costH:"Estimated living costs",costFam:"family of 2 adults + 2 children",costOne:"on your own",calcH:"Work out what is left",calcCountry:"Country",calcGross:"Gross pay per month",calc30:"Has the 30% ruling (Netherlands)",calcTax:"Income tax",calcOther:"Other compulsory deductions",calcNet:"Take-home pay",calcCost:"Living costs",calcSchool:"international school",calcLeft:"Left each month",calcNeed:"To cover living costs, gross pay of at least",calcNote:"2026 estimate as a tax resident (183+ days; Malaysia 182+). The first year can be higher. Australia: includes 2% Medicare; super is paid by the employer on top. Malaysia: includes 2% EPF. Netherlands: without the 30% ruling unless ticked. Indonesian tax: check with DJP if you live abroad more than 183 days.",costHint:"Before tax; gross pay needs to be higher. Sources: livingcost.org, Expat Focus and Numbeo (2026). Claude recalculates for each job\u2019s city.",floorsHint:"Agree? Press Next. Want other figures? Press Change figures.",edit:"Change figures",hu:"h/week",rot:"Rotation pattern, e.g. 14/14, 28/28",fam:"Who comes along? e.g. spouse and children (no number or ages)",
@@ -356,10 +366,40 @@ a{color:var(--teal)}
         {k:"cv",q:"Do you have a CV?",o:[["have","Yes, I'll send it in the chat"],["build","No, please make one"]]},
         {k:"mode",q:"How often should Claude help?",o:[["off","I'll check whenever I want"],["watch","Send a weekly summary"],["active","Help every day and fill in forms"]]}
       ],
-      quick:[["find jobs","Find jobs","Jobs that match you"],["check my application emails","Check replies","Replies from companies"],["make me a CV","Make a CV","Through a short Q&A"],["is this a scam? ","Scam check","Paste the offer after it"],["interview prep","Interview prep","Likely questions and practice"],["update my dashboard","Refresh dashboard","Sync the latest data"]]}
+      quick:[["find jobs","Find jobs","Jobs that match you"],["check my application emails","Check replies","Replies from companies"],["make me a CV","Make a CV","Through a short Q&A"],["is this a scam? ","Scam check","Paste the offer after it"],["interview prep","Interview prep","Likely questions and practice"],["update my dashboard","Refresh dashboard","Sync the latest data"],["check this offer ","Check an offer","Paste the offer after it"],["relocation checklist ","Relocation checklist","Documents for working abroad"],["take-home pay ","Take-home pay","Add the country and salary"]]}
   };
   var A={},i=0,dir=1,db=null,canWrite=true,saved=false;
-  var calcState={c:"",g:{},r30:false};
+  var CS={w:{c:"",g:{},r30:false,hh:"alone"},x:{c:"",g:{},r30:false,hh:"alone"}};
+  function num0(v){var n=parseFloat(v);return isFinite(n)&&n>0?n:0}
+  function calcBox(p,list,hh){var l=L(),st=CS[p];if(list.indexOf(st.c)<0)st.c=list[0];
+    return '<p><b>'+esc(l.calcH)+'</b></p><label class="hint">'+esc(l.calcCountry)+' <select id="'+p+'_c">'+list.map(function(c){return '<option value="'+esc(c)+'"'+(c===st.c?" selected":"")+'>'+esc(cname(c))+'</option>'}).join("")+'</select></label> '+
+      (hh?'<label class="hint">'+esc(l.hhLabel)+' <select id="'+p+'_h"><option value="alone"'+(st.hh==="alone"?" selected":"")+'>'+esc(l.hhAlone)+'</option><option value="family"'+(st.hh==="family"?" selected":"")+'>'+esc(l.hhFam)+'</option></select></label> ':"")+
+      '<label class="hint">'+esc(l.calcGross)+' (<span id="'+p+'_cur"></span>) <input type="number" min="0" step="100" id="'+p+'_g" style="width:9em"></label> '+
+      '<label class="hint" id="'+p+'_30w"><input type="checkbox" id="'+p+'_30"> '+esc(l.calc30)+'</label><div id="'+p+'_out" style="margin-top:8px"></div><p class="hint">'+esc(l.calcNote)+'</p>';}
+  function calcRun(p){var l=L(),st=CS[p],c=st.c,t=TAX[c];if(!t||!$(p+"_out"))return;var fam=st.hh==="family";
+    if(st.g[c]==null)st.g[c]=GROSS0[c][fam?1:0];if($(p+"_g")!==document.activeElement)$(p+"_g").value=st.g[c];$(p+"_cur").textContent=t.cur;
+    $(p+"_30w").style.display=t.nl?"":"none";$(p+"_30").checked=st.r30;
+    var h=takeHome(c,num0(st.g[c]),st.r30),cn=COLNUM[c],rng=fam?cn[1]:cn[0],sch=fam?cn[2]*2:0;
+    var lo=rng[0]+sch,hi=rng[1]+sch,cur=t.cur+" ";
+    var rows=[[l.calcTax,"− "+cur+fmt(h.tax)],[l.calcOther,"− "+cur+fmt(h.other)],[l.calcNet,cur+fmt(h.net)],[l.calcCost+(sch?" (+ "+l.calcSchool+" 2×)":""),"− "+cur+fmt(lo)+" – "+fmt(hi)],
+      [l.calcLeft,(h.net-hi<0?"− ":"")+cur+fmt(Math.abs(h.net-hi))+" … "+(h.net-lo<0?"− ":"")+cur+fmt(Math.abs(h.net-lo))]];
+    $(p+"_out").innerHTML='<table>'+rows.map(function(r,n){return '<tr><td class="note">'+esc(r[0])+'</td><td'+(n===4?' style="font-weight:700;color:'+(h.net-hi<0?"#b42318":"inherit")+'"':"")+'>'+esc(r[1])+'</td></tr>'}).join("")+'</table>'+
+      '<p class="hint">'+esc(l.calcNeed)+': '+esc(cur+fmt(grossFor(c,lo,st.r30))+" – "+fmt(grossFor(c,hi,st.r30)))+'</p>';}
+  function calcBind(p){var st=CS[p];calcRun(p);
+    $(p+"_c").onchange=function(){st.c=this.value;calcRun(p)};
+    if($(p+"_h"))$(p+"_h").onchange=function(){st.hh=this.value;st.g={};calcRun(p)};
+    $(p+"_g").oninput=function(){st.g[st.c]=this.value;calcRun(p)};
+    $(p+"_30").onchange=function(){st.r30=this.checked;calcRun(p)};}
+  function calcPane(){var l=L();$("hCalc").textContent=l.calcPaneH;$("calcHint").textContent=l.calcPaneHint;
+    if(!$("x_out")){$("calcPane").innerHTML=calcBox("x",Object.keys(TAX),true);calcBind("x")}else calcRun("x")}
+  function setPane(){var l=L();$("hSet").textContent=l.setH;var b=$("setBody");
+    if(!db){b.innerHTML='<p class="note">'+esc(l.setNo)+'</p>';return}
+    Promise.all([db.doc("settings/filters").get(),db.doc("settings/profile").get()]).then(function(r){
+      function tbl(t,d){var keys=Object.keys(d||{}).sort();return '<h3>'+esc(t)+'</h3>'+(keys.length?'<div class="tablewrap"><table>'+keys.map(function(k){var v=d[k];return '<tr><td class="note">'+esc(k)+'</td><td>'+esc(typeof v==="object"?JSON.stringify(v):v)+'</td></tr>'}).join("")+'</table></div>':'<p class="note">–</p>')}
+      b.innerHTML='<p class="note">'+esc(l.setHint)+'</p>'+tbl(l.setFilters,r[0].exists?r[0].data():{})+tbl(l.setProfile,r[1].exists?r[1].data():{})+
+        '<div class="navrow" style="margin-top:12px"><button class="btn ghost" id="setEd">'+esc(l.setEdit)+'</button><button class="btn ghost" id="setDl">'+esc(l.setDel)+'</button></div><p class="hint">'+esc(l.setDelHint)+'</p>';
+      $("setEd").onclick=function(){copy(l.setEditCmd)};$("setDl").onclick=function(){copy(l.setDelCmd)};
+    },function(){b.innerHTML='<p class="note">'+esc(l.setNo)+'</p>'});}
   var FLOORS={
     id:{"Indonesia":["UMP/UMK kota tempat kerja, mis. Jakarta Rp 5.729.876/bulan (2026)","Paruh waktu: upah sebulan ÷ 126 per jam (Jakarta ± Rp 45.475/jam)"],
       "Singapore":["SGD 5.600/bulan (syarat Employment Pass); warga/PR: SGD 1.800","Bawa keluarga: gaji tetap minimal SGD 6.000/bulan (Dependant's Pass)"],
@@ -431,13 +471,13 @@ a{color:var(--teal)}
     try{navigator.clipboard.writeText(text).then(function(){toast(L().copied)},function(){toast(text)})}catch(e){toast(text)}
   }
   function tabs(active){
-    var l=L();["tStart","tDash","tQuick"].forEach(function(id,n){$(id).textContent=l.tabs[n]});
-    ["start","dash","quick"].forEach(function(k){
+    var l=L();["tStart","tDash","tQuick","tCalc","tSet"].forEach(function(id,n){$(id).textContent=l.tabs[n]});
+    ["start","dash","quick","calc","set"].forEach(function(k){
       var b=document.querySelector('[data-tab="'+k+'"]');b.setAttribute("aria-selected",String(k===active));
     });
-    $("paneStart").hidden=active!=="start";$("paneDash").hidden=active!=="dash";$("paneQuick").hidden=active!=="quick";
+    $("paneStart").hidden=active!=="start";$("paneDash").hidden=active!=="dash";$("paneQuick").hidden=active!=="quick";$("paneCalc").hidden=active!=="calc";$("paneSet").hidden=active!=="set";
   }
-  document.querySelectorAll(".tab").forEach(function(b){b.addEventListener("click",function(){tabs(b.dataset.tab);if(b.dataset.tab==="quick")quick()})});
+  document.querySelectorAll(".tab").forEach(function(b){b.addEventListener("click",function(){tabs(b.dataset.tab);if(b.dataset.tab==="quick")quick();if(b.dataset.tab==="calc")calcPane();if(b.dataset.tab==="set")setPane()})});
   function quick(){
     var l=L();$("hQuick").textContent=l.quickH;$("quickHint").textContent=l.quickHint;
     $("quick").innerHTML=l.quick.map(function(q,n){return '<button data-n="'+n+'">'+esc(q[1])+'<small>'+esc(q[2])+'</small></button>'}).join("");
@@ -454,6 +494,7 @@ a{color:var(--teal)}
       if(s.hours&&A.hours_per_week)out+=" ("+A.hours_per_week+" "+l.hu+")";
       if(s.rot&&v==="rotation"&&A.rotation)out+=" ("+A.rotation+")";
       if(s.fam&&v==="family"&&A.family_text)out+=" ("+A.family_text+")";
+      if(s.fam&&(v==="alone"||v==="family")&&A.citizenship){var ro=l.reloO.filter(function(o){return o[0]===A.relocation_support})[0];out+=" · "+A.citizenship+(ro?" · "+l.relo+": "+ro[1]:"")}
       if(s.payText&&A.pay==="custom"&&A.pay_text)out=A.pay_text;
       if(out)parts.push(out);
     });
@@ -505,20 +546,16 @@ a{color:var(--teal)}
     if(s.area&&(cur==="onsite"||cur==="hybrid"||cur==="any"))html+='<input type="text" id="area" placeholder="'+esc(l.area)+'" value="'+esc(A.area||"")+'">';
     if(s.hours&&cur==="part-time")html+='<input type="number" min="1" max="60" id="hrs" placeholder="'+esc(l.hours)+'" value="'+esc(A.hours_per_week||"")+'">';
     if(s.rot&&cur==="rotation")html+='<input type="text" id="rot" placeholder="'+esc(l.rot)+'" value="'+esc(A.rotation||"")+'">';
+    if(s.fam&&(cur==="alone"||cur==="family")){if(A.citizenship==null)A.citizenship="Indonesia";if(!A.relocation_support)A.relocation_support="preferred";
+      html+='<input type="text" id="cit" placeholder="'+esc(l.cit)+'" value="'+esc(A.citizenship||"")+'"><label class="hint">'+esc(l.relo)+' <select id="relo">'+l.reloO.map(function(o){return '<option value="'+o[0]+'"'+(A.relocation_support===o[0]?" selected":"")+'>'+esc(o[1])+'</option>'}).join("")+'</select></label>';}
     if(s.fam&&cur==="family")html+='<input type="text" id="fam" placeholder="'+esc(l.fam)+'" value="'+esc(A.family_text||"")+'">';
     if(s.payText&&cur==="official"){var fl=floorLines();
       if(fl.length)html+='<div class="card" style="margin-top:12px"><p><b>'+esc(l.floorsH)+'</b></p><ul>'+fl.map(function(x){return '<li><b>'+esc(x[0])+'</b>: '+esc(x[1])+'</li>'}).join("")+'</ul><p class="hint">'+esc(l.floorsHint)+'</p><button class="btn ghost" id="editFloors">'+esc(l.edit)+'</button></div>';}
     if(s.payText&&cur){var cl=costLines();
       if(cl.length)html+='<div class="card" style="margin-top:12px"><p><b>'+esc(l.costH)+' ('+esc(A.move==="family"?l.costFam:l.costOne)+')</b></p><ul>'+cl.map(function(x){return '<li><b>'+esc(x[0])+'</b>: '+esc(x[1])+'</li>'}).join("")+'</ul><p class="hint">'+esc(l.costHint)+'</p></div>';
       var tc=(Array.isArray(A.countries)?A.countries:[]).filter(function(c){return TAX[c]});
-      if((A.move==="alone"||A.move==="family")&&tc.length){
-        if(tc.indexOf(calcState.c)<0)calcState.c=tc[0];
-        html+='<div class="card" id="calc" style="margin-top:12px"><p><b>'+esc(l.calcH)+'</b></p>'+
-          '<label class="hint">'+esc(l.calcCountry)+' <select id="calcC">'+tc.map(function(c){return '<option value="'+esc(c)+'"'+(c===calcState.c?" selected":"")+'>'+esc(cname(c))+'</option>'}).join("")+'</select></label> '+
-          '<label class="hint">'+esc(l.calcGross)+' (<span id="calcCur"></span>) <input type="number" min="0" step="100" id="calcG" style="width:9em"></label> '+
-          '<label class="hint" id="calc30w"><input type="checkbox" id="calc30"> '+esc(l.calc30)+'</label>'+
-          '<div id="calcOut" style="margin-top:8px"></div><p class="hint">'+esc(l.calcNote)+'</p></div>';
-      }}
+      if((A.move==="alone"||A.move==="family")&&tc.length){CS.w.hh=A.move==="family"?"family":"alone";html+='<div class="card" style="margin-top:12px">'+calcBox("w",tc,false)+'</div>';}
+      }
     if(s.payText&&cur==="custom")html+='<input type="text" id="payt" placeholder="'+esc(l.payText)+'" value="'+esc(A.pay_text||"")+'">';
     html+='<div class="navrow"><button class="btn ghost" id="bk"'+(i===0?" disabled":"")+'>'+esc(l.back)+'</button><button class="btn" id="nx"'+(valid(s)?"":" disabled")+'>'+esc(l.next)+'</button></div>';
     w.innerHTML=html;
@@ -530,22 +567,8 @@ a{color:var(--teal)}
     })});
     function bind(id,key){var e=$(id);if(!e)return;e.addEventListener("input",function(){A[key]=e.value;$("nx").disabled=!valid(s)})}
     bind("oth",s.k+"_other");bind("area","area");bind("hrs","hours_per_week");bind("payt","pay_text");
-    function calcRun(){var c=calcState.c,t=TAX[c];if(!t||!$("calcOut"))return;var fam=A.move==="family";
-      if(calcState.g[c]==null)calcState.g[c]=GROSS0[c][fam?1:0];$("calcG").value=calcState.g[c];$("calcCur").textContent=t.cur;
-      $("calc30w").style.display=t.nl?"":"none";$("calc30").checked=calcState.r30;
-      var h=takeHome(c,num0(calcState.g[c]),calcState.r30),cn=COLNUM[c],rng=fam?cn[1]:cn[0],sch=fam?cn[2]*2:0;
-      var lo=rng[0]+sch,hi=rng[1]+sch,cur=t.cur+" ";
-      var rows=[[l.calcTax,"− "+cur+fmt(h.tax)],[l.calcOther,"− "+cur+fmt(h.other)],[l.calcNet,cur+fmt(h.net)],[l.calcCost+(sch?" (+ "+l.calcSchool+" 2×)":""),"− "+cur+fmt(lo)+" – "+fmt(hi)],
-        [l.calcLeft,(h.net-hi<0?"− ":"")+cur+fmt(Math.abs(h.net-hi))+" … "+(h.net-lo<0?"− ":"")+cur+fmt(Math.abs(h.net-lo))]];
-      $("calcOut").innerHTML='<table>'+rows.map(function(r,n){return '<tr><td class="note">'+esc(r[0])+'</td><td'+(n===4?' style="font-weight:700;color:'+(h.net-hi<0?"#b42318":"inherit")+'"':"")+'>'+esc(r[1])+'</td></tr>'}).join("")+'</table>'+
-        '<p class="hint">'+esc(l.calcNeed)+': '+esc(cur+fmt(grossFor(c,lo,calcState.r30))+" – "+fmt(grossFor(c,hi,calcState.r30)))+'</p>';
-    }
-    function num0(v){var n=parseFloat(v);return isFinite(n)&&n>0?n:0}
-    if($("calc")){calcRun();
-      $("calcC").onchange=function(){calcState.c=this.value;calcRun()};
-      $("calcG").oninput=function(){calcState.g[calcState.c]=this.value;calcRun()};
-      $("calc30").onchange=function(){calcState.r30=this.checked;calcRun()};}
-    var ef=$("editFloors");if(ef)ef.onclick=function(){A.pay="custom";A.pay_text=shortText();render()};bind("rot","rotation");bind("fam","family_text");
+    if($("w_out"))calcBind("w");
+    var ef=$("editFloors");if(ef)ef.onclick=function(){A.pay="custom";A.pay_text=shortText();render()};bind("rot","rotation");bind("fam","family_text");bind("cit","citizenship");var rl=$("relo");if(rl)rl.onchange=function(){A.relocation_support=rl.value};
     $("bk").onclick=function(){if(i>0){dir=-1;i--;render()}};
     $("nx").onclick=function(){if(valid(s)){dir=1;i++;render()}};
   }
