@@ -2,7 +2,7 @@
 
 | Key | Example | Meaning |
 |---|---|---|
-| profile | Siti | which person this tracker belongs to (career-autopilot-setup step 0) |
+| profile | Siti | which person this store belongs to (career-autopilot-setup step 0) |
 | segment | experienced / fresh-graduate / career-returner / side-income / career-switcher | the user's situation |
 | preset | finance-accounting, custom:barista | role presets in use |
 | mode | active / watch / off | how autopilot behaves |

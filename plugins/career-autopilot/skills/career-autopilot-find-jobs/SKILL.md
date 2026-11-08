@@ -5,7 +5,18 @@ description: "Use when the user says \"find jobs\", \"scan jobs\", \"any new rol
 
 # Find matching jobs
 
-Load `Profile`, `Filters`, `Applications` and `Skip` from the active profile's tracker (career-autopilot-setup step 0), and the segment file `${CLAUDE_PLUGIN_ROOT}/segments/<segment>.md` for extra sources and search terms.
+## 0. Onboarding gate
+
+Load the Artifact tools first (`${CLAUDE_PLUGIN_ROOT}/references/store.md`, section 1) and find the profile's dashboard (section 2). If it exists and
+onboarding is not done (`onboarding/answers` missing, or `meta/summary` without `onboarded: true`), do not search:
+hand off to career-autopilot-setup (Quick start), which sends the dashboard link. Exception: the user explicitly asks
+to skip onboarding ("lewati onboarding", "skip the dashboard, just search") → write `onboarded: true` and
+`onboarding_skipped: true` to `meta/summary`, ask the three chat fallback questions from career-autopilot-setup if
+Filters is empty, then continue.
+
+## 1. Load
+
+Data store: `${CLAUDE_PLUGIN_ROOT}/references/store.md`. Load `Profile`, `Filters`, `Applications` and `Skip` from the profile's store, and the segment file `${CLAUDE_PLUGIN_ROOT}/segments/<segment>.md` for extra sources and search terms.
 Profile or Filters empty → run career-autopilot-profile-builder or career-autopilot-setup instead.
 
 ## Sources, in order
@@ -33,6 +44,6 @@ Details and endpoints: `references/sources.md`.
 Table, best first: # | Company | Role | Location | Work mode | Pay | Model | Match % | Why | Flags | Source.
 For non-technical users, also give a two-line plain summary of the top 3.
 Then one "Excluded" line grouped by reason. Write excluded postings with a reason to `Skip`.
-Save the shortlist to Drive `Career Autopilot/shortlists/<YYYY-MM-DD>.md`.
-Sync the dashboard (`${CLAUDE_PLUGIN_ROOT}/skills/career-autopilot-dashboard/SKILL.md`, Sync) if Filters has `dashboard_url`.
+If Google Drive is connected, also create a Drive file `Career Autopilot/shortlists/<YYYY-MM-DD>.md` with the table (optional).
+Write every shortlisted posting as a `jobs` document with status `worth_a_look` (match, flags, next_action "Cek dan putuskan apply"), and update `meta/summary` / `meta/run` (career-autopilot-dashboard, Sync). If a write fails, say so once (store.md, section 5).
 Ask which to apply to. Never start applying without the user's go-ahead in this conversation (career-autopilot-run in `active` mode is the only exception).

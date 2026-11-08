@@ -5,6 +5,8 @@ description: "Use when the user asks \"is this job a fit\", \"check this job\", 
 
 # Check fit
 
+Data store: `${CLAUDE_PLUGIN_ROOT}/references/store.md` (Profile, Filters, Applications, Skip and Stories are documents there; a failed write is reported once).
+
 Load `Profile` and `Filters`. Keys: `references/filters.md`. If Filters has `preset`, read each one for skill groups,
 credential equivalents and field-specific checks: example names from `${CLAUDE_PLUGIN_ROOT}/presets/examples/<name>.md`,
 `custom:<name>` from the user's Drive `Career Autopilot/presets/<name>.md`. A preset file that cannot be read: continue

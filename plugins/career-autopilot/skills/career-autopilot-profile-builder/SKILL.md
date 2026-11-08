@@ -5,7 +5,9 @@ description: "Use when the user uploads or shares a CV/resume and says \"build m
 
 # Build the profile from a CV
 
-The Profile tab is the only source for anything written into a form, email or interview answer.
+Data store: `${CLAUDE_PLUGIN_ROOT}/references/store.md` (Profile, Filters, Applications, Skip and Stories are documents there; a failed write is reported once).
+
+Profile (`settings/profile` in the store) is the only source for anything written into a form, email or interview answer.
 Write only what the CV says or the user states. Never infer years, tools, degrees, salaries, visa status or certifications.
 
 ## Keys

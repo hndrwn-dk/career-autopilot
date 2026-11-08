@@ -5,6 +5,8 @@ description: "Use when a posting says to apply by email, or the user says \"emai
 
 # Recruiter email: draft, then send on approval
 
+Data store: `${CLAUDE_PLUGIN_ROOT}/references/store.md` (Profile, Filters, Applications, Skip and Stories are documents there; a failed write is reported once).
+
 Guardrails: `${CLAUDE_PLUGIN_ROOT}/skills/career-autopilot-apply-assist/references/guardrails.md`.
 Writing: `${CLAUDE_PLUGIN_ROOT}/references/writing-style.md` for every draft (application, reply, follow-up, thank-you note). Scam check `${CLAUDE_PLUGIN_ROOT}/references/scam-signals.md` on every incoming message before drafting: an always-skip signal → no draft, tell the user why.
 

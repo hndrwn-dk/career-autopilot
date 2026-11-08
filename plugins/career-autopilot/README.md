@@ -8,7 +8,7 @@ It finds jobs, checks how well they fit, skips scams, prefills application forms
 writes emails that sound like you (you press Send), follows replies in Gmail, makes a CV if you do not have one, and
 prepares you for interviews.
 
-Nothing about you is in the plugin. Your data stays in your own Google Sheet and Drive, so anyone can install it.
+Nothing about you is in the plugin. Your data stays in your own private dashboard on claude.ai (and, if you want, exports in your own Google Drive), so anyone can install it.
 
 ## What makes it different
 
@@ -19,12 +19,12 @@ Nothing about you is in the plugin. Your data stays in your own Google Sheet and
 | Any country, any work mode | Remote, hybrid or onsite, with commute limit, hours per week, schedule and pay per hour, day, project or month. Built-in sources for Singapore, APAC, EMEA and US/Canada; other countries' portals are found on first use. |
 | Account safety | A reminder mode for LinkedIn, JobStreet, Indeed, Upwork and similar platforms: you confirm the risk once, Claude stays under daily caps, warns at 80%, and pauses at the first warning sign. |
 | Scam guard | "Agents" who ask you to pay first, like or comment first, join a paid class or install an app are skipped automatically, along with task scams, money-mule and reshipping jobs, pay-to-join schemes, fake government recruitment, and overseas offers that match trafficking patterns. Paste any offer you received and ask "ini penipuan bukan?". |
-| No hassle | Click-through onboarding: Claude sends a private page where you answer by clicking (no typing), then you say "sudah". Nothing else is asked until it changes a result. Works in chat only if you do not connect Gmail or Drive. |
+| No hassle | Click-through onboarding: Claude sends a private page where you answer by clicking (no typing), then press Save and Copy and paste the copied text into the chat. Nothing else is asked until it changes a result. Works in chat only if you do not connect Gmail or Drive. |
 | Sounds like you | Every email, reply and cover letter follows a writing guide that removes AI-sounding patterns, and can match a sample of your own writing. |
 | No CV needed | `career-autopilot-cv-builder` interviews you in plain language and makes a CV, including an honest line for a career break if you want one. |
 | Watch mode | Already employed? A weekly digest of only the strongest matches, nothing filled in. |
 | Honest flags | Contract-via-agency, vendor placement, undefined "conversion to permanent", hidden client, licence conversion needed, title that does not match the duties. |
-| Family use | Several profiles on one account (`Career Autopilot Tracker - <name>`), each with its own tracker, CV and schedule. |
+| Family use | Several profiles on one account (`Career Autopilot · <name>`), each with its own dashboard, data and schedule. |
 | Dashboard | A private page per profile with three tabs: Start (click-through onboarding), Dashboard (pipeline, next actions, platform usage, scams skipped, kept in sync after every run) and Quick commands (buttons that copy a command to paste into Claude). |
 | Interview prep | A brief per interview plus a mock interview, adapted to the situation (online tests for graduates, a short break explanation for returners, a call script for side jobs). |
 
@@ -57,11 +57,11 @@ Keep the browser (and, for scheduled `active` runs, the Claude desktop app) open
 
 ## First run
 
-Quick start: say **"mulai cari kerja"** (or pick **career-autopilot-setup** from the `/` menu). Claude sends a link to your private page: click your answers, press Save, come back and type **sudah**. Claude shows matching jobs right away and asks for anything else only when it matters. Prefer chat? Claude asks the same questions there.
+Quick start: say **"mulai cari kerja"** (or pick **career-autopilot-setup** from the `/` menu). Claude sends only a link to your private dashboard: click your answers in the Start tab, press **Simpan**, then **Salin**, and paste the copied text into the chat. Claude then shows matching jobs and asks for anything else only when it matters. If the dashboard cannot be created in your Claude app, Claude asks the same questions in chat.
 
 Full setup:
 
-1. Say **"mulai cari kerja"** or **"set up career autopilot"**, or pick **career-autopilot-setup** from the `/` menu. Claude checks Gmail, Google Drive and the browser and creates your tracker.
+1. Say **"mulai cari kerja"** or **"set up career autopilot"**, or pick **career-autopilot-setup** from the `/` menu. Claude sends your dashboard link first; after onboarding it checks Gmail, Google Drive and the browser.
 2. Answer a few plain questions: your situation, the kind of work, remote or onsite, hours, pay, countries.
 3. Upload your CV and say **"build my profile"**, or say **"buatkan CV"** if you do not have one.
 4. Optional: paste 1–2 emails you wrote so drafts sound like you.
@@ -84,11 +84,37 @@ Full setup:
 | "ini penipuan bukan?" + a pasted WhatsApp/email offer | scam check with the reason, in plain words |
 | "apply to 1 and 3" | forms prefilled in the browser; you tick consents and submit |
 | "draft an email for this job" / "balas email HRD ini" | Gmail draft in your voice; sent only when you say so |
-| "check my application emails" | tracker statuses updated, next actions, scams listed separately |
-| "buatkan CV" | CV made by interview, saved to your Drive |
+| "check my application emails" | statuses updated in your dashboard, next actions, scams listed separately |
+| "buatkan CV" | CV made by interview, saved to your Drive if connected |
 | "prep me for the <company> interview" | interview brief and mock interview |
-| "add a profile for my wife" | a separate tracker and settings for another person |
+| "add a profile for my wife" | a separate dashboard and settings for another person |
 | "buka dashboard" / "open my dashboard" | your private dashboard: pipeline, next actions, platform safety, scams skipped |
+
+## Where your data lives
+
+Everything Career Autopilot remembers about you (profile, settings, jobs, stories, onboarding answers) is stored in the
+database of your private dashboard page on claude.ai. Every skill reads and writes it there with Claude's Artifact
+tools, which every claude.ai user has, so saving works without any extra connector.
+
+- Profile, settings, stories and onboarding answers are readable only by you, even if you share the dashboard link.
+- Google Drive is optional. It holds files: your CV, shortlists, interview briefs and exports. The Drive connector can
+  create or replace whole files but cannot add rows to a Google Sheet, so Career Autopilot never keeps its data in a Sheet.
+- "export my tracker" / "ekspor data saya" creates a new CSV file in Drive (`Career Autopilot/<profile>/tracker-<date>.csv`).
+- If something cannot be saved, Claude says so once in the reply instead of pretending it worked.
+- An older `Career Autopilot Tracker` sheet from a previous version is imported once and then left alone.
+
+## New-user smoke test
+
+Run this after every change to setup or onboarding:
+
+1. Use a fresh account, or a new profile: say **"add a profile for Test"**.
+2. In a new chat, type **"mulai cari kerja"**.
+   Expected: only the dashboard link and one sentence ("Buka halaman ini, klik pilihan di tab Mulai, tekan Simpan, lalu Salin, dan tempel di sini."). No questions in chat, no job search.
+3. Open the link, answer the 9 questions in the Start tab, press **Simpan**, then **Salin**.
+4. Paste the copied text into the chat.
+   Expected: Filters filled from your answers (Claude lists them), the dashboard's Start tab no longer opens by default, and a first shortlist appears in the chat and in the Dashboard tab.
+5. Type **"cari lowongan"** in a profile whose onboarding is not finished.
+   Expected: the dashboard link again, not a search.
 
 ## Settings
 

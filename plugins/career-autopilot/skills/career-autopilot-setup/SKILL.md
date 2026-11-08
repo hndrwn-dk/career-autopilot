@@ -1,31 +1,42 @@
 ---
 name: career-autopilot-setup
-description: "Career Autopilot plugin setup. This skill IS the setup: run it directly, never look for a repository, project folder or install step, and never fetch code from GitHub for it. Use when the user says \"set up career autopilot\", \"start career autopilot\", \"check my setup\", \"health check\", \"cek setup\", \"pasang career autopilot\", \"mulai cari kerja\", \"add a profile for my wife\", pastes a block starting with CAREER-AUTOPILOT-SETTINGS, or before the first job search. Verifies connectors, creates the tracker, sets the user's situation, field, work arrangement and countries, and schedules runs."
+description: "Career Autopilot plugin setup. This skill IS the setup: run it directly, never look for a repository, project folder or install step, and never fetch code from GitHub for it. Use when the user says \"set up career autopilot\", \"start career autopilot\", \"check my setup\", \"health check\", \"cek setup\", \"pasang career autopilot\", \"mulai cari kerja\", \"add a profile for my wife\", pastes a block starting with CAREER-AUTOPILOT-SETTINGS, or before the first job search. Sends the click-through onboarding page first, verifies connectors, creates the data store, sets the user's situation, field, work arrangement and countries, and schedules runs."
 ---
 
 # Setup and health check
 
-## Quick start (default for new users)
+Data store: `${CLAUDE_PLUGIN_ROOT}/references/store.md`. In this skill "Filters" and "Profile" mean the store documents.
 
-The user should be able to start in under two minutes, without typing much.
+## Quick start: onboarding gate (always first, before anything else)
 
-**Click-through first.** If the Artifact tool with database access is available: create the dashboard first
-(career-autopilot-dashboard, Create) and send the user its link with one plain sentence:
-"Buka halaman ini, klik pilihan di tab Mulai, tekan Simpan, lalu kembali ke sini dan ketik: sudah."
-When they come back, apply the answers (career-autopilot-dashboard, Onboarding answers) and continue below from
-"Then create the tracker". If the user prefers chat, or the dashboard cannot be made here, ask in chat instead.
+The user should be able to start in under two minutes by clicking, not typing. Do these steps in order:
 
-**Chat fallback.** Ask only three things, in one friendly message:
+1. **Load the Artifact tools** (store.md, section 1). Do this before deciding anything.
+2. **Find the profile's dashboard** (store.md, section 2). If found, read `onboarding/answers` and `meta/summary`.
+   - `onboarding/answers` missing, or `meta/summary` has no `onboarded: true` → onboarding is not done.
+     Send the dashboard link with this one sentence (in English if the user writes in English):
+     "Buka halaman ini, klik pilihan di tab Mulai, tekan Simpan, lalu Salin, dan tempel di sini."
+     Then **stop**. No setup questions in chat, no job search, no multiple-choice question cards.
+   - Onboarding done (`onboarded: true`) → the user is returning: continue with what they asked (a health check runs Full setup).
+3. **No dashboard** → create it (career-autopilot-dashboard, Create), send the link with the same sentence, and **stop**.
+4. **Chat fallback** only when the Artifact database tools are truly unavailable after a tool search. Say so in one line
+   ("Halaman dashboard tidak bisa dibuat di sini, jadi saya tanya lewat chat."), then ask the three questions below.
+
+**When the user comes back** with the pasted text ("Lanjutkan setup Career Autopilot dari dashboard" plus "Jawaban saya: …"),
+or just "sudah" / "done": apply the answers (career-autopilot-dashboard, Onboarding answers), then continue at
+"After onboarding" below.
+
+**Chat fallback questions** (only in case 4). Ask three things in one friendly message:
 1. What work they are looking for (any words: "admin", "jaga toko", "kerja dari rumah", "SRE").
 2. Where: city or area, or remote.
 3. Whether they have a CV (upload it) or want Claude to make one.
+Infer `segment`, `preset` (an example or `none`) and `work_mode` from the answers and set `mode: off`.
 
-Then create the tracker if Drive is connected (otherwise run in chat-only mode), infer `segment`, `preset` (an example
-or `none`) and `work_mode` from the answers, set `mode: off`, share the five simple scam rules from
-`${CLAUDE_PLUGIN_ROOT}/references/scam-signals.md`, create the dashboard (career-autopilot-dashboard skill), and run career-autopilot-find-jobs once. Everything else (pay, hours, countries,
-schedule, voice sample, autopilot) is asked later, only when it changes a result ("Lowongan ini dibayar per jam;
-berapa minimal per jam yang Anda mau?"). Use the full steps below only when the user asks for full setup, a health
-check, or pastes a settings block.
+**After onboarding.** Share the five simple scam rules from `${CLAUDE_PLUGIN_ROOT}/references/scam-signals.md`,
+handle the CV (`cv: build` → career-autopilot-cv-builder; `cv: have` → ask for the file), create the schedule for the
+chosen mode (step 9), and run career-autopilot-find-jobs once. Everything else (hours, schedule, voice sample) is asked
+later, only when it changes a result ("Lowongan ini dibayar per jam; berapa minimal per jam yang Anda mau?").
+Use Full setup only when the user asks for full setup or a health check, or pastes a settings block.
 
 ## Full setup
 
@@ -35,12 +46,9 @@ Run every step, never stop at the first failure, and finish with one table: Chec
 
 ## 0. Profiles (one account, several people)
 
-The tracker is a sheet named `Career Autopilot Tracker` (default profile) or `Career Autopilot Tracker - <profile>`
-(e.g. `- Siti`, `- Raka`). List sheets with these names.
-- None → create the default one, unless the user is setting up for someone else ("for my wife") → ask the profile name.
-- One → use it.
-- Several → use the one the user or the scheduled prompt names; otherwise ask which.
-Every other skill works on the active profile's tracker; Drive files go under `Career Autopilot/<profile>/` for named profiles.
+Each profile has its own dashboard and store: `Career Autopilot` (default) or `Career Autopilot · <profile>`
+(e.g. `· Siti`, `· Raka`). Setting up for someone else ("add a profile for my wife") → ask the profile name, create
+that profile's dashboard, and send its link with the onboarding sentence. Drive files go under `Career Autopilot/<profile>/`.
 The person whose data it is should agree to it being collected; when setting up for someone else, say so once.
 
 ## 1. Connectors
@@ -49,27 +57,21 @@ Load each tool (ToolSearch if deferred) and make one harmless read.
 
 | Connector | Test | Needed for |
 |---|---|---|
+| Artifact tools with database | find the dashboard (store.md) | dashboard and all saved data (required for saving) |
 | Gmail | search threads `newer_than:1d`, 1 result | recruiter mail, status sync, drafts |
-| Google Drive | search files named "Career Autopilot" | tracker, CV, presets, shortlists, interview briefs |
+| Google Drive | search files named "Career Autopilot" | CV file, shortlists, interview briefs, exports (optional) |
 | Browser (built-in browser or Claude in Chrome) | list tabs | prefilling forms, sites without an API |
 | Scheduling (scheduled-task tool) | tool present | `active` / `watch` runs |
 | Google Calendar | list calendars | interview slots (optional) |
 
 - Absent → Missing; say in plain words what it would let Claude do and how to add it. Offer a connector suggestion if that tool exists.
 - Present but errors → Error; quote the error in one line.
-- Gmail or Drive missing → the plugin still works in chat-only mode: shortlists and drafts in the conversation, no tracker. Say so.
+- Gmail missing → no status sync or drafts in Gmail; drafts appear in the chat instead. Drive missing → CV and briefs stay in the chat.
 
-## 2. Tracker sheet
+## 2. Store
 
-Create the active profile's sheet if missing; otherwise add any missing tab or header.
-
-| Tab | Columns |
-|---|---|
-| Applications | No, Company, Role, Location, Work Mode, Status, Channel, Employment Model, Applied On, Link, Job ID, Match %, Last Update, Next Action, Notes |
-| Profile | Key, Value |
-| Filters | Key, Value |
-| Skip | Company, Role, Link, Reason, Date |
-| Stories | Id, Title, Situation, Task, Action, Result, Skills, Source |
+Make sure the profile's store has `settings/filters` and `settings/profile` (create empty documents if missing).
+A legacy `Career Autopilot Tracker` sheet → import it once (store.md, section 6).
 
 ## 3. Situation (segment)
 
@@ -86,7 +88,7 @@ If Filters has no `preset`, ask what kind of work the user wants (any field, any
 - An example in `${CLAUDE_PLUGIN_ROOT}/presets/examples/` fits → offer it as is, or as a custom copy the user can adjust.
 - Otherwise, or if the user asks for `custom` → draft one from `${CLAUDE_PLUGIN_ROOT}/presets/_template.md`, from the
   work the user names, their CV (if any) and 2–3 web searches on how such postings are worded in their target countries.
-  Show it in plain words, apply edits, save to Drive `Career Autopilot/presets/<name>.md` (shared by all profiles) and set
+  Show it in plain words, apply edits, create the Drive file `Career Autopilot/presets/<name>.md` (shared by all profiles; to change it later, create a new file and point Filters to it) and set
   Filters `preset: custom:<name>`.
 - `none` → career-autopilot-fit-check scores against each posting's own requirements.
 
@@ -138,7 +140,7 @@ Turn on push notifications; email only if the user asked. Write `autopilot_task`
 
 ## 10. Dashboard
 
-Run the career-autopilot-dashboard skill (Create) so the user has their private dashboard page. Add a row "Dashboard" with its link to the summary table.
+Add a row "Dashboard" with its link to the summary table (create it first if it does not exist).
 
 ## 11. Summary
 

@@ -11,7 +11,8 @@ Turning on `active` mode approves searching and prefilling forms. It never appro
 
 ## 0. Load
 
-Read Profile, Filters, Applications, Skip from the tracker of the profile the prompt names (career-autopilot-setup step 0; default profile when none is named).
+Data store: `${CLAUDE_PLUGIN_ROOT}/references/store.md`. Load the Artifact tools first, then read Profile, Filters, Applications and Skip from the store of the profile the prompt names (default profile when none is named).
+- No store, or onboarding not done (`onboarding/answers` missing, or `meta/summary` without `onboarded: true`) → stop. Summary: "Setup belum selesai. Buka dashboard Anda, klik pilihan di tab Mulai, tekan Simpan, lalu Salin dan tempel di chat Claude." plus the dashboard link if there is one. Never ask questions in a scheduled run.
 - `mode` is `off` → stop: "Autopilot is off."
 - Profile empty → stop: "Profile is empty. Upload your CV and say: build my profile."
 - The prompt names a mode that differs from Filters → use Filters and mention it.
@@ -30,8 +31,8 @@ Run career-autopilot-find-jobs without its final question. Account platforms onl
 
 List browser tabs. No browser reachable → leave jobs queued, say so in the summary.
 For each queued job follow career-autopilot-apply-assist steps 2–7, except: the mode is the approval; attach the CV if the tools allow, else note it; leave the tab open; never press Submit.
-Append to Applications with Status `Ready to submit`, Applied On empty, Next Action naming the tab and what is left.
-A form that cannot be filled: Status `Needs manual apply` with the reason.
+Write the `jobs` document with status `ready`, `applied_on` empty, `next_action` naming the tab and what is left.
+A form that cannot be filled: status `queued` with `next_action` "Isi manual" and the reason.
 
 Dashboard: keep `meta/run` current at every step and sync all rows touched in this run (career-autopilot-dashboard skill, Sync).
 
@@ -55,7 +56,7 @@ Replies
 
 Skipped: <n> (<top reasons>) · Scams skipped: <n> · Waiting for reply: <n>
 Platforms: <platform> <used>/<cap> · paused: <platform until date>
-Tracker: <sheet link> · Dashboard: <dashboard_url>
+Dashboard: <dashboard link>
 ```
 
 Mention `Ready to submit` rows older than 3 days without a confirmation email.

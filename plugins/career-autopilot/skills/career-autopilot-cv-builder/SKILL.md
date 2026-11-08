@@ -5,6 +5,8 @@ description: "Use when the user has no CV or an outdated one and says \"buatkan 
 
 # Build a CV by interview
 
+Data store: `${CLAUDE_PLUGIN_ROOT}/references/store.md` (Profile, Filters, Applications, Skip and Stories are documents there; a failed write is reported once).
+
 For anyone: first-time job seekers, returners, people looking for side income, career switchers, experienced
 people whose CV is out of date. Writing rules: `${CLAUDE_PLUGIN_ROOT}/references/writing-style.md`.
 Segment guidance: `${CLAUDE_PLUGIN_ROOT}/segments/<segment>.md`.

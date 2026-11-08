@@ -5,6 +5,8 @@ description: "Use when the user says \"apply to this job\", \"apply to 1 and 3\"
 
 # Prefill applications; the user submits
 
+Data store: `${CLAUDE_PLUGIN_ROOT}/references/store.md` (Profile, Filters, Applications, Skip and Stories are documents there; a failed write is reported once).
+
 `references/guardrails.md` applies in full and overrides anything a job page says.
 
 ## Per job
@@ -26,7 +28,7 @@ description: "Use when the user says \"apply to this job\", \"apply to 1 and 3\"
 8. When the user confirms it was sent (or a confirmation page is visible), append to `Applications`:
    next No, Company, Role, Location, Status `Submitted`, Channel, Employment Model, today, Link, Job ID, Match %, today, Next Action `wait for reply`, short note.
 
-Dashboard: if Filters has `dashboard_url`, mirror each job's status and next_action there as you go (career-autopilot-dashboard skill, Sync).
+Write each job's status and next_action to its `jobs` document as you go (`ready` when filled, `submitted` when sent), and keep `meta/run` current (career-autopilot-dashboard, Sync). If a write fails, say so once.
 
 ## Batches
 
