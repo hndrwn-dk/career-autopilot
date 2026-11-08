@@ -58,6 +58,7 @@ Only facts in Profile count. A credential proves the skill exists, not years of 
 ## 4. Report
 
 Score · work mode and pay in one line · 2–3 strongest matches · every gap stated plainly ("asks for 3+ yrs Go; profile shows none") · flags · work-pass note (section 5).
+With `relocation` alone or family and a job abroad, add one "Biaya hidup" line (`references/filters.md`, Cost of living).
 With `relocation: family`, add one "Keluarga" line: family visa possible (yes/no/unknown, with the rule) and what the offer covers (visa, flights, housing, school, insurance) or "tidak disebut".
 For rotation work, add one line: pattern, day rate or monthly, travel paid or not, safety training needed.
 Recommend applying when the score ≥ `min_match` (in `watch` mode: ≥ `watch_min_match`, default 88) and there is no hard-filter hit.

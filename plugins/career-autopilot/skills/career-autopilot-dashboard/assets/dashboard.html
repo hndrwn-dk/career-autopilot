@@ -324,7 +324,7 @@ a{color:var(--teal)}
     id:{tabs:["Mulai","Dashboard","Perintah cepat"],step:"Langkah",of:"dari",back:"Kembali",next:"Lanjut",save:"Simpan",skip:"Lewati",
       saved:"Tersimpan. Kembali ke chat Claude, tempel pesan ini, dan lampirkan CV Anda kalau ada:",copy:"Salin",copied:"Tersalin. Tempel di chat Claude.",msg:"Lanjutkan setup Career Autopilot dari dashboard",
       redo:"Ubah jawaban",mine:"Jawaban saya: ",cantSave:"Belum bisa menyimpan dari tampilan ini. Buka halaman ini di claude.ai dalam keadaan login, atau jawab pertanyaannya langsung di chat Claude.",
-      other:"Lainnya (tulis sendiri)",area:"Kota atau area (opsional)",hours:"Berapa jam per minggu?",payText:"Contoh: IDR 6 juta per bulan, SGD 5.000 per bulan",floorsH:"Gaji minimum yang disarankan untuk negara pilihan Anda:",floorsHint:"Setuju? Tekan Lanjut. Mau angka lain? Tekan Ubah angka.",edit:"Ubah angka",hu:"jam/minggu",rot:"Pola rotasi, contoh: 14/14, 28/28",fam:"Siapa yang ikut? Contoh: istri dan anak (tanpa jumlah atau usia)",
+      other:"Lainnya (tulis sendiri)",area:"Kota atau area (opsional)",hours:"Berapa jam per minggu?",payText:"Contoh: IDR 6 juta per bulan, SGD 5.000 per bulan",floorsH:"Gaji minimum yang disarankan untuk negara pilihan Anda:",costH:"Perkiraan biaya hidup",costFam:"keluarga 2 dewasa + 2 anak",costOne:"sendiri",costHint:"Belum termasuk pajak; gaji kotor perlu lebih tinggi. Sumber: Numbeo (Juni 2026) dan panduan relokasi 2026. Claude menghitung ulang untuk kota setiap lowongan.",floorsHint:"Setuju? Tekan Lanjut. Mau angka lain? Tekan Ubah angka.",edit:"Ubah angka",hu:"jam/minggu",rot:"Pola rotasi, contoh: 14/14, 28/28",fam:"Siapa yang ikut? Contoh: istri dan anak (tanpa jumlah atau usia)",
       review:"Cek lagi pilihan Anda",quickH:"Perintah cepat",quickHint:"Klik tombol untuk menyalin perintahnya, lalu tempel di chat Claude.",
       steps:[
         {k:"language",q:"Bahasa yang Anda pakai?",o:[["id","Bahasa Indonesia"],["en","English"]]},
@@ -342,7 +342,7 @@ a{color:var(--teal)}
     en:{tabs:["Start","Dashboard","Quick commands"],step:"Step",of:"of",back:"Back",next:"Next",save:"Save",skip:"Skip",
       saved:"Saved. Go back to the Claude chat, paste this message, and attach your CV if you have one:",copy:"Copy",copied:"Copied. Paste it in the Claude chat.",msg:"Continue Career Autopilot setup from the dashboard",
       redo:"Change answers",mine:"My answers: ",cantSave:"This view can't save yet. Open this page on claude.ai while signed in, or answer the questions in the Claude chat.",
-      other:"Other (type it)",area:"City or area (optional)",hours:"How many hours per week?",payText:"For example: SGD 5,000 per month, IDR 6 million per month",floorsH:"Suggested minimum pay for the countries you picked:",floorsHint:"Agree? Press Next. Want other figures? Press Change figures.",edit:"Change figures",hu:"h/week",rot:"Rotation pattern, e.g. 14/14, 28/28",fam:"Who comes along? e.g. spouse and children (no number or ages)",
+      other:"Other (type it)",area:"City or area (optional)",hours:"How many hours per week?",payText:"For example: SGD 5,000 per month, IDR 6 million per month",floorsH:"Suggested minimum pay for the countries you picked:",costH:"Estimated living costs",costFam:"family of 2 adults + 2 children",costOne:"on your own",costHint:"Before tax; gross pay needs to be higher. Sources: Numbeo (June 2026) and 2026 relocation guides. Claude recalculates for each job\u2019s city.",floorsHint:"Agree? Press Next. Want other figures? Press Change figures.",edit:"Change figures",hu:"h/week",rot:"Rotation pattern, e.g. 14/14, 28/28",fam:"Who comes along? e.g. spouse and children (no number or ages)",
       review:"Check your answers",quickH:"Quick commands",quickHint:"Click a button to copy the command, then paste it in the Claude chat.",
       steps:[
         {k:"language",q:"Which language?",o:[["id","Bahasa Indonesia"],["en","English"]]},
@@ -385,6 +385,20 @@ a{color:var(--teal)}
     var t=SHORT[A.language||lang]||SHORT.en;
     return (Array.isArray(A.countries)?A.countries:[]).map(function(c){var f=t[c];if(!f)return cname(c)+": ";
       var v=(c==="Indonesia"&&A.employment==="part-time")?f[1]:(c==="Singapore"&&A.move==="family")?f[1]:f[0];return cname(c)+": "+v}).join("; ");
+  }
+  var COL={id:{"Singapore":["± SGD 3.500–4.900 per bulan (sewa 1 kamar + kebutuhan)","± SGD 9.000–12.400 per bulan (sewa 3 kamar + kebutuhan)","Anak asing hampir selalu ke sekolah internasional: ± SGD 3.100 per anak per bulan"],
+      "Australia":["± AUD 4.300–5.500 per bulan (Sydney)","± AUD 11.000–13.700 per bulan (Sydney)","Sekolah negeri bisa berbayar untuk visa sementara di beberapa negara bagian"],
+      "Europe":["± EUR 3.000–3.500 per bulan (Amsterdam)","± EUR 6.000–7.800 per bulan (Amsterdam)","Sekolah negeri Belanda gratis; sekolah internasional ± EUR 1.500 per anak per bulan"],
+      "Malaysia":["± RM 5.500–8.500 per bulan (Kuala Lumpur)","± RM 10.000–15.000 per bulan (Kuala Lumpur)","Sekolah internasional menambah ± RM 8.000–16.000 per bulan untuk 2 anak"]},
+    en:{"Singapore":["≈ SGD 3,500–4,900 a month (1-bedroom rent + living costs)","≈ SGD 9,000–12,400 a month (3-bedroom rent + living costs)","Foreign children almost always attend international school: ≈ SGD 3,100 per child a month"],
+      "Australia":["≈ AUD 4,300–5,500 a month (Sydney)","≈ AUD 11,000–13,700 a month (Sydney)","Public schools can charge fees to temporary visa holders in some states"],
+      "Europe":["≈ EUR 3,000–3,500 a month (Amsterdam)","≈ EUR 6,000–7,800 a month (Amsterdam)","Dutch public schools are free; international school ≈ EUR 1,500 per child a month"],
+      "Malaysia":["≈ RM 5,500–8,500 a month (Kuala Lumpur)","≈ RM 10,000–15,000 a month (Kuala Lumpur)","International school adds ≈ RM 8,000–16,000 a month for 2 children"]}};
+  function costLines(){
+    if(A.move!=="alone"&&A.move!=="family")return [];
+    var t=COL[A.language||lang]||COL.en,out=[];
+    (Array.isArray(A.countries)?A.countries:[]).forEach(function(c){var f=t[c];if(!f)return;out.push([cname(c),A.move==="family"?f[1]+". "+f[2]:f[0]])});
+    return out;
   }
   function floorLines(){
     var t=FLOORS[A.language||lang]||FLOORS.en,out=[];
@@ -478,6 +492,8 @@ a{color:var(--teal)}
     if(s.fam&&cur==="family")html+='<input type="text" id="fam" placeholder="'+esc(l.fam)+'" value="'+esc(A.family_text||"")+'">';
     if(s.payText&&cur==="official"){var fl=floorLines();
       if(fl.length)html+='<div class="card" style="margin-top:12px"><p><b>'+esc(l.floorsH)+'</b></p><ul>'+fl.map(function(x){return '<li><b>'+esc(x[0])+'</b>: '+esc(x[1])+'</li>'}).join("")+'</ul><p class="hint">'+esc(l.floorsHint)+'</p><button class="btn ghost" id="editFloors">'+esc(l.edit)+'</button></div>';}
+    if(s.payText&&cur){var cl=costLines();
+      if(cl.length)html+='<div class="card" style="margin-top:12px"><p><b>'+esc(l.costH)+' ('+esc(A.move==="family"?l.costFam:l.costOne)+')</b></p><ul>'+cl.map(function(x){return '<li><b>'+esc(x[0])+'</b>: '+esc(x[1])+'</li>'}).join("")+'</ul><p class="hint">'+esc(l.costHint)+'</p></div>';}
     if(s.payText&&cur==="custom")html+='<input type="text" id="payt" placeholder="'+esc(l.payText)+'" value="'+esc(A.pay_text||"")+'">';
     html+='<div class="navrow"><button class="btn ghost" id="bk"'+(i===0?" disabled":"")+'>'+esc(l.back)+'</button><button class="btn" id="nx"'+(valid(s)?"":" disabled")+'>'+esc(l.next)+'</button></div>';
     w.innerHTML=html;

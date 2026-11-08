@@ -26,6 +26,7 @@
 | relocation | none / alone / family | whether the user would move for the job |
 | family | spouse, children | who moves along: spouse, children, parents. Never the number, names or ages of children (profile-builder privacy rule) |
 | relocation_support | required / preferred / none | relocation package: flights, shipping, temporary housing, visa costs for the family |
+| living_cost_<code> | living_cost_sg: SGD 9,000–12,400/month + school SGD 3,100/child | monthly living cost for the household in that country (Cost of living below); saved when the user moves alone or with family |
 | rotation_pattern | 14/14, 28/28 | days on / days off for rotation work (offshore, mining, remote sites) |
 | rotation_region | Asia Pacific, Middle East | where the user accepts to fly in for rotations; crew-change point travel |
 | languages_spoken | English, Indonesian | any other required language is a blocker |
@@ -112,6 +113,28 @@ school fees or international-school allowance, health insurance for dependants. 
 For Indonesian citizens going abroad: work through the employer directly (jalur mandiri) or a P3MI agency listed as active in
 SISKOP2MI (siskop2mi.bp2mi.go.id, Kementerian P2MI). Official placement charges no registration or recruitment fee to the candidate.
 Register the job in SISKOP2MI before leaving, so the worker is protected.
+
+# Cost of living (when `relocation` is alone or family)
+
+The Start tab shows these monthly estimates next to the salary floors (`COL` in dashboard.html; keep both in step, check monthly).
+Household = one adult (alone) or 2 adults + 2 children (family; the real number of children is never stored). Before tax.
+
+| Country (city) | Alone | Family | School note |
+|---|---|---|---|
+| Singapore | SGD 3,500–4,900 | SGD 9,000–12,400 | international school ≈ SGD 3,100 per child a month (local places for foreign children are scarce) |
+| Australia (Sydney) | AUD 4,300–5,500 | AUD 11,000–13,700 | public schools may charge temporary visa holders in some states |
+| Netherlands (Amsterdam) | EUR 3,000–3,500 | EUR 6,000–7,800 | public school free; international ≈ EUR 1,500 per child a month |
+| Malaysia (Kuala Lumpur) | RM 5,500–8,500 | RM 10,000–15,000 | international school adds ≈ RM 8,000–16,000 a month for 2 children |
+
+Sources: Numbeo via Expatica (1 June 2026: single and family-of-four costs excluding rent, 1- and 3-bedroom rents), 2026 relocation
+guides for school fees. Other countries and cities: look up the same items for the posting's city when a job comes up.
+
+In career-autopilot-fit-check, per posting abroad:
+1. Living cost for the posting's city and household (rent for 1 or 3 bedrooms, living costs, school when children come and local school is not open to them).
+2. Take-home pay from the posted salary with the country's official tax calculator or rates (e.g. IRAS, ATO, Belastingdienst; note special
+   regimes such as the Dutch 30% ruling only when the posting or user mentions them).
+3. Report one line "Biaya hidup: gaji bersih ± X, kebutuhan ± Y → sisa ± Z / kurang ± Z". Shortfall → flag "Gaji tidak cukup untuk biaya hidup
+   <keluarga|sendiri>". Never exclude on this alone; the user decides. No posted pay → say the gross pay needed instead.
 
 # Rotation and offshore work (when `employment_types` has rotation)
 

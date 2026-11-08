@@ -73,7 +73,8 @@ When the user pastes the copied text ("Lanjutkan setup Career Autopilot dari das
    Unanswered → `relocation_support: preferred` (flag, not exclude) and say so in one line. `Europe` with no countries named → search
    EU-wide (EURES and visa-sponsor boards) and apply each posting country's threshold; do not ask again before the first search. `pay: official` → the page already showed the suggested floors and the user agreed: save them as `salary_floor_<code>` without asking
    again, and ask in one message only for countries the page gives no figure for (Middle East, US/Canada, Japan, other); with `relocation: family`
-   the floor is the higher of that and the country's minimum for bringing family (fit-check filters.md, Family relocation);
+   the floor is the higher of that and the country's minimum for bringing family (fit-check filters.md, Family relocation). With `move`
+   alone or family, also save the page's living-cost estimate per country as `living_cost_<code>` (filters.md, Cost of living);
    `pay: custom` → parse `pay_text` into `salary_floor_<code>` lines and confirm them in one line.
 3. `cv: build` → run career-autopilot-cv-builder; `cv: have` → ask for the file.
 4. Write `applied: true` into `onboarding/answers` and `onboarded: true` into `meta/summary`, then continue with
