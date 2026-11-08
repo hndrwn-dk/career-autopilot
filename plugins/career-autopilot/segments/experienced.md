@@ -1,13 +1,13 @@
 # Segment: experienced
 
 ## Profile
-Built from the CV as profile-builder describes.
+Built from the CV as career-autopilot-profile-builder describes.
 
 ## Scoring
 Use the preset weights, else `must_have:45, years:15, stack:20, certs:10, domain:5, scope:5`.
 
 ## Sources
-All sources in find-jobs.
+All sources in career-autopilot-find-jobs.
 
 ## Filters defaults
 | Key | Value |
@@ -20,4 +20,4 @@ All sources in find-jobs.
 Lead with the most relevant result and the scope (team size, budget, customers, systems).
 
 ## Checks
-Employment-model flags in fit-check.
+Employment-model flags in career-autopilot-fit-check.

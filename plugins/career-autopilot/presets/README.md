@@ -2,7 +2,7 @@
 
 A preset tells Career Autopilot what a good match looks like for one kind of role: target titles, search keywords,
 skill groups, credential equivalents, scoring weights and field-specific checks. Presets are optional; without one,
-fit-check scores each posting against its own requirements.
+career-autopilot-fit-check scores each posting against its own requirements.
 
 ## Layout
 

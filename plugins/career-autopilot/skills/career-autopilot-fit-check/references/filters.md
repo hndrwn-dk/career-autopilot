@@ -2,7 +2,7 @@
 
 | Key | Example | Meaning |
 |---|---|---|
-| profile | Siti | which person this tracker belongs to (career-setup step 0) |
+| profile | Siti | which person this tracker belongs to (career-autopilot-setup step 0) |
 | segment | experienced / fresh-graduate / career-returner / side-income / career-switcher | the user's situation |
 | preset | finance-accounting, custom:barista | role presets in use |
 | mode | active / watch / off | how autopilot behaves |
@@ -35,7 +35,7 @@
 | max_applications_per_day | 10 | pacing in active mode |
 | company_boards | greenhouse:acme, lever:foo | saved ATS boards |
 | use_platforms | linkedin, jobstreet | account platforms allowed in unattended runs (default none) |
-| platform_caps | linkedin: opened=30, prefilled=3 | overrides of the daily caps in find-jobs/references/platforms.md |
+| platform_caps | linkedin: opened=30, prefilled=3 | overrides of the daily caps in career-autopilot-find-jobs/references/platforms.md |
 | platform_ack_<platform> | 2026-11-08 | date the user accepted the account-risk reminder |
 | platform_pause_<platform> | 2026-11-10 | paused until this date after a warning sign |
 | platform_usage_<platform> | 2026-11-08 opened=12 searches=3 prefilled=1 | today's counters |
@@ -44,8 +44,8 @@
 | timezone | Asia/Singapore | IANA zone |
 | language | id / en | language for summaries and drafts to the user |
 | availability | weekdays after 18:00 SGT | used when proposing interview slots |
-| dashboard_url | https://claude.ai/artifact/… | the user's private dashboard (career-dashboard skill) |
-| last_inbox_sync | 2026-11-01 | set by inbox-sync |
+| dashboard_url | https://claude.ai/artifact/… | the user's private dashboard (career-autopilot-dashboard skill) |
+| last_inbox_sync | 2026-11-01 | set by career-autopilot-inbox-sync |
 
 # Default salary floors (when the user gives none)
 
@@ -91,4 +91,4 @@ Use the official national minimum wage or the work-permit salary threshold for t
 - Canada: employer route usually needs an LMIA (Job Bank shows LMIA-approved postings); permanent route via Express Entry; intra-company transfers and some trade-agreement categories are LMIA-exempt.
 
 ## Regulated professions (any country)
-Medicine, nursing, law, teaching, engineering, accounting and similar often need local registration or a conversion exam. Flag it in fit-check.
+Medicine, nursing, law, teaching, engineering, accounting and similar often need local registration or a conversion exam. Flag it in career-autopilot-fit-check.

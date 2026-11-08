@@ -52,7 +52,7 @@ Do not open their links or reply to them.
 - Official registry where available (e.g. Singapore ACRA BizFile, Indonesia AHU, UK Companies House).
 - Search "<company name> scam" / "<nama perusahaan> penipuan".
 
-## Simple rules to share with the user (once, at career-setup, in their language)
+## Simple rules to share with the user (once, at career-autopilot-setup, in their language)
 
 1. Pekerjaan resmi tidak pernah meminta Anda membayar apa pun untuk diterima.
 2. Jangan pernah memberi kode OTP, PIN, password, atau foto KTP sebelum ada kontrak resmi.

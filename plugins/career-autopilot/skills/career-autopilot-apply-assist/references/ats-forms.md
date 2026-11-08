@@ -27,4 +27,4 @@ Applying needs Singpass sign-in by the user. After sign-in the form is short: CV
 Check phone country code. Replace any remembered cover letter. Last page often has a follow-company checkbox: untick only if the user asks.
 
 ## Email applications
-Hand over to recruiter-email.
+Hand over to career-autopilot-recruiter-email.

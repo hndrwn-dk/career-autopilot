@@ -7,7 +7,7 @@ and other work alongside another job, study or caring for a family.
 - A short profile is enough: skills the user can offer (e.g. bookkeeping, baking, sewing, translation, tutoring maths, social media, data entry, customer service), languages, tools they can use, availability.
 - `hours_per_week`, `schedule` (e.g. "weekdays 9:00–14:00"), `work_mode`, `max_commute_minutes`, `pay_unit` and `pay_floor`.
 - Portfolio links or photos of work where relevant (Drive links the user provides).
-- No CV needed: cv-builder can make a one-page profile.
+- No CV needed: career-autopilot-cv-builder can make a one-page profile.
 
 ## Scoring
 `must_have:35, schedule_fit:25, pay:15, stack:15, safety:10`.
@@ -17,7 +17,7 @@ and other work alongside another job, study or caring for a family.
 
 ## Sources
 - Country portals with part-time and work-from-home filters.
-- Freelance marketplaces (see find-jobs sources, section Freelance and remote). The user signs up and applies on those platforms personally; Claude drafts proposals.
+- Freelance marketplaces (see career-autopilot-find-jobs sources, section Freelance and remote). The user signs up and applies on those platforms personally; Claude drafts proposals.
 - Local community job groups the user names: Claude reads only what the user pastes.
 
 ## Filters defaults

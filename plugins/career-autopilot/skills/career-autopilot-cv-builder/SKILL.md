@@ -1,6 +1,6 @@
 ---
-name: cv-builder
-description: "Use when the user has no CV or an outdated one and says \"buatkan CV\", \"saya belum punya CV\", \"make me a resume\", \"update my CV\", \"CV untuk fresh graduate\", \"CV untuk kembali bekerja\", or when profile-builder finds no CV. Builds a CV and the Profile through a short interview."
+name: career-autopilot-cv-builder
+description: "Use when the user has no CV or an outdated one and says \"buatkan CV\", \"saya belum punya CV\", \"make me a resume\", \"update my CV\", \"CV untuk fresh graduate\", \"CV untuk kembali bekerja\", or when career-autopilot-profile-builder finds no CV. Builds a CV and the Profile through a short interview."
 ---
 
 # Build a CV by interview
@@ -35,5 +35,5 @@ Show the draft as text, apply the user's corrections, then confirm.
 ## 3. Save
 
 - Make the CV as a document the user can edit and download (a Docs artifact where available, or a .docx when the user asks for Word). Also save a PDF copy to Drive `Career Autopilot/CV/` when a PDF export is available.
-- Run profile-builder on the confirmed text so Profile and Stories are filled, and set `cv_default`.
+- Run career-autopilot-profile-builder on the confirmed text so Profile and Stories are filled, and set `cv_default`.
 - Offer a second version when the user targets two kinds of work (e.g. `cv_admin` and `cv_tutor`).

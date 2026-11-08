@@ -1,5 +1,5 @@
 ---
-name: profile-builder
+name: career-autopilot-profile-builder
 description: "Use when the user uploads or shares a CV/resume and says \"build my profile\", \"read my CV\", \"update my profile\", \"baca CV saya\", \"buat profil dari CV\", \"add a story\", or when another Career Autopilot skill needs profile data that is missing."
 ---
 
@@ -31,7 +31,7 @@ Source: CV = from the CV · ask = ask the user · calc = computed from CV dates.
 | education | CV | school, qualification, field, years; note equivalents only if the user states them |
 | languages | CV/ask | with level |
 | notice_period | ask | |
-| salary_floor_<region> | ask | e.g. salary_floor_sg: SGD 5,600/month. If the user has no figure, propose the official default from `fit-check/references/filters.md` (Default salary floors), say which rule it is, and let them raise it |
+| salary_floor_<region> | ask | e.g. salary_floor_sg: SGD 5,600/month. If the user has no figure, propose the official default from `career-autopilot-fit-check/references/filters.md` (Default salary floors), say which rule it is, and let them raise it |
 | current_salary | ask, optional | only if the user wants forms to show it |
 | preferred_employment | ask | permanent / contract / either |
 | willing_to_relocate | ask | |
@@ -47,14 +47,14 @@ Never store: ID or passport numbers, bank or card details, passwords, date of bi
 
 ## Steps
 
-0. No CV, or the user says it is old → offer cv-builder instead; it fills the Profile at the end.
+0. No CV, or the user says it is old → offer career-autopilot-cv-builder instead; it fills the Profile at the end.
 1. Read the CV. Extract the keys above. Read the segment file (`${CLAUDE_PLUGIN_ROOT}/segments/<segment>.md`, section Profile) for what matters most for this user.
 2. Show a compact table plus the arithmetic lines, and list every empty `ask` key. Ask for them in one message.
 3. After the user confirms, write to `Profile` (overwrite only changed keys).
 4. Save the CV in Drive folder `Career Autopilot/CV` if missing; set `cv_default`.
 5. Turn each strong achievement into a STAR row in `Stories` (Situation, Task, Action, Result, Skills) using only CV facts; mark `Source: CV`. Ask the user to fill any missing Result numbers rather than inventing them.
-6. Suggest target roles and keywords that the CV supports, in whatever field the CV is in. If no preset is set, offer an example preset that fits or a custom preset (career-setup step 3).
+6. Suggest target roles and keywords that the CV supports, in whatever field the CV is in. If no preset is set, offer an example preset that fits or a custom preset (career-autopilot-setup step 3).
 
 ## Several CVs
 
-Store each as `cv_<label>` with when to use it (e.g. `cv_tam: customer-facing roles`). apply-assist picks by role.
+Store each as `cv_<label>` with when to use it (e.g. `cv_tam: customer-facing roles`). career-autopilot-apply-assist picks by role.

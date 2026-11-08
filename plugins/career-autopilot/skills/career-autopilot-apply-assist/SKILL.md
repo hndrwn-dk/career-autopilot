@@ -1,5 +1,5 @@
 ---
-name: apply-assist
+name: career-autopilot-apply-assist
 description: "Use when the user says \"apply to this job\", \"apply to 1 and 3\", \"lanjut apply\", \"isi form lamaran\", \"fill the application\", or approves jobs from a shortlist. Prefills application forms in the user's browser from Profile and logs them; the user submits."
 ---
 
@@ -9,9 +9,9 @@ description: "Use when the user says \"apply to this job\", \"apply to 1 and 3\"
 
 ## Per job
 
-1. Confirm the job was approved in this conversation (or queued by an `active` autopilot run) and passes fit-check.
+1. Confirm the job was approved in this conversation (or queued by an `active` autopilot run) and passes career-autopilot-fit-check.
 2. Check `Applications` for the same company + role or link. Already there → stop and say so. Run the scam check again on the apply page (a form asking for payment, bank or ID details → stop, skip, tell the user).
-3. Open the posting in a new tab. Note the route: company ATS, portal, an account platform (LinkedIn Easy Apply, JobStreet, Indeed, Glints…), or email (→ recruiter-email). Account platforms: follow `${CLAUDE_PLUGIN_ROOT}/skills/find-jobs/references/platforms.md` (reminder, prefill cap, stop on warning signs).
+3. Open the posting in a new tab. Note the route: company ATS, portal, an account platform (LinkedIn Easy Apply, JobStreet, Indeed, Glints…), or email (→ career-autopilot-recruiter-email). Account platforms: follow `${CLAUDE_PLUGIN_ROOT}/skills/career-autopilot-find-jobs/references/platforms.md` (reminder, prefill cap, stop on warning signs).
 4. Pick the CV: the `cv_<label>` whose note matches the role, else `cv_default`. Respect the form's file-size limit.
 5. Fill only from Profile. Patterns per ATS: `references/ats-forms.md`.
    - Phone: the regional phone for the job's country.
@@ -26,7 +26,7 @@ description: "Use when the user says \"apply to this job\", \"apply to 1 and 3\"
 8. When the user confirms it was sent (or a confirmation page is visible), append to `Applications`:
    next No, Company, Role, Location, Status `Submitted`, Channel, Employment Model, today, Link, Job ID, Match %, today, Next Action `wait for reply`, short note.
 
-Dashboard: if Filters has `dashboard_url`, mirror each job's status and next_action there as you go (career-dashboard skill, Sync).
+Dashboard: if Filters has `dashboard_url`, mirror each job's status and next_action there as you go (career-autopilot-dashboard skill, Sync).
 
 ## Batches
 

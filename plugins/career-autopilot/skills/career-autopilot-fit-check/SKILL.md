@@ -1,6 +1,6 @@
 ---
-name: fit-check
-description: "Use when the user asks \"is this job a fit\", \"check this job\", \"how well do I match\", \"cek kecocokan\", \"cocok gak\", pastes a job link, description or a chat message with a job offer, asks \"apakah ini penipuan?\", \"ini scam bukan?\", \"is this offer legit\", or when find-jobs or autopilot-run needs to score a posting against the profile and filters."
+name: career-autopilot-fit-check
+description: "Use when the user asks \"is this job a fit\", \"check this job\", \"how well do I match\", \"cek kecocokan\", \"cocok gak\", pastes a job link, description or a chat message with a job offer, asks \"apakah ini penipuan?\", \"ini scam bukan?\", \"is this offer legit\", or when career-autopilot-find-jobs or career-autopilot-run needs to score a posting against the profile and filters."
 ---
 
 # Check fit
@@ -19,7 +19,7 @@ Apply `${CLAUDE_PLUGIN_ROOT}/references/scam-signals.md` before anything else. A
 Read the full description:
 - Required language the user does not speak. "Nice to have" is not a blocker; mention it.
 - Work rights the user cannot meet ("citizens/PR only", "no sponsorship", "must hold a valid work pass", "security clearance required") when Profile says they need sponsorship there.
-- Posted pay below the user's floor for the posting's country: `salary_floor_<country code>`, else the region key (e.g. `eu`), else `salary_floor_remote` for remote roles, else `pay_floor` in `pay_unit`. Compare in the posting's currency; convert only with a rate looked up that day and say so. No floor at all for that country → do not exclude on pay; ask the user for one (career-setup step 5). Convert units only when the posting gives hours or days; otherwise compare like with like and flag when unsure.
+- Posted pay below the user's floor for the posting's country: `salary_floor_<country code>`, else the region key (e.g. `eu`), else `salary_floor_remote` for remote roles, else `pay_floor` in `pay_unit`. Compare in the posting's currency; convert only with a rate looked up that day and say so. No floor at all for that country → do not exclude on pay; ask the user for one (career-autopilot-setup step 5). Convert units only when the posting gives hours or days; otherwise compare like with like and flag when unsure.
 - Work arrangement outside `work_mode`: e.g. onsite-only when the user wants remote; hybrid/onsite beyond `max_commute_minutes` from the user's area (estimate with a quick map or transit lookup when the address is given).
 - Remote roles restricted to countries or timezones outside `remote_scope` / `remote_timezones` ("US residents only", "must overlap 9–5 EST").
 - Hours or schedule that cannot fit `hours_per_week` / `schedule` (e.g. weekend shifts when the user said weekdays only).

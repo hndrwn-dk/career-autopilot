@@ -1,6 +1,6 @@
 ---
-name: interview-prep
-description: "Use when the user says \"prep me for the <company> interview\", \"interview prep\", \"persiapan interview\", \"what will they ask\", \"siapkan jawaban interview\", or when inbox-sync finds an interview invite and the user accepts the offer to prepare."
+name: career-autopilot-interview-prep
+description: "Use when the user says \"prep me for the <company> interview\", \"interview prep\", \"persiapan interview\", \"what will they ask\", \"siapkan jawaban interview\", or when career-autopilot-inbox-sync finds an interview invite and the user accepts the offer to prepare."
 ---
 
 # Interview brief
@@ -22,7 +22,7 @@ Inputs: the Applications row (or a link/description the user gives), `Profile`, 
 2. **Pitch**: a 60-second "tell me about yourself" for this role, from Profile only.
 3. **Why this company / role**: 3 specific points tied to research.
 4. **Likely questions** (10–15) split into technical, scenario/system design, behavioural, customer (for customer-facing roles). For each: the best-matching Story id and a 2–3 line answer outline.
-5. **Gaps to address**: from fit-check gaps, with an honest framing for each ("not used X in production; used Y which solves the same problem; here's how I'd ramp").
+5. **Gaps to address**: from career-autopilot-fit-check gaps, with an honest framing for each ("not used X in production; used Y which solves the same problem; here's how I'd ramp").
 6. **Questions to ask them**: 5, specific to the role and the employment model (for agency/vendor roles: client, duration, conversion criteria and timeline, who manages performance).
 7. **Logistics**: time in the user's timezone, link/location, what to have open.
 

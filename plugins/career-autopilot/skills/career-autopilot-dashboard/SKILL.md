@@ -1,5 +1,5 @@
 ---
-name: career-dashboard
+name: career-autopilot-dashboard
 description: "Use when the user says \"open my dashboard\", \"buka dashboard\", \"show my job search\", \"lihat progres lamaran\", \"update my dashboard\", \"dashboard saya\", or at the end of setup. Creates the user's private Career Autopilot dashboard page once, and keeps it in sync with the tracker. Other skills call this skill's \"Sync\" section."
 ---
 
@@ -16,7 +16,7 @@ actions, e.g. `db_write` / `db_get` or the Artifact tool's `write_db` / `read_db
 ## Create (once per profile)
 
 1. Filters has `dashboard_url` → it exists: open it with the Artifact tool and go to Sync. If it no longer loads, recreate.
-2. Copy `${CLAUDE_PLUGIN_ROOT}/skills/career-dashboard/assets/dashboard.html` to the working folder unchanged. Publish it as a new
+2. Copy `${CLAUDE_PLUGIN_ROOT}/skills/career-autopilot-dashboard/assets/dashboard.html` to the working folder unchanged. Publish it as a new
    artifact: title `Career Autopilot` (default profile) or `Career Autopilot · <profile>`, icon `chart`.
 3. Declare its capabilities as exactly:
    `{"db":{"rules":[{"path":"","read":"view","write":"owner"}]},"user":{}}`
@@ -42,10 +42,10 @@ anything from Profile beyond `profile`, `segment` and `language`. `pay` is only 
 
 ## Sync (called by other skills)
 
-- Write `meta/run` `running` with the step ("Mencari lowongan · MyCareersFuture") at the start of find-jobs, apply-assist batches and autopilot-run; `idle` with a one-line result at the end.
-- After find-jobs: every shortlisted posting as `worth_a_look` (with match, flags, next_action "Cek dan putuskan apply"); excluded postings as `skipped`, scams as `scam`, each with `reason`. Only the most recent 100 skipped/scam rows; delete older ones.
-- After apply-assist / autopilot-run prefill: `ready` with next_action naming the tab and what is left; after the user confirms: `submitted`.
-- After inbox-sync: the new status and next_action for each matched row.
+- Write `meta/run` `running` with the step ("Mencari lowongan · MyCareersFuture") at the start of career-autopilot-find-jobs, career-autopilot-apply-assist batches and career-autopilot-run; `idle` with a one-line result at the end.
+- After career-autopilot-find-jobs: every shortlisted posting as `worth_a_look` (with match, flags, next_action "Cek dan putuskan apply"); excluded postings as `skipped`, scams as `scam`, each with `reason`. Only the most recent 100 skipped/scam rows; delete older ones.
+- After career-autopilot-apply-assist / career-autopilot-run prefill: `ready` with next_action naming the tab and what is left; after the user confirms: `submitted`.
+- After career-autopilot-inbox-sync: the new status and next_action for each matched row.
 - `meta/summary`: update counts, `last_run`, `next_run` (from the scheduled task), and today's platform usage from Filters `platform_usage_*` / `platform_pause_*`.
 - Keep at most 500 `jobs` documents: delete `rejected`/`closed`/`withdrawn` rows older than 60 days first.
 - Batch writes (one call for many documents where the tool allows). For a document that exists, pass its current version if the tool asks for one.

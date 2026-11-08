@@ -1,12 +1,12 @@
 ---
-name: find-jobs
+name: career-autopilot-find-jobs
 description: "Use when the user says \"find jobs\", \"scan jobs\", \"any new roles\", \"search jobs in <country>\", \"cari lowongan\", \"carikan loker\", \"scan lowongan\", or asks for roles matching their CV and filters on company career sites, job portals, recruiter emails, LinkedIn or similar platforms."
 ---
 
 # Find matching jobs
 
-Load `Profile`, `Filters`, `Applications` and `Skip` from the active profile's tracker (career-setup step 0), and the segment file `${CLAUDE_PLUGIN_ROOT}/segments/<segment>.md` for extra sources and search terms.
-Profile or Filters empty → run profile-builder or career-setup instead.
+Load `Profile`, `Filters`, `Applications` and `Skip` from the active profile's tracker (career-autopilot-setup step 0), and the segment file `${CLAUDE_PLUGIN_ROOT}/segments/<segment>.md` for extra sources and search terms.
+Profile or Filters empty → run career-autopilot-profile-builder or career-autopilot-setup instead.
 
 ## Sources, in order
 
@@ -25,7 +25,7 @@ Details and endpoints: `references/sources.md`.
 1. Skip if company+role or the link is already in `Applications` or `Skip`, or the company is in `exclude_companies`.
    Run the scam check (`${CLAUDE_PLUGIN_ROOT}/references/scam-signals.md`) first on every posting and recruiter message.
 2. Get the full description, not the card.
-3. Run fit-check (hard filters, employment model, score).
+3. Run career-autopilot-fit-check (hard filters, employment model, score).
 4. Keep: company, role, location, link, source, salary if posted, employment model, match %, one-line why, flags.
 
 ## Output
@@ -34,5 +34,5 @@ Table, best first: # | Company | Role | Location | Work mode | Pay | Model | Mat
 For non-technical users, also give a two-line plain summary of the top 3.
 Then one "Excluded" line grouped by reason. Write excluded postings with a reason to `Skip`.
 Save the shortlist to Drive `Career Autopilot/shortlists/<YYYY-MM-DD>.md`.
-Sync the dashboard (`${CLAUDE_PLUGIN_ROOT}/skills/career-dashboard/SKILL.md`, Sync) if Filters has `dashboard_url`.
-Ask which to apply to. Never start applying without the user's go-ahead in this conversation (autopilot-run in `active` mode is the only exception).
+Sync the dashboard (`${CLAUDE_PLUGIN_ROOT}/skills/career-autopilot-dashboard/SKILL.md`, Sync) if Filters has `dashboard_url`.
+Ask which to apply to. Never start applying without the user's go-ahead in this conversation (career-autopilot-run in `active` mode is the only exception).

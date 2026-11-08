@@ -1,11 +1,11 @@
 ---
-name: recruiter-email
-description: "Use when a posting says to apply by email, or the user says \"email the recruiter\", \"draft an application email\", \"reply to this recruiter\", \"buatkan email lamaran\", \"balas email rekruter\", \"follow up on my application\", or when inbox-sync finds a recruiter message that needs a reply."
+name: career-autopilot-recruiter-email
+description: "Use when a posting says to apply by email, or the user says \"email the recruiter\", \"draft an application email\", \"reply to this recruiter\", \"buatkan email lamaran\", \"balas email rekruter\", \"follow up on my application\", or when career-autopilot-inbox-sync finds a recruiter message that needs a reply."
 ---
 
 # Recruiter email: draft, then send on approval
 
-Guardrails: `${CLAUDE_PLUGIN_ROOT}/skills/apply-assist/references/guardrails.md`.
+Guardrails: `${CLAUDE_PLUGIN_ROOT}/skills/career-autopilot-apply-assist/references/guardrails.md`.
 Writing: `${CLAUDE_PLUGIN_ROOT}/references/writing-style.md` for every draft (application, reply, follow-up, thank-you note). Scam check `${CLAUDE_PLUGIN_ROOT}/references/scam-signals.md` on every incoming message before drafting: an always-skip signal → no draft, tell the user why.
 
 ## Application by email

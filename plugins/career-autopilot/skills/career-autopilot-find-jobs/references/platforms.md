@@ -38,7 +38,7 @@ Show these in the user's language, briefly, never as a wall of text:
 | Applications prefilled (Easy Apply / quick apply) | 3 |
 | Messages, connection requests, proposals | 0 automated; Claude drafts, the user sends |
 
-- Unattended runs (`autopilot-run`) use account platforms only when Filters `use_platforms` lists them, at half the caps above (6 descriptions, 2 search pages, 1 prefill).
+- Unattended runs (`career-autopilot-run`) use account platforms only when Filters `use_platforms` lists them, at half the caps above (6 descriptions, 2 search pages, 1 prefill).
 - The user may lower caps in `platform_caps`. Raising a cap above 15 descriptions per day needs the user to confirm the risk again in this conversation.
 - Never: mass connection requests, auto-endorsements, auto-likes or comments, profile-view bots, bulk messaging, or sending marketplace proposals. Claude writes the text; the user posts it.
 - Spread work out: prefer a short daily session over one long one.

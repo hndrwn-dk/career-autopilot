@@ -1,5 +1,5 @@
 ---
-name: career-setup
+name: career-autopilot-setup
 description: "Career Autopilot plugin setup. This skill IS the setup: run it directly, never look for a repository, project folder or install step, and never fetch code from GitHub for it. Use when the user says \"set up career autopilot\", \"start career autopilot\", \"check my setup\", \"health check\", \"cek setup\", \"pasang career autopilot\", \"mulai cari kerja\", \"add a profile for my wife\", pastes a block starting with CAREER-AUTOPILOT-SETTINGS, or before the first job search. Verifies connectors, creates the tracker, sets the user's situation, field, work arrangement and countries, and schedules runs."
 ---
 
@@ -14,7 +14,7 @@ The user should be able to start in under two minutes. Ask only three things, in
 
 Then create the tracker if Drive is connected (otherwise run in chat-only mode), infer `segment`, `preset` (an example
 or `none`) and `work_mode` from the answers, set `mode: off`, share the five simple scam rules from
-`${CLAUDE_PLUGIN_ROOT}/references/scam-signals.md`, create the dashboard (career-dashboard skill), and run find-jobs once. Everything else (pay, hours, countries,
+`${CLAUDE_PLUGIN_ROOT}/references/scam-signals.md`, create the dashboard (career-autopilot-dashboard skill), and run career-autopilot-find-jobs once. Everything else (pay, hours, countries,
 schedule, voice sample, autopilot) is asked later, only when it changes a result ("Lowongan ini dibayar per jam;
 berapa minimal per jam yang Anda mau?"). Use the full steps below only when the user asks for full setup, a health
 check, or pastes a settings block.
@@ -80,7 +80,7 @@ If Filters has no `preset`, ask what kind of work the user wants (any field, any
   work the user names, their CV (if any) and 2–3 web searches on how such postings are worded in their target countries.
   Show it in plain words, apply edits, save to Drive `Career Autopilot/presets/<name>.md` (shared by all profiles) and set
   Filters `preset: custom:<name>`.
-- `none` → fit-check scores against each posting's own requirements.
+- `none` → career-autopilot-fit-check scores against each posting's own requirements.
 
 Several presets: union `target_roles` and `keywords`, lowest `min_match`, weights of the first. Write only empty keys.
 
@@ -90,7 +90,7 @@ Ask, if empty: remote, hybrid, onsite or any (`work_mode`); for onsite/hybrid, h
 `hours_per_week` and `schedule` if not full-time; `pay_unit` (hour/day/project/month) and `pay_floor`.
 Salary floor per target country: for every country in `countries` (and `remote` if allowed) that has no
 `salary_floor_<code>` yet, ask in one message for the minimum in that country's currency, showing the official default
-next to each (from `${CLAUDE_PLUGIN_ROOT}/skills/fit-check/references/filters.md`, Default salary floors; for Singapore the
+next to each (from `${CLAUDE_PLUGIN_ROOT}/skills/career-autopilot-fit-check/references/filters.md`, Default salary floors; for Singapore the
 MOM EP or S Pass qualifying salary when a work pass is needed, otherwise the Local Qualifying Salary). Save one
 `salary_floor_<code>` line per country with the user's figure, or the default if they accept it.
 When a country is added later ("cari juga di Jepang"), ask for its floor the same way before searching there.
@@ -99,19 +99,19 @@ Remote: ask which countries' employers they can legally work for (`remote_scope`
 ## 6. Countries
 
 If Filters has no `countries`, ask (any countries). For each, look it up in
-`${CLAUDE_PLUGIN_ROOT}/skills/find-jobs/references/sources.md`. Not listed → find its 2–3 main portals (official first)
+`${CLAUDE_PLUGIN_ROOT}/skills/career-autopilot-find-jobs/references/sources.md`. Not listed → find its 2–3 main portals (official first)
 with a web search, show them, save to Filters `country_portals`. Ask per country whether a work permit is needed (`needs_sponsorship`).
 
 ## 7. Settings block
 
 A block from `CAREER-AUTOPILOT-SETTINGS` to `END-SETTINGS`: write every `key: value` line into Filters (overwriting).
 `profile: <name>` selects or creates that profile first. Lines starting `profile.` go to Profile without the prefix, only
-for keys profile-builder allows. A `CV-TEXT` … `END-CV` section counts as the CV. A template users can copy:
+for keys career-autopilot-profile-builder allows. A `CV-TEXT` … `END-CV` section counts as the CV. A template users can copy:
 `${CLAUDE_PLUGIN_ROOT}/settings-template.txt`.
 
 ## 8. Profile and writing voice
 
-Profile empty → CV available: "upload your CV and say: build my profile". No CV: offer cv-builder.
+Profile empty → CV available: "upload your CV and say: build my profile". No CV: offer career-autopilot-cv-builder.
 Ask once whether the user wants to paste 1–2 emails or messages they wrote, so drafts sound like them (`writing_sample`).
 
 ## 9. Schedule by mode (Filters `mode`, default `off`)
@@ -121,7 +121,7 @@ Find the scheduling tools. List existing tasks; update one named `Career Autopil
 
 | mode | schedule | prompt |
 |---|---|---|
-| active | daily at `run_time` (default 09:40) | `Run the Career Autopilot run (autopilot-run skill) in active mode for profile "<profile or default>".` |
+| active | daily at `run_time` (default 09:40) | `Run the Career Autopilot run (career-autopilot-run skill) in active mode for profile "<profile or default>".` |
 | watch | weekly on `run_day` (default Sunday) at `run_time` | same prompt with `watch mode` |
 | off | delete nothing; tell the user an existing task can be paused | — |
 
@@ -130,7 +130,7 @@ Turn on push notifications; email only if the user asked. Write `autopilot_task`
 
 ## 10. Dashboard
 
-Run the career-dashboard skill (Create) so the user has their private dashboard page. Add a row "Dashboard" with its link to the summary table.
+Run the career-autopilot-dashboard skill (Create) so the user has their private dashboard page. Add a row "Dashboard" with its link to the summary table.
 
 ## 11. Summary
 

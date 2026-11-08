@@ -3,7 +3,7 @@
 ## Profile
 - Education first: school, programme, expected or actual graduation, grade if the user wants it shown, relevant modules.
 - Experience counts broadly: internships, part-time jobs, final-year project, research, competitions, student organisations, volunteering, freelance or personal projects. Record each as a role with dates.
-- No CV yet → run cv-builder.
+- No CV yet → run career-autopilot-cv-builder.
 - Stories: draw STAR stories from projects, organisations and part-time work.
 
 ## Scoring
@@ -31,4 +31,4 @@ Lead with the programme and the one project or internship closest to the role. B
 ## Checks
 - Graduate programme deadlines (many have fixed intake dates): note them in Next Action.
 - Unpaid internships: flag, and note when local law limits them.
-- Online tests and assessment centres: offer interview-prep for those formats.
+- Online tests and assessment centres: offer career-autopilot-interview-prep for those formats.

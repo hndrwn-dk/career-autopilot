@@ -21,7 +21,7 @@ Nothing about you is in the plugin. Your data stays in your own Google Sheet and
 | Scam guard | "Agents" who ask you to pay first, like or comment first, join a paid class or install an app are skipped automatically, along with task scams, money-mule and reshipping jobs, pay-to-join schemes, fake government recruitment, and overseas offers that match trafficking patterns. Paste any offer you received and ask "ini penipuan bukan?". |
 | No hassle | Three questions to start; nothing else is asked until it changes a result. Works in chat only if you do not connect Gmail or Drive. |
 | Sounds like you | Every email, reply and cover letter follows a writing guide that removes AI-sounding patterns, and can match a sample of your own writing. |
-| No CV needed | `cv-builder` interviews you in plain language and makes a CV, including an honest line for a career break if you want one. |
+| No CV needed | `career-autopilot-cv-builder` interviews you in plain language and makes a CV, including an honest line for a career break if you want one. |
 | Watch mode | Already employed? A weekly digest of only the strongest matches, nothing filled in. |
 | Honest flags | Contract-via-agency, vendor placement, undefined "conversion to permanent", hidden client, licence conversion needed, title that does not match the duties. |
 | Family use | Several profiles on one account (`Career Autopilot Tracker - <name>`), each with its own tracker, CV and schedule. |
@@ -50,11 +50,11 @@ Keep the browser (and, for scheduled `active` runs, the Claude desktop app) open
 
 ## First run
 
-Quick start: say **"mulai cari kerja"** (or pick **career-setup** from the `/` menu) and answer three questions (what work, where or remote, CV or no CV). Claude shows matching jobs right away and asks for anything else only when it matters.
+Quick start: say **"mulai cari kerja"** (or pick **career-autopilot-setup** from the `/` menu) and answer three questions (what work, where or remote, CV or no CV). Claude shows matching jobs right away and asks for anything else only when it matters.
 
 Full setup:
 
-1. Say **"mulai cari kerja"** or **"set up career autopilot"**, or pick **career-setup** from the `/` menu. Claude checks Gmail, Google Drive and the browser and creates your tracker.
+1. Say **"mulai cari kerja"** or **"set up career autopilot"**, or pick **career-autopilot-setup** from the `/` menu. Claude checks Gmail, Google Drive and the browser and creates your tracker.
 2. Answer a few plain questions: your situation, the kind of work, remote or onsite, hours, pay, countries.
 3. Upload your CV and say **"build my profile"**, or say **"buatkan CV"** if you do not have one.
 4. Optional: paste 1–2 emails you wrote so drafts sound like you.
@@ -85,7 +85,7 @@ Full setup:
 
 ## Settings
 
-Every key is documented in `skills/fit-check/references/filters.md`.
+Every key is documented in `skills/career-autopilot-fit-check/references/filters.md`.
 Segments: `segments/`. Presets: `presets/`.
 
 ## What always stays with you

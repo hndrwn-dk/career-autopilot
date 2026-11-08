@@ -13,4 +13,4 @@ Presets (field) and segments (situation) combine: e.g. `segment: fresh-graduate`
 | career-switcher | moving into a new field, using transferable skills |
 
 Each file has the same sections: Profile, Scoring, Sources, Filters defaults, Writing, Checks.
-Setup copies "Filters defaults" into empty Filters keys. fit-check uses "Scoring" unless Filters `weights` is set.
+Setup copies "Filters defaults" into empty Filters keys. career-autopilot-fit-check uses "Scoring" unless Filters `weights` is set.
