@@ -25,8 +25,12 @@ max_commute_minutes:
 hours_per_week:
 schedule:
 
-# Pay (pick one style)
-salary_floor_<region>:
+# Pay: one line per target country, in that country's currency (lowercase ISO code: sg, id, my, au, gb, us, de...)
+# Leave a country out and Claude proposes the official minimum for it (e.g. MOM for Singapore) for you to accept or change.
+# salary_floor_sg: SGD 5,600/month
+# salary_floor_id: IDR 10,000,000/month
+# salary_floor_remote: USD 3,000/month
+# Hourly or project work instead:
 pay_unit:
 pay_floor:
 
