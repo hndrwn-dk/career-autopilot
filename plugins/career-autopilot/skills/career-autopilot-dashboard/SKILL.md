@@ -39,7 +39,7 @@ The page shows only `jobs`, `meta/summary` and `meta/run` (full document list: s
 
 | Path | Fields the page reads |
 |---|---|
-| `jobs/<id>` | `company`, `role`, `city`, `country`, `work_mode`, `pay` (as posted, short), `model`, `status`, `match` (0–100), `channel`, `link` (https posting URL), `next_action`, `flags` (up to 3 short strings), `reason` (skip/scam reason, short), `updated` (ISO time with offset) |
+| `jobs/<id>` | `company`, `role`, `city`, `country`, `work_mode`, `pay` (as posted, short), `model`, `status`, `match` (0–100), `channel`, `link` (https posting URL), `next_action`, `flags` (up to 3 short strings), `reason` (skip/scam reason, short), `ready_to_send` (true/false), `updated` (ISO time with offset) |
 | `meta/summary` | `profile`, `mode`, `segment`, `language` (`id`/`en`), `onboarded`, `last_run`, `next_run`, `scams_skipped_total`, `skipped_total`, `platforms` (`{"<name>":{"used":n,"cap":n,"paused_until":"ISO or empty"}}`, today only) |
 | `meta/run` | `state` (`running`/`idle`), `activity` (one short line), `updated` |
 
@@ -71,7 +71,8 @@ When the user pastes the copied text ("Lanjutkan setup Career Autopilot dari das
    number, names or ages, and write the same cleaned text back to `onboarding/answers`. For `alone` or `family`, ask once in one
    message: the user's citizenship (for `needs_sponsorship` per country) and whether a relocation package is required (`relocation_support`).
    Unanswered → `relocation_support: preferred` (flag, not exclude) and say so in one line. `Europe` with no countries named → search
-   EU-wide (EURES and visa-sponsor boards) and apply each posting country's threshold; do not ask again before the first search. `pay: official` → propose each country's official floor (career-autopilot-setup step 5) in one message; with `relocation: family`
+   EU-wide (EURES and visa-sponsor boards) and apply each posting country's threshold; do not ask again before the first search. `pay: official` → the page already showed the suggested floors and the user agreed: save them as `salary_floor_<code>` without asking
+   again, and ask in one message only for countries the page gives no figure for (Middle East, US/Canada, Japan, other); with `relocation: family`
    the floor is the higher of that and the country's minimum for bringing family (fit-check filters.md, Family relocation);
    `pay: custom` → parse `pay_text` into `salary_floor_<code>` lines and confirm them in one line.
 3. `cv: build` → run career-autopilot-cv-builder; `cv: have` → ask for the file.

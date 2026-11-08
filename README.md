@@ -4,7 +4,7 @@ A Claude plugin that helps anyone look for work: an experienced professional, a 
 to work after years at home, someone who wants a few hours of side income, or a person changing fields. You set the
 situation, the field, the countries and whether the work is remote or onsite; the plugin adapts.
 
-It finds jobs, checks how well they fit, skips scams, prefills application forms in your own browser (you press Submit),
+It finds jobs, checks how well they fit, skips scams, prefills application forms in your own browser and submits only the ones you approve in chat,
 writes emails that sound like you (you press Send), follows replies in Gmail, makes a CV if you do not have one, and
 prepares you for interviews.
 
@@ -77,7 +77,7 @@ Chat is where you ask; the dashboard is where you look. Every button on the dash
 3. Dashboard, Start tab: click your answers, press **Simpan**, then **Salin**.
 4. Chat: paste the copied text and attach your CV (or ask Claude to make one). Claude finds matching jobs.
 5. Dashboard: new jobs, statuses and next actions appear by themselves.
-6. Dashboard: press **Apply** on a job card, paste in the chat. Claude fills in the form in your browser; you check it and press Submit.
+6. Dashboard: press **Apply** on a job card, paste in the chat. Claude fills in the form in your browser. Ready forms show under **Siap dikirim**: press **Kirim semua yang siap** (or reply "kirim 1, 2") and Claude presses Submit for those only. LinkedIn and similar platforms: you press Submit.
    Interview invite? Press **Interview prep** on the card and paste.
 
 Steps 5 and 6 repeat as new jobs come in.
@@ -86,7 +86,7 @@ Steps 5 and 6 repeat as new jobs come in.
 
 | Mode | For | What it does |
 |---|---|---|
-| `active` | actively looking | daily run: inbox sync, new jobs, forms prefilled up to Submit |
+| `active` | actively looking | daily run: inbox sync, new jobs, forms prefilled; matches ≥ 80 listed as "Siap dikirim" for your one-line go-ahead |
 | `watch` | employed, open to the right offer | weekly run: only very strong matches, no forms filled, a short digest |
 | `off` | not looking | nothing scheduled; commands still work on demand |
 
@@ -97,7 +97,8 @@ Steps 5 and 6 repeat as new jobs come in.
 | "find jobs" / "cari lowongan" / "cari kerja sampingan dari rumah" | ranked shortlist with match %, work mode, pay and reasons |
 | "check this job: <link>" | fit check with gaps, blockers, scam check and flags |
 | "ini penipuan bukan?" + a pasted WhatsApp/email offer | scam check with the reason, in plain words |
-| "apply to 1 and 3" | forms prefilled in the browser; you tick consents and submit |
+| "apply to 1 and 3" | forms prefilled in the browser |
+| "kirim 1, 2" / "kirim semua yang siap" | Claude submits exactly those prefilled forms after a last check |
 | "draft an email for this job" / "balas email HRD ini" | Gmail draft in your voice; sent only when you say so |
 | "check my application emails" | statuses updated in your dashboard, next actions, scams listed separately |
 | "buatkan CV" | CV made by interview, saved to your Drive if connected |
@@ -138,7 +139,7 @@ Segments: `plugins/career-autopilot/segments/`. Presets: `plugins/career-autopil
 
 ## What always stays with you
 
-Passwords and logins, consent and terms checkboxes, diversity questions, date of birth, home address, ID numbers, payments, the final Submit, and sending email.
+Passwords and logins, marketing and background-check boxes, diversity questions, date of birth, home address, ID numbers, payments, and sending email. Submit happens only for jobs you name in chat, never in an unattended run, and never on LinkedIn-style account platforms.
 
 ## Account safety on LinkedIn and similar platforms
 

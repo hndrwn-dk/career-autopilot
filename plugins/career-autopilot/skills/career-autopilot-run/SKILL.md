@@ -7,7 +7,8 @@ description: "Use when a scheduled Career Autopilot run starts, or the user says
 
 Runs unattended. Never ask questions mid-run: make the safe choice, note it, continue.
 Guardrails `${CLAUDE_PLUGIN_ROOT}/skills/career-autopilot-apply-assist/references/guardrails.md` apply in full.
-Turning on `active` mode approves searching and prefilling forms. It never approves Submit, sending email, or any guardrail item.
+Turning on `active` mode approves searching and prefilling forms. It never approves Submit, sending email, or any guardrail item:
+the run prepares a numbered "Siap dikirim" list, and the user approves it later in chat ("kirim 1, 2").
 
 ## 0. Load
 
@@ -32,6 +33,10 @@ Run career-autopilot-find-jobs without its final question. Account platforms onl
 List browser tabs. No browser reachable → leave jobs queued, say so in the summary.
 For each queued job follow career-autopilot-apply-assist steps 2–7, except: the mode is the approval; attach the CV if the tools allow, else note it; leave the tab open; never press Submit.
 Write the `jobs` document with status `ready`, `applied_on` empty, `next_action` naming the tab and what is left.
+Mark `ready_to_send: true` only when all hold: score ≥ `ready_send_min_match` (default 80); no flag about pay, visa, sponsorship or
+employer identity; every required field answered from Profile; the route is a company ATS or portal, not an account platform; the
+posting does not forbid AI help. Otherwise `ready_to_send: false` and `next_action` says what the user must do.
+Write `meta/ready`: `{"date": today, "ids": [ready_to_send job ids, best first]}`; the numbers in the summary follow this order.
 A form that cannot be filled: status `queued` with `next_action` "Isi manual" and the reason.
 
 Dashboard: keep `meta/run` current at every step and sync all rows touched in this run (career-autopilot-dashboard skill, Sync).
@@ -43,7 +48,10 @@ In Filters `language`. Leave out empty sections. No tool names.
 ```
 Career Autopilot · <date> · <mode>
 
-Ready to submit (<n>) – open the browser, check each tab, tick consents, Submit
+Siap dikirim (<n>) – balas "kirim 1, 2" atau "kirim semua yang siap"; Claude menekan Submit hanya untuk nomor itu
+1. <Company> · <Role> · <City> · <match>% · <answers worth checking, e.g. expected salary>
+
+Perlu Anda (<n>) – buka tab, lengkapi, lalu Submit sendiri
 - <Company> · <Role> · <City> · <match>% · <what is left>
 
 Worth a look (<n>)                      ← watch mode

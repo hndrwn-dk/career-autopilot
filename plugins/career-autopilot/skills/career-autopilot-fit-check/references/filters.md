@@ -36,6 +36,7 @@
 | employment_types | permanent, contract (direct), part-time, freelance / project, casual / gig, internship, graduate programme, returnship, rotation | allowed models |
 | min_contract_months | 12 | shorter contracts get flagged |
 | min_match | 75 | apply threshold in active mode |
+| ready_send_min_match | 80 | from this score a prefilled form can go on the "Siap dikirim" list, sent only after the user's go-ahead in chat |
 | watch_min_match | 88 | threshold in watch mode |
 | weights | must_have:45, years:15, stack:20, certs:10, domain:5, scope:5 | scoring |
 | max_applications_per_day | 10 | pacing in active mode |
@@ -75,6 +76,20 @@ For a work-pass holder the EP or S Pass figure is a hard floor: an employer cann
 The minimum wage floor does not apply to an internship: interns usually get an allowance (Indonesia: uang saku under the
 pemagangan rules), not a wage. Do not exclude an internship on pay; ask the user once for a minimum allowance or "tidak
 masalah", and flag unpaid internships (segment fresh-graduate, Checks).
+
+## Figures shown on the dashboard's Start tab
+
+The Start tab (`career-autopilot-dashboard/assets/dashboard.html`, `FLOORS` and `SHORT`) shows these defaults before the user saves.
+Keep both places in step; check them once per month.
+
+| Country | Default | Source |
+|---|---|---|
+| Indonesia | UMP/UMK of the work location, e.g. DKI Jakarta IDR 5,729,876/month (2026); part time ÷ 126 per hour | Kemnaker / provincial decree; PP 36/2021 Pasal 16 |
+| Singapore | EP SGD 5,600/month; with family SGD 6,000 fixed (Dependant's Pass); locals SGD 1,800 (LQS) | MOM |
+| Malaysia | EP category III RM 5,000/month from 1 June 2026 (II RM 10,000, I RM 20,000); all categories may bring dependants | MOHA / MDEC |
+| Australia | AUD 79,423/year, Skills in Demand 482 Core Skills, from 1 July 2026; family on the same visa | Home Affairs |
+| Netherlands | EUR 5,942/month excl. holiday pay (highly skilled migrant 30+, also EU Blue Card), under 30 EUR 4,357 (2026) | IND |
+| Germany | EU Blue Card EUR 50,700/year; shortage occupations, IT and recent graduates EUR 45,934.20 (2026) | Make it in Germany |
 
 ## Other countries
 

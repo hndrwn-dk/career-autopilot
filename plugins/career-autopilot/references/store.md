@@ -31,10 +31,10 @@ List the user's artifacts whose title is `Career Autopilot` (default profile) or
 | Skip | `jobs/<id>` with status `skipped` or `scam` | `reason`, `date` |
 | Stories | `stories/<id>` | `title`, `situation`, `task`, `action`, `result`, `skills`, `source` |
 | Onboarding | `onboarding/answers` | written by the dashboard page |
-| Dashboard state | `meta/summary`, `meta/run` | see career-autopilot-dashboard |
+| Dashboard state | `meta/summary`, `meta/run`, `meta/ready` | see career-autopilot-dashboard; `meta/ready` = the numbered "Siap dikirim" list from the last run |
 
 `jobs/<id>` fields: `company`, `role`, `city`, `country`, `work_mode`, `pay`, `model`, `status`, `match`, `channel`,
-`link`, `job_id`, `applied_on`, `next_action`, `flags`, `reason`, `notes`, `source`, `date`, `updated`.
+`link`, `job_id`, `applied_on`, `next_action`, `flags`, `reason`, `notes`, `source`, `date`, `updated`, `ready_to_send`.
 `<id>` = `<company>-<role>` lowercased, every character outside `a-z0-9` replaced by `-`, collapsed, at most 120 characters.
 "Append a row to Applications/Skip" means: write that `jobs/<id>` document. "Already in Applications or Skip" means:
 a `jobs` document with that id or link exists.

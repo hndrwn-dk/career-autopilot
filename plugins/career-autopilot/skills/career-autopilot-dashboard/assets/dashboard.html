@@ -83,6 +83,9 @@ a{color:var(--teal)}
 .tablewrap{overflow-x:auto}
 .act{font:600 13px var(--fb);margin-top:8px;padding:6px 12px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer}
 .act.alt{background:var(--teal)}
+.sendall{border:2px solid var(--accent)}
+.sendall p{margin:4px 0 0}
+.sendall .act{font-size:15px;padding:10px 18px}
 .act:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
 .tabs{display:flex;gap:8px;flex-wrap:wrap}
 .tab{font:600 15px var(--fb);padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink2);cursor:pointer}
@@ -133,6 +136,7 @@ a{color:var(--teal)}
   <div class="run"><span class="dot" id="runDot"></span><span id="runText"></span></div>
 
   <section class="kpis" id="kpis"></section>
+  <section class="card sendall" id="sendAll" hidden></section>
 
   <section class="card">
     <h2 id="hPipeline"></h2>
@@ -180,7 +184,7 @@ a{color:var(--teal)}
       empty:"Nothing here yet.",noNext:"No actions waiting. Nice.",noPlat:"No account platforms used today.",paused:"paused until",
       loading:"Loading…",stale:"Can't reach the data right now; showing what was last loaded.",nodb:"This view can't load the dashboard data. Open it on claude.ai while signed in.",
       firstRun:"No data yet. In Claude, say “find jobs” or “update my dashboard”.",foot:"Updated by Claude each time Career Autopilot runs. Personal details (phone, email, salary) are never shown here.",
-      apply:"Apply",prep:"Interview prep",copied:"Copied. Paste it in the Claude chat.",cmdApply:"apply to ",cmdPrep:"interview prep for ",st:{worth_a_look:"Worth a look",queued:"Queued",ready:"Ready to submit",submitted:"Submitted",in_review:"In review",assessment:"Assessment",interview:"Interview",offer:"Offer",rejected:"Rejected",withdrawn:"Withdrawn",closed:"Closed",skipped:"Skipped",scam:"Scam"}},
+      apply:"Apply",prep:"Interview prep",copied:"Copied. Paste it in the Claude chat.",cmdApply:"apply to ",cmdPrep:"interview prep for ",send:"Send",sendAll:"Send all ready",cmdSend:"send ",cmdSendAll:"send all ready: ",sendH:"Ready to send",sendHint:"Forms are filled and checked. Copy, paste in the Claude chat, and Claude presses Submit for these only. LinkedIn and similar platforms: you submit yourself.",st:{worth_a_look:"Worth a look",queued:"Queued",ready:"Ready to submit",submitted:"Submitted",in_review:"In review",assessment:"Assessment",interview:"Interview",offer:"Offer",rejected:"Rejected",withdrawn:"Withdrawn",closed:"Closed",skipped:"Skipped",scam:"Scam"}},
     id:{sub:"Dashboard pencarian kerja",mode:{active:"Aktif",watch:"Pantau",off:"Mati"},idle:"Diam",running:"Berjalan",lastRun:"Terakhir jalan",nextRun:"Jadwal berikutnya",never:"belum",
       k:{worth:"Layak dilihat",ready:"Siap submit",open:"Lamaran berjalan",interview:"Interview & tes",offer:"Offer",closed:"Selesai"},
       pipeline:"Alur lamaran",next:"Yang perlu Anda lakukan",platforms:"Keamanan platform hari ini",scams:"penipuan dilewati",skipped:"lowongan dilewati",
@@ -188,7 +192,7 @@ a{color:var(--teal)}
       empty:"Belum ada.",noNext:"Tidak ada yang menunggu. Mantap.",noPlat:"Belum ada platform akun yang dipakai hari ini.",paused:"dijeda sampai",
       loading:"Memuat…",stale:"Data belum bisa dijangkau; yang tampil adalah data terakhir.",nodb:"Tampilan ini tidak bisa memuat data dashboard. Buka di claude.ai dalam keadaan login.",
       firstRun:"Belum ada data. Di Claude, ketik “cari lowongan” atau “update dashboard saya”.",foot:"Diperbarui Claude setiap kali Career Autopilot berjalan. Data pribadi (HP, email, gaji) tidak pernah ditampilkan di sini.",
-      apply:"Apply",prep:"Persiapan interview",copied:"Tersalin. Tempel di chat Claude.",cmdApply:"apply ke ",cmdPrep:"persiapan interview ",st:{worth_a_look:"Layak dilihat",queued:"Antre",ready:"Siap submit",submitted:"Terkirim",in_review:"Ditinjau",assessment:"Tes",interview:"Interview",offer:"Offer",rejected:"Ditolak",withdrawn:"Dibatalkan",closed:"Ditutup",skipped:"Dilewati",scam:"Penipuan"}}
+      apply:"Apply",prep:"Persiapan interview",copied:"Tersalin. Tempel di chat Claude.",cmdApply:"apply ke ",cmdPrep:"persiapan interview ",send:"Kirim",sendAll:"Kirim semua yang siap",cmdSend:"kirim ",cmdSendAll:"kirim semua yang siap: ",sendH:"Siap dikirim",sendHint:"Form sudah terisi dan dicek. Salin, tempel di chat Claude, lalu Claude menekan Submit hanya untuk lowongan ini. LinkedIn dan platform sejenis: Anda yang Submit.",st:{worth_a_look:"Layak dilihat",queued:"Antre",ready:"Siap submit",submitted:"Terkirim",in_review:"Ditinjau",assessment:"Tes",interview:"Interview",offer:"Offer",rejected:"Ditolak",withdrawn:"Dibatalkan",closed:"Ditutup",skipped:"Dilewati",scam:"Penipuan"}}
   };
   var COLS=[["worth",["worth_a_look"]],["ready",["queued","ready"]],["open",["submitted","in_review"]],["interview",["assessment","interview"]],["offer",["offer"]]];
   var CLOSED=["rejected","withdrawn","closed"];
@@ -225,6 +229,14 @@ a{color:var(--teal)}
     function count(arr){return arr.reduce(function(n,k){return n+(by[k]?by[k].length:0)},0)}
     var k=[["worth",count(["worth_a_look"]),true],["ready",count(["queued","ready"]),true],["open",count(["submitted","in_review"])],["interview",count(["assessment","interview"])],["offer",count(["offer"])],["closed",count(CLOSED)]];
     $("kpis").innerHTML=k.map(function(x){return '<div class="kpi'+(x[2]&&x[1]?" hl":"")+'"><b>'+x[1]+'</b><span>'+esc(L.k[x[0]])+'</span></div>'}).join("");
+
+    var rs=jobs.filter(function(j){return j.status==="ready"&&j.ready_to_send===true}).sort(function(a,b){return num(b.match)-num(a.match)});
+    var sa=$("sendAll");
+    if(rs.length){
+      sa.hidden=false;
+      sa.innerHTML='<h2>'+esc(L.sendH)+' ('+rs.length+')</h2><ol>'+rs.map(function(j){return '<li>'+esc(j.company)+' · '+esc(j.role)+(j.match!=null&&j.match!==""?' · '+num(j.match)+'%':"")+'</li>'}).join("")+'</ol>'+
+        '<p class="note">'+esc(L.sendHint)+'</p><button class="act" data-cmd="'+esc(L.cmdSendAll+rs.map(function(j){return j._id}).join(", "))+'">'+esc(L.sendAll)+' ('+rs.length+')</button>';
+    }else{sa.hidden=true;sa.innerHTML=""}
 
     $("board").innerHTML=COLS.map(function(c){
       var list=[];c[1].forEach(function(st){if(by[st])list=list.concat(by[st])});
@@ -265,6 +277,7 @@ a{color:var(--teal)}
   function action(j){
     var k=j._id||"",lab=(j.company||"")+" · "+(j.role||"");
     if(j.status==="worth_a_look"||j.status==="queued")return '<button class="act" data-cmd="'+esc(L.cmdApply+lab+" ("+k+")")+'">'+esc(L.apply)+'</button>';
+    if(j.status==="ready"&&j.ready_to_send===true)return '<button class="act" data-cmd="'+esc(L.cmdSend+lab+" ("+k+")")+'">'+esc(L.send)+'</button>';
     if(j.status==="interview"||j.status==="assessment")return '<button class="act alt" data-cmd="'+esc(L.cmdPrep+lab+" ("+k+")")+'">'+esc(L.prep)+'</button>';
     return "";
   }
@@ -311,7 +324,7 @@ a{color:var(--teal)}
     id:{tabs:["Mulai","Dashboard","Perintah cepat"],step:"Langkah",of:"dari",back:"Kembali",next:"Lanjut",save:"Simpan",skip:"Lewati",
       saved:"Tersimpan. Kembali ke chat Claude, tempel pesan ini, dan lampirkan CV Anda kalau ada:",copy:"Salin",copied:"Tersalin. Tempel di chat Claude.",msg:"Lanjutkan setup Career Autopilot dari dashboard",
       redo:"Ubah jawaban",mine:"Jawaban saya: ",cantSave:"Belum bisa menyimpan dari tampilan ini. Buka halaman ini di claude.ai dalam keadaan login, atau jawab pertanyaannya langsung di chat Claude.",
-      other:"Lainnya (tulis sendiri)",area:"Kota atau area (opsional)",hours:"Berapa jam per minggu?",payText:"Contoh: IDR 6 juta per bulan, SGD 5.000 per bulan",hu:"jam/minggu",rot:"Pola rotasi, contoh: 14/14, 28/28",fam:"Siapa yang ikut? Contoh: istri dan anak (tanpa jumlah atau usia)",
+      other:"Lainnya (tulis sendiri)",area:"Kota atau area (opsional)",hours:"Berapa jam per minggu?",payText:"Contoh: IDR 6 juta per bulan, SGD 5.000 per bulan",floorsH:"Gaji minimum yang disarankan untuk negara pilihan Anda:",floorsHint:"Setuju? Tekan Lanjut. Mau angka lain? Tekan Ubah angka.",edit:"Ubah angka",hu:"jam/minggu",rot:"Pola rotasi, contoh: 14/14, 28/28",fam:"Siapa yang ikut? Contoh: istri dan anak (tanpa jumlah atau usia)",
       review:"Cek lagi pilihan Anda",quickH:"Perintah cepat",quickHint:"Klik tombol untuk menyalin perintahnya, lalu tempel di chat Claude.",
       steps:[
         {k:"language",q:"Bahasa yang Anda pakai?",o:[["id","Bahasa Indonesia"],["en","English"]]},
@@ -329,7 +342,7 @@ a{color:var(--teal)}
     en:{tabs:["Start","Dashboard","Quick commands"],step:"Step",of:"of",back:"Back",next:"Next",save:"Save",skip:"Skip",
       saved:"Saved. Go back to the Claude chat, paste this message, and attach your CV if you have one:",copy:"Copy",copied:"Copied. Paste it in the Claude chat.",msg:"Continue Career Autopilot setup from the dashboard",
       redo:"Change answers",mine:"My answers: ",cantSave:"This view can't save yet. Open this page on claude.ai while signed in, or answer the questions in the Claude chat.",
-      other:"Other (type it)",area:"City or area (optional)",hours:"How many hours per week?",payText:"For example: SGD 5,000 per month, IDR 6 million per month",hu:"h/week",rot:"Rotation pattern, e.g. 14/14, 28/28",fam:"Who comes along? e.g. spouse and children (no number or ages)",
+      other:"Other (type it)",area:"City or area (optional)",hours:"How many hours per week?",payText:"For example: SGD 5,000 per month, IDR 6 million per month",floorsH:"Suggested minimum pay for the countries you picked:",floorsHint:"Agree? Press Next. Want other figures? Press Change figures.",edit:"Change figures",hu:"h/week",rot:"Rotation pattern, e.g. 14/14, 28/28",fam:"Who comes along? e.g. spouse and children (no number or ages)",
       review:"Check your answers",quickH:"Quick commands",quickHint:"Click a button to copy the command, then paste it in the Claude chat.",
       steps:[
         {k:"language",q:"Which language?",o:[["id","Bahasa Indonesia"],["en","English"]]},
@@ -346,6 +359,42 @@ a{color:var(--teal)}
       quick:[["find jobs","Find jobs","Jobs that match you"],["check my application emails","Check replies","Replies from companies"],["make me a CV","Make a CV","Through a short Q&A"],["is this a scam? ","Scam check","Paste the offer after it"],["interview prep","Interview prep","Likely questions and practice"],["update my dashboard","Refresh dashboard","Sync the latest data"]]}
   };
   var A={},i=0,dir=1,db=null,canWrite=true,saved=false;
+  var FLOORS={
+    id:{"Indonesia":["UMP/UMK kota tempat kerja, mis. Jakarta Rp 5.729.876/bulan (2026)","Paruh waktu: upah sebulan ÷ 126 per jam (Jakarta ± Rp 45.475/jam)"],
+      "Singapore":["SGD 5.600/bulan (syarat Employment Pass); warga/PR: SGD 1.800","Bawa keluarga: gaji tetap minimal SGD 6.000/bulan (Dependant's Pass)"],
+      "Malaysia":["RM 5.000/bulan (Employment Pass kategori III, sejak 1 Juni 2026); warga lokal: upah minimum nasional","Keluarga boleh ikut di semua kategori Employment Pass"],
+      "Australia":["AUD 79.423/tahun (visa kerja 482, sejak 1 Juli 2026)","Keluarga boleh ikut di visa yang sama"],
+      "Japan":["Upah minimum prefektur; visa kerja: gaji setara pekerja Jepang di posisi yang sama",""],
+      "Middle East":["Tidak ada standar tunggal; dicek per negara saat ada lowongan","Visa keluarga punya syarat gaji sendiri per negara"],
+      "Europe":["Belanda EUR 5.942/bulan (usia 30+); Jerman EUR 50.700/tahun (Blue Card; IT EUR 45.934); negara lain dicek per lowongan","Keluarga boleh ikut dengan izin kerja tersebut"],
+      "US/Canada":["Upah minimum setempat; visa kerja: gaji standar jabatan (prevailing/median wage), dicek per lowongan",""],
+      "Worldwide":["Tidak ada standar resmi; usulan USD 3.000/bulan, ubah sesuai keinginan",""]},
+    en:{"Indonesia":["Local UMP/UMK minimum wage, e.g. Jakarta IDR 5,729,876/month (2026)","Part time: monthly wage ÷ 126 per hour (Jakarta ≈ IDR 45,475/hour)"],
+      "Singapore":["SGD 5,600/month (Employment Pass); citizens/PR: SGD 1,800","With family: fixed salary of at least SGD 6,000/month (Dependant's Pass)"],
+      "Malaysia":["RM 5,000/month (Employment Pass category III, from 1 June 2026); locals: national minimum wage","Family can join in every Employment Pass category"],
+      "Australia":["AUD 79,423/year (482 work visa, from 1 July 2026)","Family can be on the same visa"],
+      "Japan":["Prefecture minimum wage; work visa: pay equal to a Japanese worker in the same role",""],
+      "Middle East":["No single standard; checked per country when a job comes up","Family visas have their own salary minimum per country"],
+      "Europe":["Netherlands EUR 5,942/month (age 30+); Germany EUR 50,700/year (Blue Card; IT EUR 45,934); other countries per job","Family can join on that permit"],
+      "US/Canada":["Local minimum wage; work visa: the role's prevailing/median wage, checked per job",""],
+      "Worldwide":["No official standard; suggested USD 3,000/month, change as you like",""]}};
+  var SHORT={id:{"Indonesia":["Rp 5.729.876/bulan","Rp 45.475/jam"],"Singapore":["SGD 5.600/bulan","SGD 6.000/bulan"],"Malaysia":["RM 5.000/bulan"],"Australia":["AUD 79.423/tahun"],"Europe":["EUR 5.942/bulan (Belanda), EUR 50.700/tahun (Jerman)"],"Worldwide":["USD 3.000/bulan"]},
+    en:{"Indonesia":["IDR 5,729,876/month","IDR 45,475/hour"],"Singapore":["SGD 5,600/month","SGD 6,000/month"],"Malaysia":["RM 5,000/month"],"Australia":["AUD 79,423/year"],"Europe":["EUR 5,942/month (Netherlands), EUR 50,700/year (Germany)"],"Worldwide":["USD 3,000/month"]}};
+  function cname(c){var st=L().steps.filter(function(x){return x.k==="countries"})[0];var o=st?st.o.filter(function(p){return p[0]===c})[0]:null;return o?o[1]:c}
+  function shortText(){
+    var t=SHORT[A.language||lang]||SHORT.en;
+    return (Array.isArray(A.countries)?A.countries:[]).map(function(c){var f=t[c];if(!f)return cname(c)+": ";
+      var v=(c==="Indonesia"&&A.employment==="part-time")?f[1]:(c==="Singapore"&&A.move==="family")?f[1]:f[0];return cname(c)+": "+v}).join("; ");
+  }
+  function floorLines(){
+    var t=FLOORS[A.language||lang]||FLOORS.en,out=[];
+    (Array.isArray(A.countries)?A.countries:[]).forEach(function(c){var f=t[c];if(!f)return;var line=f[0];
+      if(c==="Indonesia"&&A.employment==="part-time")line=f[1];
+      else if(A.move==="family"&&f[1])line+=" · "+f[1];
+      out.push([cname(c),line])});
+    if((A.countries_other||"").trim())out.push([A.countries_other.trim(),(A.language||lang)==="id"?"dicek dari situs resmi negara itu":"checked on that country's official site"]);
+    return out;
+  }
   function L(){return W[A.language||lang]}
   function toast(m){var t=$("toast");t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(function(){t.hidden=true},2500)}
   function copy(text){
@@ -427,6 +476,8 @@ a{color:var(--teal)}
     if(s.hours&&cur==="part-time")html+='<input type="number" min="1" max="60" id="hrs" placeholder="'+esc(l.hours)+'" value="'+esc(A.hours_per_week||"")+'">';
     if(s.rot&&cur==="rotation")html+='<input type="text" id="rot" placeholder="'+esc(l.rot)+'" value="'+esc(A.rotation||"")+'">';
     if(s.fam&&cur==="family")html+='<input type="text" id="fam" placeholder="'+esc(l.fam)+'" value="'+esc(A.family_text||"")+'">';
+    if(s.payText&&cur==="official"){var fl=floorLines();
+      if(fl.length)html+='<div class="card" style="margin-top:12px"><p><b>'+esc(l.floorsH)+'</b></p><ul>'+fl.map(function(x){return '<li><b>'+esc(x[0])+'</b>: '+esc(x[1])+'</li>'}).join("")+'</ul><p class="hint">'+esc(l.floorsHint)+'</p><button class="btn ghost" id="editFloors">'+esc(l.edit)+'</button></div>';}
     if(s.payText&&cur==="custom")html+='<input type="text" id="payt" placeholder="'+esc(l.payText)+'" value="'+esc(A.pay_text||"")+'">';
     html+='<div class="navrow"><button class="btn ghost" id="bk"'+(i===0?" disabled":"")+'>'+esc(l.back)+'</button><button class="btn" id="nx"'+(valid(s)?"":" disabled")+'>'+esc(l.next)+'</button></div>';
     w.innerHTML=html;
@@ -437,7 +488,8 @@ a{color:var(--teal)}
       render();
     })});
     function bind(id,key){var e=$(id);if(!e)return;e.addEventListener("input",function(){A[key]=e.value;$("nx").disabled=!valid(s)})}
-    bind("oth",s.k+"_other");bind("area","area");bind("hrs","hours_per_week");bind("payt","pay_text");bind("rot","rotation");bind("fam","family_text");
+    bind("oth",s.k+"_other");bind("area","area");bind("hrs","hours_per_week");bind("payt","pay_text");
+    var ef=$("editFloors");if(ef)ef.onclick=function(){A.pay="custom";A.pay_text=shortText();render()};bind("rot","rotation");bind("fam","family_text");
     $("bk").onclick=function(){if(i>0){dir=-1;i--;render()}};
     $("nx").onclick=function(){if(valid(s)){dir=1;i++;render()}};
   }
