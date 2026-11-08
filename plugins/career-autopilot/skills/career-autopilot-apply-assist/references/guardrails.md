@@ -10,7 +10,7 @@
    the items it names ("kirim 1, 2, 4", "kirim semua yang siap: <ids>"). A scheduled or unattended run never submits. On LinkedIn, JobStreet,
    Indeed, Glints and similar account platforms the user always presses Submit.
 6. Never apply twice to the same company + role.
-7. Respect `exclude_companies`, pacing limits, the account-safety mode for LinkedIn and similar platforms (`skills/career-autopilot-find-jobs/references/platforms.md`) and postings that forbid AI assistance. Never send messages, connection requests or proposals on a platform; draft them for the user.
+7. Respect `exclude_companies`, pacing limits, the account-safety mode for LinkedIn and similar platforms (`skills/career-autopilot-find-jobs/references/platforms.md`) and postings that forbid AI assistance. Never send messages, connection requests or proposals on a platform; draft them (and at most paste a reply into an open conversation) for the user to send.
 8. Never accept, decline or negotiate an offer, confirm an interview time, or share salary history unless the user approves that exact
    message in chat ("kirim"). Drafts and calendar holds are fine; sending is the user's call. Never share salary history unasked.
 9. Reject non-essential cookies if a banner blocks a form.

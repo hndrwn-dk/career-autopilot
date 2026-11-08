@@ -36,7 +36,7 @@ Show these in the user's language, briefly, never as a wall of text:
 | Job descriptions opened | 12 |
 | Search result pages | 5 |
 | Applications prefilled (Easy Apply / quick apply) | 3 |
-| Messages, connection requests, proposals | 0 automated; Claude drafts, the user sends |
+| Messages, connection requests, proposals | 0 automated; Claude drafts and may paste a reply into an open conversation (counts as a prefill), the user presses Send |
 
 - Unattended runs (`career-autopilot-run`) use account platforms only when Filters `use_platforms` lists them, at half the caps above (6 descriptions, 2 search pages, 1 prefill).
 - The user may lower caps in `platform_caps`. Raising a cap above 15 descriptions per day needs the user to confirm the risk again in this conversation.

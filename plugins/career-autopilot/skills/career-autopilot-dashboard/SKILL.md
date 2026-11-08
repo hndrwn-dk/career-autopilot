@@ -39,7 +39,7 @@ The page shows only `jobs`, `meta/summary` and `meta/run` (full document list: s
 
 | Path | Fields the page reads |
 |---|---|
-| `jobs/<id>` | `company`, `role`, `city`, `country`, `work_mode`, `pay` (as posted, short), `model`, `status`, `match` (0–100), `channel`, `link` (https posting URL), `next_action`, `flags` (up to 3 short strings), `reason` (skip/scam reason, short), `ready_to_send`, `invite_pending`, `follow_up_ready`, `reached_interview`, `reached_offer` (true/false), `updated` (ISO time with offset) |
+| `jobs/<id>` | `company`, `role`, `city`, `country`, `work_mode`, `pay` (as posted, short), `model`, `status`, `match` (0–100), `channel`, `link` (https posting URL), `next_action`, `flags` (up to 3 short strings), `reason` (skip/scam reason, short), `ready_to_send`, `approach_pending`, `invite_pending`, `follow_up_ready`, `reached_interview`, `reached_offer` (true/false), `updated` (ISO time with offset) |
 | `meta/summary` | `profile`, `mode`, `segment`, `language` (`id`/`en`), `onboarded`, `last_run`, `next_run`, `scams_skipped_total`, `skipped_total`, `platforms` (`{"<name>":{"used":n,"cap":n,"paused_until":"ISO or empty"}}`, today only) |
 | `meta/run` | `state` (`running`/`idle`), `activity` (one short line), `updated` |
 
@@ -53,7 +53,7 @@ and `settings/filters`, which only the owner can read. `pay` is only what the po
 
 ## Tabs on the page
 
-Mulai (onboarding), Dashboard (pipeline, funnel line, buttons: Apply, Kirim, Balas undangan, Persiapan interview, Cek offer, Kirim
+Mulai (onboarding), Dashboard (pipeline, funnel line, buttons: Apply, Balas rekruter, Kirim, Balas undangan, Persiapan interview, Cek offer, Kirim
 follow-up), Perintah cepat, Kalkulator (take-home and living cost for any listed country, any time), Pengaturan (owner-only view of
 Filters and Profile, with "ubah pengaturan saya" and "hapus semua data saya" buttons). Every button copies a command to paste in Claude.
 

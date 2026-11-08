@@ -104,6 +104,7 @@ Steps 5 and 6 repeat as new jobs come in.
 | "check my application emails" | statuses updated in your dashboard, next actions, scams listed separately |
 | "buatkan CV" | CV made by interview, saved to your Drive if connected |
 | "prep me for the <company> interview" | interview brief and mock interview |
+| "balas rekruter …" (dashboard button) or a pasted LinkedIn/WhatsApp message | scam and fit check, then a reply in your voice (interested / questions first / not now); CV goes by Gmail on your "kirim", or the reply is pasted into the LinkedIn chat for you to attach the CV and press Send |
 | "balas undangan interview …" (dashboard button) | 2–3 free slots from your calendar, a reply draft and calendar holds; sent when you say "kirim" |
 | "cek offer" + the offer text | pay breakdown, visa thresholds, take-home and what is left after living costs, points to negotiate, accept/ask/decline drafts |
 | "hitung gaji bersih Singapura 8000" | take-home pay and what is left; also on the dashboard's Kalkulator tab |
