@@ -139,10 +139,27 @@ posting's city when a job comes up.
 
 In career-autopilot-fit-check, per posting abroad:
 1. Living cost for the posting's city and household (rent for 1 or 3 bedrooms, living costs, school when children come and local school is not open to them).
-2. Take-home pay from the posted salary with the country's official tax calculator or rates (e.g. IRAS, ATO, Belastingdienst; note special
-   regimes such as the Dutch 30% ruling only when the posting or user mentions them).
+2. Take-home pay from the posted salary with the rules in "Tax and take-home pay" below (other countries: the official calculator); note
+   special regimes such as the Dutch 30% ruling only when the posting or user mentions them.
 3. Report one line "Biaya hidup: gaji bersih ± X, kebutuhan ± Y → sisa ± Z / kurang ± Z". Shortfall → flag "Gaji tidak cukup untuk biaya hidup
    <keluarga|sendiri>". Never exclude on this alone; the user decides. No posted pay → say the gross pay needed instead.
+
+# Tax and take-home pay (migrant workers)
+
+The Start tab has a calculator (`TAX` in dashboard.html; keep in step): gross pay per month → income tax → other compulsory
+deductions → take-home → living cost → what is left, plus the gross pay needed to cover living costs. Rules used, 2026, tax resident:
+
+| Country | Rule | Source |
+|---|---|---|
+| Singapore | Resident rates from YA2024 (0% to SGD 20,000; 2%, 3.5%, 7%, 11.5%, 15%, 18%, 19%, 19.5%, 20%, 22%, 23%, 24%); earned income relief SGD 1,000; foreigners pay no CPF. Non-resident (under 183 days): higher of 15% flat or resident rates, no reliefs. No rebate for YA2026. | IRAS |
+| Australia | 2026–27 resident rates: 0% to AUD 18,200, 15% to 45,000, 30% to 135,000, 37% to 190,000, 45% above; Medicare levy 2% (some temporary visa holders can claim an exemption). Superannuation is paid by the employer on top of salary unless the offer says "including super". | ATO |
+| Netherlands | 2026 Box 1: 35.75% to EUR 38,883, 37.56% to 78,426, 49.5% above; general tax credit max EUR 3,115 (phases out 6.398% above 29,736); labour credit max EUR 5,685 (phases out 6.51% above 45,592). 30% ruling (when granted): 30% of salary tax-free in 2026, 27% from 2027. Health insurance (≈ EUR 157 per adult a month) is a living cost, not a tax. | Belastingdienst / Rijksoverheid |
+| Malaysia | Resident rates (0% to RM 5,000; 1%, 3%, 6%, 11%, 19%, 25%, 26%, 28%, 30%); individual relief RM 9,000; EPF 2% employee for foreigners since Oct 2025 (deductible up to RM 4,000); RM 400 rebate up to RM 35,000 chargeable. Non-resident (under 182 days): 30% flat. | LHDN / KWSP |
+| Germany and others | Not in the calculator (Germany adds about 20% social contributions to wage tax). Use the country's official calculator per job. | — |
+
+Indonesian citizens living abroad more than 183 days are usually no longer Indonesian tax residents; tell the user to confirm with DJP,
+never decide it for them. In career-autopilot-fit-check use the same rules for the "Biaya hidup" line; first-year non-resident rates
+can be higher: say so when the start date makes it likely.
 
 # Rotation and offshore work (when `employment_types` has rotation)
 
