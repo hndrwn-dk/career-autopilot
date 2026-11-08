@@ -38,6 +38,15 @@ Claude Code:
 /plugin install career-autopilot --marketplace hndrwn-dk/career-autopilot
 ```
 
+## Enable the browser (for filling in forms)
+
+Searching, fit checks, scam checks and email drafts work without a browser. Prefilling application forms needs one of these:
+
+- **Built-in browser** in the Claude desktop app: nothing to install; allow each job site when asked. It is rolling out gradually.
+- **Claude in Chrome**: install it from the Chrome Web Store ("Add to Chrome"), sign in with the same Claude account and pin it. Then in the Claude desktop app open **Settings → Connectors → Claude in Chrome → Configure** and turn it on. Desktop Google Chrome only.
+
+Keep the browser (and, for scheduled `active` runs, the Claude desktop app) open while Claude works, and sign in to job sites yourself.
+
 ## First run
 
 Quick start: say **"mulai cari kerja"** and answer three questions (what work, where or remote, CV or no CV). Claude shows matching jobs right away and asks for anything else only when it matters.
