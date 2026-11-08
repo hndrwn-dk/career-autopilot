@@ -9,7 +9,7 @@
       "name": "career-autopilot",
       "source": "./plugins/career-autopilot",
       "description": "Job search help for anyone: professionals, fresh graduates, returners, side income and career switchers, in any field, any country, remote or onsite. Finds and scores jobs, skips scams, prefills applications for you to submit, writes emails in your voice, builds a CV, tracks replies and prepares interviews.",
-      "version": "0.7.1",
+      "version": "0.7.2",
       "category": "Jobs & career",
       "tags": [
         "jobs",

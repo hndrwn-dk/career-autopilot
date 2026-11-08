@@ -24,7 +24,7 @@ The user should be able to start in under two minutes by clicking, not typing. D
 
 **When the user comes back** with the pasted text ("Lanjutkan setup Career Autopilot dari dashboard" plus "Jawaban saya: …"),
 or just "sudah" / "done": apply the answers (career-autopilot-dashboard, Onboarding answers), then continue at
-"After onboarding" below.
+"After onboarding" below. A CV attached to the same message → run career-autopilot-profile-builder on it right away.
 
 **Chat fallback questions** (only in case 4). Ask three things in one friendly message:
 1. What work they are looking for (any words: "admin", "jaga toko", "kerja dari rumah", "SRE").

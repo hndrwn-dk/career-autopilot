@@ -81,6 +81,9 @@ a{color:var(--teal)}
 .note{font-size:13px;color:var(--muted)}
 .banner{background:var(--warn-soft);color:var(--warn);border-radius:10px;padding:10px 14px;font-size:14px}
 .tablewrap{overflow-x:auto}
+.act{font:600 13px var(--fb);margin-top:8px;padding:6px 12px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer}
+.act.alt{background:var(--teal)}
+.act:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
 .tabs{display:flex;gap:8px;flex-wrap:wrap}
 .tab{font:600 15px var(--fb);padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink2);cursor:pointer}
 .tab[aria-selected=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
@@ -177,7 +180,7 @@ a{color:var(--teal)}
       empty:"Nothing here yet.",noNext:"No actions waiting. Nice.",noPlat:"No account platforms used today.",paused:"paused until",
       loading:"Loading…",stale:"Can't reach the data right now; showing what was last loaded.",nodb:"This view can't load the dashboard data. Open it on claude.ai while signed in.",
       firstRun:"No data yet. In Claude, say “find jobs” or “update my dashboard”.",foot:"Updated by Claude each time Career Autopilot runs. Personal details (phone, email, salary) are never shown here.",
-      st:{worth_a_look:"Worth a look",queued:"Queued",ready:"Ready to submit",submitted:"Submitted",in_review:"In review",assessment:"Assessment",interview:"Interview",offer:"Offer",rejected:"Rejected",withdrawn:"Withdrawn",closed:"Closed",skipped:"Skipped",scam:"Scam"}},
+      apply:"Apply",prep:"Interview prep",copied:"Copied. Paste it in the Claude chat.",cmdApply:"apply to ",cmdPrep:"interview prep for ",st:{worth_a_look:"Worth a look",queued:"Queued",ready:"Ready to submit",submitted:"Submitted",in_review:"In review",assessment:"Assessment",interview:"Interview",offer:"Offer",rejected:"Rejected",withdrawn:"Withdrawn",closed:"Closed",skipped:"Skipped",scam:"Scam"}},
     id:{sub:"Dashboard pencarian kerja",mode:{active:"Aktif",watch:"Pantau",off:"Mati"},idle:"Diam",running:"Berjalan",lastRun:"Terakhir jalan",nextRun:"Jadwal berikutnya",never:"belum",
       k:{worth:"Layak dilihat",ready:"Siap submit",open:"Lamaran berjalan",interview:"Interview & tes",offer:"Offer",closed:"Selesai"},
       pipeline:"Alur lamaran",next:"Yang perlu Anda lakukan",platforms:"Keamanan platform hari ini",scams:"penipuan dilewati",skipped:"lowongan dilewati",
@@ -185,7 +188,7 @@ a{color:var(--teal)}
       empty:"Belum ada.",noNext:"Tidak ada yang menunggu. Mantap.",noPlat:"Belum ada platform akun yang dipakai hari ini.",paused:"dijeda sampai",
       loading:"Memuat…",stale:"Data belum bisa dijangkau; yang tampil adalah data terakhir.",nodb:"Tampilan ini tidak bisa memuat data dashboard. Buka di claude.ai dalam keadaan login.",
       firstRun:"Belum ada data. Di Claude, ketik “cari lowongan” atau “update dashboard saya”.",foot:"Diperbarui Claude setiap kali Career Autopilot berjalan. Data pribadi (HP, email, gaji) tidak pernah ditampilkan di sini.",
-      st:{worth_a_look:"Layak dilihat",queued:"Antre",ready:"Siap submit",submitted:"Terkirim",in_review:"Ditinjau",assessment:"Tes",interview:"Interview",offer:"Offer",rejected:"Ditolak",withdrawn:"Dibatalkan",closed:"Ditutup",skipped:"Dilewati",scam:"Penipuan"}}
+      apply:"Apply",prep:"Persiapan interview",copied:"Tersalin. Tempel di chat Claude.",cmdApply:"apply ke ",cmdPrep:"persiapan interview ",st:{worth_a_look:"Layak dilihat",queued:"Antre",ready:"Siap submit",submitted:"Terkirim",in_review:"Ditinjau",assessment:"Tes",interview:"Interview",offer:"Offer",rejected:"Ditolak",withdrawn:"Dibatalkan",closed:"Ditutup",skipped:"Dilewati",scam:"Penipuan"}}
   };
   var COLS=[["worth",["worth_a_look"]],["ready",["queued","ready"]],["open",["submitted","in_review"]],["interview",["assessment","interview"]],["offer",["offer"]]];
   var CLOSED=["rejected","withdrawn","closed"];
@@ -256,16 +259,28 @@ a{color:var(--teal)}
         '<td>'+esc([j.city,j.country].filter(Boolean).join(", "))+'<br><span class="note">'+esc(j.work_mode||"")+(j.pay?" · "+esc(j.pay):"")+'</span></td>'+
         '<td>'+(j.match!=null&&j.match!==""?'<span class="match">'+num(j.match)+'%</span>':"")+'</td>'+
         '<td><span class="st '+esc(j.status)+'">'+esc(L.st[j.status]||j.status)+'</span>'+(j.reason?'<br><span class="note">'+esc(j.reason)+'</span>':"")+'</td>'+
-        '<td>'+esc(j.next_action||"")+'</td></tr>';
+        '<td>'+esc(j.next_action||"")+(action(j)?'<br>'+action(j):"")+'</td></tr>';
     }).join(""):'<tr><td colspan="5" class="empty">'+esc(state.loaded&&!jobs.length?L.firstRun:L.empty)+'</td></tr>';
+  }
+  function action(j){
+    var k=j._id||"",lab=(j.company||"")+" · "+(j.role||"");
+    if(j.status==="worth_a_look"||j.status==="queued")return '<button class="act" data-cmd="'+esc(L.cmdApply+lab+" ("+k+")")+'">'+esc(L.apply)+'</button>';
+    if(j.status==="interview"||j.status==="assessment")return '<button class="act alt" data-cmd="'+esc(L.cmdPrep+lab+" ("+k+")")+'">'+esc(L.prep)+'</button>';
+    return "";
   }
   function card(j){
     var u=safeUrl(j.link);
     return '<div class="job"><div class="co">'+(u?'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(j.company)+'</a>':esc(j.company))+'</div>'+
       '<div class="ro">'+esc(j.role)+'</div><div class="meta">'+(j.match!=null&&j.match!==""?'<span class="match">'+num(j.match)+'%</span>':"")+
       '<span>'+esc([j.city,j.work_mode].filter(Boolean).join(" · "))+'</span>'+
-      (Array.isArray(j.flags)?j.flags.slice(0,2).map(function(f){return '<span class="flag">'+esc(f)+'</span>'}).join(""):"")+'</div></div>';
+      (Array.isArray(j.flags)?j.flags.slice(0,2).map(function(f){return '<span class="flag">'+esc(f)+'</span>'}).join(""):"")+'</div>'+action(j)+'</div>';
   }
+  document.addEventListener("click",function(e){
+    var b=e.target.closest?e.target.closest(".act"):null;if(!b)return;
+    var cmd=b.getAttribute("data-cmd");
+    function done(){var t=document.getElementById("toast");if(!t)return;t.textContent=L.copied;t.hidden=false;clearTimeout(done.h);done.h=setTimeout(function(){t.hidden=true},2500)}
+    try{navigator.clipboard.writeText(cmd).then(done,function(){var t=document.getElementById("toast");if(t){t.textContent=cmd;t.hidden=false}})}catch(err){var t2=document.getElementById("toast");if(t2){t2.textContent=cmd;t2.hidden=false}}
+  });
   $("q").addEventListener("input",render);
   $("fStatus").addEventListener("change",render);
   render();
@@ -294,7 +309,7 @@ a{color:var(--teal)}
   var lang=(navigator.language||"").toLowerCase().indexOf("id")===0?"id":"en";
   var W={
     id:{tabs:["Mulai","Dashboard","Perintah cepat"],step:"Langkah",of:"dari",back:"Kembali",next:"Lanjut",save:"Simpan",skip:"Lewati",
-      saved:"Tersimpan. Kembali ke chat Claude, lalu kirim pesan ini:",copy:"Salin",copied:"Tersalin. Tempel di chat Claude.",msg:"Lanjutkan setup Career Autopilot dari dashboard",
+      saved:"Tersimpan. Kembali ke chat Claude, tempel pesan ini, dan lampirkan CV Anda kalau ada:",copy:"Salin",copied:"Tersalin. Tempel di chat Claude.",msg:"Lanjutkan setup Career Autopilot dari dashboard",
       redo:"Ubah jawaban",mine:"Jawaban saya: ",cantSave:"Belum bisa menyimpan dari tampilan ini. Buka halaman ini di claude.ai dalam keadaan login, atau jawab pertanyaannya langsung di chat Claude.",
       other:"Lainnya (tulis sendiri)",area:"Kota atau area (opsional)",hours:"Berapa jam per minggu?",payText:"Contoh: IDR 6 juta per bulan, SGD 5.000 per bulan",
       review:"Cek lagi pilihan Anda",quickH:"Perintah cepat",quickHint:"Klik tombol untuk menyalin perintahnya, lalu tempel di chat Claude.",
@@ -311,7 +326,7 @@ a{color:var(--teal)}
       ],
       quick:[["cari lowongan","Cari lowongan","Daftar lowongan yang cocok untuk Anda"],["cek email lamaran","Cek balasan","Lihat balasan dari perusahaan"],["buatkan CV","Buatkan CV","Lewat tanya-jawab singkat"],["ini penipuan bukan? ","Cek penipuan","Tempel pesan tawaran setelahnya"],["persiapan interview","Persiapan interview","Perkiraan pertanyaan dan latihan"],["update dashboard saya","Perbarui dashboard","Sinkronkan data terbaru"]]},
     en:{tabs:["Start","Dashboard","Quick commands"],step:"Step",of:"of",back:"Back",next:"Next",save:"Save",skip:"Skip",
-      saved:"Saved. Go back to the Claude chat and send this message:",copy:"Copy",copied:"Copied. Paste it in the Claude chat.",msg:"Continue Career Autopilot setup from the dashboard",
+      saved:"Saved. Go back to the Claude chat, paste this message, and attach your CV if you have one:",copy:"Copy",copied:"Copied. Paste it in the Claude chat.",msg:"Continue Career Autopilot setup from the dashboard",
       redo:"Change answers",mine:"My answers: ",cantSave:"This view can't save yet. Open this page on claude.ai while signed in, or answer the questions in the Claude chat.",
       other:"Other (type it)",area:"City or area (optional)",hours:"How many hours per week?",payText:"For example: SGD 5,000 per month, IDR 6 million per month",
       review:"Check your answers",quickH:"Quick commands",quickHint:"Click a button to copy the command, then paste it in the Claude chat.",

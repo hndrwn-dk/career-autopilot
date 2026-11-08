@@ -1,6 +1,6 @@
 ---
 name: career-autopilot-apply-assist
-description: "Use when the user says \"apply to this job\", \"apply to 1 and 3\", \"lanjut apply\", \"isi form lamaran\", \"fill the application\", or approves jobs from a shortlist. Prefills application forms in the user's browser from Profile and logs them; the user submits."
+description: "Use when the user says \"apply ke <company · role> (<id>)\" pasted from the dashboard, \"apply to this job\", \"apply to 1 and 3\", \"lanjut apply\", \"isi form lamaran\", \"fill the application\", or approves jobs from a shortlist. Prefills application forms in the user's browser from Profile and logs them; the user submits."
 ---
 
 # Prefill applications; the user submits
@@ -11,6 +11,7 @@ Data store: `${CLAUDE_PLUGIN_ROOT}/references/store.md` (Profile, Filters, Appli
 
 ## Per job
 
+0. Pasted from the dashboard ("apply ke Acme · Platform Engineer (acme-platform-engineer)") → the id in brackets is the `jobs` document: read it for the link and details. That paste counts as the user's approval for this job.
 1. Confirm the job was approved in this conversation (or queued by an `active` autopilot run) and passes career-autopilot-fit-check.
 2. Check `Applications` for the same company + role or link. Already there → stop and say so. Run the scam check again on the apply page (a form asking for payment, bank or ID details → stop, skip, tell the user).
 3. Open the posting in a new tab. Note the route: company ATS, portal, an account platform (LinkedIn Easy Apply, JobStreet, Indeed, Glints…), or email (→ career-autopilot-recruiter-email). Account platforms: follow `${CLAUDE_PLUGIN_ROOT}/skills/career-autopilot-find-jobs/references/platforms.md` (reminder, prefill cap, stop on warning signs).

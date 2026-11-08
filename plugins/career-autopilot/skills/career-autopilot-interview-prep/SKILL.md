@@ -1,6 +1,6 @@
 ---
 name: career-autopilot-interview-prep
-description: "Use when the user says \"prep me for the <company> interview\", \"interview prep\", \"persiapan interview\", \"what will they ask\", \"siapkan jawaban interview\", or when career-autopilot-inbox-sync finds an interview invite and the user accepts the offer to prepare."
+description: "Use when the user says \"persiapan interview <company · role> (<id>)\" pasted from the dashboard, \"prep me for the <company> interview\", \"interview prep\", \"persiapan interview\", \"what will they ask\", \"siapkan jawaban interview\", or when career-autopilot-inbox-sync finds an interview invite and the user accepts the offer to prepare."
 ---
 
 # Interview brief

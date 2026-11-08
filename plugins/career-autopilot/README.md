@@ -67,6 +67,20 @@ Full setup:
 4. Optional: paste 1–2 emails you wrote so drafts sound like you.
 5. Optional: fill `settings-template.txt` and paste it to set everything at once.
 
+## Workflow
+
+Chat is where you ask; the dashboard is where you look. Every button on the dashboard copies a command to paste into the chat.
+
+1. Once: install the plugin and connect Gmail (and Google Drive if you like).
+2. New chat: type **mulai cari kerja**. Claude replies with your dashboard link.
+3. Dashboard, Start tab: click your answers, press **Simpan**, then **Salin**.
+4. Chat: paste the copied text and attach your CV (or ask Claude to make one). Claude finds matching jobs.
+5. Dashboard: new jobs, statuses and next actions appear by themselves.
+6. Dashboard: press **Apply** on a job card, paste in the chat. Claude fills in the form in your browser; you check it and press Submit.
+   Interview invite? Press **Interview prep** on the card and paste.
+
+Steps 5 and 6 repeat as new jobs come in.
+
 ## Modes
 
 | Mode | For | What it does |
