@@ -39,6 +39,13 @@ Claude Code:
 /plugin install career-autopilot --marketplace hndrwn-dk/career-autopilot
 ```
 
+## Update
+
+Installed from the marketplace: **Customize → Plugins → Career autopilot → ⋯ → Check for updates → Update**. No need to remove and reinstall. Check that the version number changed.
+Installed from a `.plugin` file: upload the new file on the same page.
+
+Skills are all named `career-autopilot-…` (for example `/career-autopilot-setup`), so they never clash with other plugins.
+
 ## Enable the browser (for filling in forms)
 
 Searching, fit checks, scam checks and email drafts work without a browser. Prefilling application forms needs one of these:
