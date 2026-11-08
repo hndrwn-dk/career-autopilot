@@ -20,7 +20,7 @@ Data store: `${CLAUDE_PLUGIN_ROOT}/references/store.md`. Load the Artifact tools
 
 ## 1. Replies
 
-Run career-autopilot-inbox-sync. Flip `Ready to submit` rows to `Submitted` when a confirmation email matches.
+Run career-autopilot-inbox-sync. Set `ready` jobs to `submitted` when a confirmation email matches.
 
 ## 2. New roles
 
@@ -39,7 +39,7 @@ posting does not forbid AI help. Otherwise `ready_to_send: false` and `next_acti
 Write `meta/ready`: `{"date": today, "ids": [ready_to_send job ids, best first]}`; the numbers in the summary follow this order.
 A form that cannot be filled: status `queued` with `next_action` "Isi manual" and the reason.
 
-Dashboard: keep `meta/run` current at every step and sync all rows touched in this run (career-autopilot-dashboard skill, Sync).
+Dashboard: keep `meta/run` current at every step and sync all jobs touched in this run (career-autopilot-dashboard skill, Sync).
 
 ## 4. Summary (the notification / email)
 
@@ -67,4 +67,4 @@ Platforms: <platform> <used>/<cap> · paused: <platform until date>
 Dashboard: <dashboard link>
 ```
 
-Mention `Ready to submit` rows older than 3 days without a confirmation email.
+Mention `ready` jobs older than 3 days without a confirmation email. Close `submitted` jobs with no reply after 45 days (status `closed`, reason "tidak ada balasan 45 hari") and say how many.

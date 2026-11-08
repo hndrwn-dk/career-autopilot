@@ -35,7 +35,10 @@ Details and endpoints: `references/sources.md`.
 
 1. Skip if company+role or the link is already in `Applications` or `Skip`, or the company is in `exclude_companies`.
    Run the scam check (`${CLAUDE_PLUGIN_ROOT}/references/scam-signals.md`) first on every posting and recruiter message.
-2. Get the full description, not the card.
+2. Get the full description, not the card. Aggregator or mirror pages (job boards that copy postings, "visa sponsor" lists,
+   salary sites): find the original on the company site or its ATS and use that link; no original found → flag "sumber tidak asli".
+   Skip postings older than Filters `max_posting_age_days` (default 30) or past their closing date, and duplicates of a job already
+   kept (same company and role from another source).
 3. Run career-autopilot-fit-check (hard filters, employment model, score).
 4. Keep: company, role, location, link, source, salary if posted, employment model, match %, one-line why, flags.
 

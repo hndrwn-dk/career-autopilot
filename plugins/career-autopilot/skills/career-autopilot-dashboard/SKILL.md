@@ -46,7 +46,9 @@ The page shows only `jobs`, `meta/summary` and `meta/run` (full document list: s
 `status` values: `worth_a_look`, `queued`, `ready`, `submitted`, `in_review`, `assessment`, `interview`, `offer`, `rejected`, `withdrawn`, `closed`, `skipped`, `scam`.
 
 Privacy: `jobs` and `meta` are readable by anyone the owner shares the link with, so they never hold phone numbers,
-emails, addresses, salary floors, current salary, CV contents or recruiter names. Those stay in `settings/profile`
+emails, addresses, salary floors, current salary, CV contents, recruiter names, or anything about the user's family, citizenship,
+living costs or take-home pay. Write those comparisons (the "Biaya hidup" and "Keluarga" lines) in the chat only; a job's flags may
+say neutral facts about the posting ("Visa keluarga disponsori", "Gaji tidak disebut", "Di bawah syarat visa"). Those stay in `settings/profile`
 and `settings/filters`, which only the owner can read. `pay` is only what the posting itself states.
 
 ## Onboarding answers (written by the page)

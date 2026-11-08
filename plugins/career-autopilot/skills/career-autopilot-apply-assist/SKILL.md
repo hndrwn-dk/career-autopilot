@@ -26,8 +26,8 @@ Data store: `${CLAUDE_PLUGIN_ROOT}/references/store.md` (Profile, Filters, Appli
 6. Leave for the user: logins and account creation, consents and terms, diversity and personal questions, date of birth, address if not in Profile, ID numbers, background-check acknowledgements, and any Yes/No the Profile does not prove.
 7. Stop before Submit. Tell the user in one block: tab, what is filled, what is left.
    Submit only if the user explicitly said to submit this specific job (see Send approved jobs).
-8. When the user confirms it was sent (or a confirmation page is visible), append to `Applications`:
-   next No, Company, Role, Location, Status `Submitted`, Channel, Employment Model, today, Link, Job ID, Match %, today, Next Action `wait for reply`, short note.
+8. When the user confirms it was sent (or a confirmation page is visible), update its `jobs` document: status `submitted`,
+   `applied_on` today, `channel`, `model`, `job_id`, `next_action` "Tunggu balasan", one short note.
 
 Write each job's status and next_action to its `jobs` document as you go (`ready` when filled, `submitted` when sent), and keep `meta/run` current (career-autopilot-dashboard, Sync). If a write fails, say so once.
 

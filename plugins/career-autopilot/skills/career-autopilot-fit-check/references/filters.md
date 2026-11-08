@@ -36,6 +36,7 @@
 | exclude_keywords | intern, junior | title words to skip |
 | employment_types | permanent, contract (direct), part-time, freelance / project, casual / gig, internship, graduate programme, returnship, rotation | allowed models |
 | min_contract_months | 12 | shorter contracts get flagged |
+| max_posting_age_days | 30 | older postings and those past their closing date are skipped |
 | min_match | 75 | apply threshold in active mode |
 | ready_send_min_match | 80 | from this score a prefilled form can go on the "Siap dikirim" list, sent only after the user's go-ahead in chat |
 | watch_min_match | 88 | threshold in watch mode |
