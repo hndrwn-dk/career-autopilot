@@ -81,6 +81,32 @@ a{color:var(--teal)}
 .note{font-size:13px;color:var(--muted)}
 .banner{background:var(--warn-soft);color:var(--warn);border-radius:10px;padding:10px 14px;font-size:14px}
 .tablewrap{overflow-x:auto}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{font:600 15px var(--fb);padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink2);cursor:pointer}
+.tab[aria-selected=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.wiz{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.wiz h2{font:700 26px/1.25 var(--fd);margin:0}
+.wiz .hint{color:var(--ink2);font-size:16px;margin:0}
+.progress{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.progress div{height:100%;background:var(--accent);transition:width .2s}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.opt{font:500 16px/1.35 var(--fb);text-align:left;padding:16px 18px;border-radius:12px;border:2px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.opt small{display:block;color:var(--muted);font-size:13px;margin-top:4px}
+.opt[aria-pressed=true]{border-color:var(--accent);background:var(--accent-soft)}
+.opt:focus-visible,.tab:focus-visible,.btn:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.wiz input[type=text],.wiz input[type=number]{font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);width:100%}
+.navrow{display:flex;justify-content:space-between;gap:10px}
+.btn{font:600 16px var(--fb);padding:12px 22px;border-radius:12px;border:0;background:var(--accent);color:#fff;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink2);border:1px solid var(--line)}
+.btn[disabled]{opacity:.45;cursor:default}
+.done{background:var(--good-soft);color:var(--good);border-radius:14px;padding:20px;font-size:16px}
+.copybox{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.copybox code{background:var(--panel);color:var(--ink);padding:10px 14px;border-radius:10px;font-size:15px}
+.quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.quick button{font:600 16px/1.3 var(--fb);text-align:left;padding:18px;border-radius:14px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.quick button small{display:block;font-weight:400;color:var(--muted);font-size:13px;margin-top:6px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px}
+
 </style>
 </head>
 <body>
@@ -92,7 +118,15 @@ a{color:var(--teal)}
     </div>
     <div class="chips" id="chips"></div>
   </header>
+  <nav class="tabs" role="tablist" id="tabs">
+    <button class="tab" role="tab" data-tab="start" id="tStart"></button>
+    <button class="tab" role="tab" data-tab="dash" id="tDash"></button>
+    <button class="tab" role="tab" data-tab="quick" id="tQuick"></button>
+  </nav>
   <div class="banner" id="banner" hidden></div>
+  <section id="paneStart" hidden><div class="card"><div class="wiz" id="wiz"></div></div></section>
+  <section id="paneQuick" hidden><div class="card"><h2 id="hQuick"></h2><p class="note" id="quickHint"></p><div class="quick" id="quick"></div></div></section>
+  <div id="paneDash">
   <div class="run"><span class="dot" id="runDot"></span><span id="runText"></span></div>
 
   <section class="kpis" id="kpis"></section>
@@ -128,8 +162,10 @@ a{color:var(--teal)}
       <tbody id="rows"></tbody>
     </table></div>
   </section>
+  </div>
   <p class="note" id="foot"></p>
 </div>
+<div class="toast" id="toast" hidden></div>
 <script>
 (function(){
   "use strict";
@@ -248,6 +284,137 @@ a{color:var(--teal)}
     db.doc("meta/summary").onSnapshot(function(d){state.summary=d.exists?d.data():{};render()},fail);
     db.doc("meta/run").onSnapshot(function(d){state.run=d.exists?d.data():{};render()},fail);
   },function(){fail()});
+})();
+</script>
+<script>
+(function(){
+  "use strict";
+  function $(id){return document.getElementById(id)}
+  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+  var lang=(navigator.language||"").toLowerCase().indexOf("id")===0?"id":"en";
+  var W={
+    id:{tabs:["Mulai","Dashboard","Perintah cepat"],step:"Langkah",of:"dari",back:"Kembali",next:"Lanjut",save:"Simpan",skip:"Lewati",
+      saved:"Tersimpan. Kembali ke chat Claude, lalu kirim pesan ini:",copy:"Salin",copied:"Tersalin. Tempel di chat Claude.",msg:"Lanjutkan setup Career Autopilot dari dashboard",
+      redo:"Ubah jawaban",cantSave:"Belum bisa menyimpan dari tampilan ini. Buka halaman ini di claude.ai dalam keadaan login, atau jawab pertanyaannya langsung di chat Claude.",
+      other:"Lainnya (tulis sendiri)",area:"Kota atau area (opsional)",hours:"Berapa jam per minggu?",payText:"Contoh: IDR 6 juta per bulan, SGD 5.000 per bulan",
+      review:"Cek lagi pilihan Anda",quickH:"Perintah cepat",quickHint:"Klik tombol untuk menyalin perintahnya, lalu tempel di chat Claude.",
+      steps:[
+        {k:"language",q:"Bahasa yang Anda pakai?",o:[["id","Bahasa Indonesia"],["en","English"]]},
+        {k:"segment",q:"Mana yang paling sesuai dengan Anda?",o:[["experienced","Sudah bekerja / berpengalaman"],["fresh-graduate","Baru lulus atau masih kuliah"],["career-returner","Ingin kembali bekerja setelah jeda"],["side-income","Cari kerja sampingan, paruh waktu, atau freelance"],["career-switcher","Ingin pindah ke bidang baru"]]},
+        {k:"work",q:"Kerja apa yang Anda cari?",h:"Boleh pilih lebih dari satu.",multi:true,other:true,o:[["admin","Admin / kantor"],["retail","Toko & retail"],["fnb","Makanan & minuman"],["logistics","Gudang & logistik"],["teaching","Guru / les privat"],["health","Kesehatan"],["finance","Keuangan & akuntansi"],["marketing","Marketing & media sosial"],["design","Desain"],["it","IT & teknologi"],["cs","Customer service"],["driver","Sopir & pengiriman"]]},
+        {k:"work_mode",q:"Mau kerja di mana?",o:[["remote","Dari rumah (remote)"],["hybrid","Campuran rumah & kantor"],["onsite","Datang ke tempat kerja"],["any","Apa saja"]],area:true},
+        {k:"countries",q:"Di negara mana?",h:"Boleh pilih lebih dari satu.",multi:true,other:true,o:[["Indonesia","Indonesia"],["Singapore","Singapura"],["Malaysia","Malaysia"],["Australia","Australia"],["Japan","Jepang"],["Middle East","Timur Tengah"],["Europe","Eropa"],["US/Canada","Amerika / Kanada"]]},
+        {k:"employment",q:"Berapa banyak waktu Anda?",o:[["full-time","Penuh waktu"],["part-time","Paruh waktu"],["freelance","Freelance / per proyek"],["any","Apa saja"]],hours:true},
+        {k:"pay",q:"Gaji minimum yang Anda mau?",o:[["official","Pakai standar resmi tiap negara (disarankan)"],["custom","Saya isi sendiri"]],payText:true},
+        {k:"cv",q:"Sudah punya CV?",o:[["have","Sudah, nanti saya kirim di chat"],["build","Belum, tolong buatkan"]]},
+        {k:"mode",q:"Mau dibantu seberapa sering?",o:[["off","Saya cek sendiri kapan saja"],["watch","Kirim ringkasan seminggu sekali"],["active","Bantu setiap hari dan isi form lamaran"]]}
+      ],
+      quick:[["cari lowongan","Cari lowongan","Daftar lowongan yang cocok untuk Anda"],["cek email lamaran","Cek balasan","Lihat balasan dari perusahaan"],["buatkan CV","Buatkan CV","Lewat tanya-jawab singkat"],["ini penipuan bukan? ","Cek penipuan","Tempel pesan tawaran setelahnya"],["persiapan interview","Persiapan interview","Perkiraan pertanyaan dan latihan"],["update dashboard saya","Perbarui dashboard","Sinkronkan data terbaru"]]},
+    en:{tabs:["Start","Dashboard","Quick commands"],step:"Step",of:"of",back:"Back",next:"Next",save:"Save",skip:"Skip",
+      saved:"Saved. Go back to the Claude chat and send this message:",copy:"Copy",copied:"Copied. Paste it in the Claude chat.",msg:"Continue Career Autopilot setup from the dashboard",
+      redo:"Change answers",cantSave:"This view can't save yet. Open this page on claude.ai while signed in, or answer the questions in the Claude chat.",
+      other:"Other (type it)",area:"City or area (optional)",hours:"How many hours per week?",payText:"For example: SGD 5,000 per month, IDR 6 million per month",
+      review:"Check your answers",quickH:"Quick commands",quickHint:"Click a button to copy the command, then paste it in the Claude chat.",
+      steps:[
+        {k:"language",q:"Which language?",o:[["id","Bahasa Indonesia"],["en","English"]]},
+        {k:"segment",q:"Which fits you best?",o:[["experienced","Working / experienced"],["fresh-graduate","New graduate or still studying"],["career-returner","Returning to work after a break"],["side-income","Side income, part-time or freelance"],["career-switcher","Moving into a new field"]]},
+        {k:"work",q:"What kind of work?",h:"Pick as many as you like.",multi:true,other:true,o:[["admin","Admin / office"],["retail","Shop & retail"],["fnb","Food & drink"],["logistics","Warehouse & logistics"],["teaching","Teaching / tutoring"],["health","Healthcare"],["finance","Finance & accounting"],["marketing","Marketing & social media"],["design","Design"],["it","IT & technology"],["cs","Customer service"],["driver","Driving & delivery"]]},
+        {k:"work_mode",q:"Where do you want to work?",o:[["remote","From home (remote)"],["hybrid","Mix of home and office"],["onsite","At the workplace"],["any","Any"]],area:true},
+        {k:"countries",q:"Which countries?",h:"Pick as many as you like.",multi:true,other:true,o:[["Indonesia","Indonesia"],["Singapore","Singapore"],["Malaysia","Malaysia"],["Australia","Australia"],["Japan","Japan"],["Middle East","Middle East"],["Europe","Europe"],["US/Canada","US / Canada"]]},
+        {k:"employment",q:"How much time do you have?",o:[["full-time","Full time"],["part-time","Part time"],["freelance","Freelance / projects"],["any","Any"]],hours:true},
+        {k:"pay",q:"Minimum pay?",o:[["official","Use each country's official standard (recommended)"],["custom","I'll type my own"]],payText:true},
+        {k:"cv",q:"Do you have a CV?",o:[["have","Yes, I'll send it in the chat"],["build","No, please make one"]]},
+        {k:"mode",q:"How often should Claude help?",o:[["off","I'll check whenever I want"],["watch","Send a weekly summary"],["active","Help every day and fill in forms"]]}
+      ],
+      quick:[["find jobs","Find jobs","Jobs that match you"],["check my application emails","Check replies","Replies from companies"],["make me a CV","Make a CV","Through a short Q&A"],["is this a scam? ","Scam check","Paste the offer after it"],["interview prep","Interview prep","Likely questions and practice"],["update my dashboard","Refresh dashboard","Sync the latest data"]]}
+  };
+  var A={},i=0,db=null,canWrite=true,saved=false;
+  function L(){return W[A.language||lang]}
+  function toast(m){var t=$("toast");t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(function(){t.hidden=true},2500)}
+  function copy(text){
+    try{navigator.clipboard.writeText(text).then(function(){toast(L().copied)},function(){toast(text)})}catch(e){toast(text)}
+  }
+  function tabs(active){
+    var l=L();["tStart","tDash","tQuick"].forEach(function(id,n){$(id).textContent=l.tabs[n]});
+    ["start","dash","quick"].forEach(function(k){
+      var b=document.querySelector('[data-tab="'+k+'"]');b.setAttribute("aria-selected",String(k===active));
+    });
+    $("paneStart").hidden=active!=="start";$("paneDash").hidden=active!=="dash";$("paneQuick").hidden=active!=="quick";
+  }
+  document.querySelectorAll(".tab").forEach(function(b){b.addEventListener("click",function(){tabs(b.dataset.tab);if(b.dataset.tab==="quick")quick()})});
+  function quick(){
+    var l=L();$("hQuick").textContent=l.quickH;$("quickHint").textContent=l.quickHint;
+    $("quick").innerHTML=l.quick.map(function(q,n){return '<button data-n="'+n+'">'+esc(q[1])+'<small>'+esc(q[2])+'</small></button>'}).join("");
+    $("quick").querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){copy(l.quick[+b.dataset.n][0])})});
+  }
+  function valid(s){
+    var v=A[s.k];
+    if(s.multi)return (Array.isArray(v)&&v.length>0)||(A[s.k+"_other"]||"").trim().length>0;
+    if(s.k==="pay"&&v==="custom")return (A.pay_text||"").trim().length>0;
+    return !!v;
+  }
+  function render(){
+    var l=L(),steps=l.steps,w=$("wiz");
+    if(saved){
+      w.innerHTML='<div class="done">'+esc(l.saved)+'<div class="copybox"><code>'+esc(l.msg)+'</code><button class="btn" id="cp">'+esc(l.copy)+'</button></div></div>'+
+        '<div class="navrow"><button class="btn ghost" id="redo">'+esc(l.redo)+'</button><span></span></div>';
+      $("cp").onclick=function(){copy(l.msg)};$("redo").onclick=function(){saved=false;i=0;render()};return;
+    }
+    if(i>=steps.length){
+      var rows=steps.map(function(s){
+        var v=A[s.k],lab=function(x){var o=s.o.filter(function(p){return p[0]===x})[0];return o?o[1]:x};
+        var out=Array.isArray(v)?v.map(lab).join(", "):lab(v||"");
+        if(A[s.k+"_other"])out+=(out?", ":"")+A[s.k+"_other"];
+        if(s.area&&A.area)out+=" · "+A.area;
+        if(s.hours&&A.hours_per_week)out+=" · "+A.hours_per_week+" h";
+        if(s.payText&&A.pay==="custom")out+=" · "+A.pay_text;
+        return '<tr><td class="note">'+esc(s.q)+'</td><td><b>'+esc(out)+'</b></td></tr>';
+      }).join("");
+      w.innerHTML='<div class="progress"><div style="width:100%"></div></div><h2>'+esc(l.review)+'</h2><table>'+rows+'</table>'+
+        (canWrite?"":'<div class="banner">'+esc(l.cantSave)+'</div>')+
+        '<div class="navrow"><button class="btn ghost" id="bk">'+esc(l.back)+'</button><button class="btn" id="sv"'+(canWrite?"":" disabled")+'>'+esc(l.save)+'</button></div>';
+      $("bk").onclick=function(){i--;render()};
+      $("sv").onclick=function(){
+        var b=$("sv");b.disabled=true;
+        var data=JSON.parse(JSON.stringify(A));data.submitted_at=new Date().toISOString();data.applied=false;
+        db.doc("onboarding/answers").set(data).then(function(){saved=true;render()},function(){canWrite=false;render()});
+      };
+      return;
+    }
+    var s=steps[i],multi=!!s.multi,cur=A[s.k];
+    var html='<div class="progress"><div style="width:'+Math.round(i/steps.length*100)+'%"></div></div>'+
+      '<p class="note">'+esc(l.step)+' '+(i+1)+' '+esc(l.of)+' '+steps.length+'</p><h2>'+esc(s.q)+'</h2>'+(s.h?'<p class="hint">'+esc(s.h)+'</p>':"")+
+      '<div class="opts">'+s.o.map(function(o){var on=multi?(Array.isArray(cur)&&cur.indexOf(o[0])>=0):cur===o[0];return '<button class="opt" aria-pressed="'+on+'" data-v="'+esc(o[0])+'">'+esc(o[1])+'</button>'}).join("")+'</div>';
+    if(s.other)html+='<input type="text" id="oth" placeholder="'+esc(l.other)+'" value="'+esc(A[s.k+"_other"]||"")+'">';
+    if(s.area&&(cur==="onsite"||cur==="hybrid"||cur==="any"))html+='<input type="text" id="area" placeholder="'+esc(l.area)+'" value="'+esc(A.area||"")+'">';
+    if(s.hours&&cur==="part-time")html+='<input type="number" min="1" max="60" id="hrs" placeholder="'+esc(l.hours)+'" value="'+esc(A.hours_per_week||"")+'">';
+    if(s.payText&&cur==="custom")html+='<input type="text" id="payt" placeholder="'+esc(l.payText)+'" value="'+esc(A.pay_text||"")+'">';
+    html+='<div class="navrow"><button class="btn ghost" id="bk"'+(i===0?" disabled":"")+'>'+esc(l.back)+'</button><button class="btn" id="nx"'+(valid(s)?"":" disabled")+'>'+esc(l.next)+'</button></div>';
+    w.innerHTML=html;
+    w.querySelectorAll(".opt").forEach(function(b){b.addEventListener("click",function(){
+      var v=b.dataset.v;
+      if(multi){var a=Array.isArray(A[s.k])?A[s.k].slice():[];var k=a.indexOf(v);if(k>=0)a.splice(k,1);else a.push(v);A[s.k]=a}else A[s.k]=v;
+      if(s.k==="language"){tabs("start")}
+      render();
+    })});
+    function bind(id,key){var e=$(id);if(!e)return;e.addEventListener("input",function(){A[key]=e.value;$("nx").disabled=!valid(s)})}
+    bind("oth",s.k+"_other");bind("area","area");bind("hrs","hours_per_week");bind("payt","pay_text");
+    $("bk").onclick=function(){if(i>0){i--;render()}};
+    $("nx").onclick=function(){if(valid(s)){i++;render()}};
+  }
+  tabs("dash");quick();
+  if(!window.claude||typeof window.claude.use!=="function"){canWrite=false;render();return}
+  window.claude.use("db").then(function(d){
+    db=d;if(!db){canWrite=false;render();return}
+    Promise.all([db.doc("meta/summary").get(),db.doc("onboarding/answers").get(),db.collection("jobs").limit(1).get()]).then(function(r){
+      var sum=r[0].exists?r[0].data():{},ans=r[1].exists?r[1].data():null,hasJobs=!r[2].empty;
+      if(sum.language)lang=String(sum.language).indexOf("id")===0?"id":"en";
+      if(ans){A=JSON.parse(JSON.stringify(ans));delete A.submitted_at;delete A.applied;if(!ans.applied){saved=true}}
+      render();
+      tabs(sum.onboarded||hasJobs?"dash":"start");
+    },function(){render();tabs("start")});
+  },function(){canWrite=false;render()});
+  render();
 })();
 </script>
 </body>

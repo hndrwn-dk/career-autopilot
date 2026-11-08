@@ -7,7 +7,15 @@ description: "Career Autopilot plugin setup. This skill IS the setup: run it dir
 
 ## Quick start (default for new users)
 
-The user should be able to start in under two minutes. Ask only three things, in one friendly message:
+The user should be able to start in under two minutes, without typing much.
+
+**Click-through first.** If the Artifact tool with database access is available: create the dashboard first
+(career-autopilot-dashboard, Create) and send the user its link with one plain sentence:
+"Buka halaman ini, klik pilihan di tab Mulai, tekan Simpan, lalu kembali ke sini dan ketik: sudah."
+When they come back, apply the answers (career-autopilot-dashboard, Onboarding answers) and continue below from
+"Then create the tracker". If the user prefers chat, or the dashboard cannot be made here, ask in chat instead.
+
+**Chat fallback.** Ask only three things, in one friendly message:
 1. What work they are looking for (any words: "admin", "jaga toko", "kerja dari rumah", "SRE").
 2. Where: city or area, or remote.
 3. Whether they have a CV (upload it) or want Claude to make one.

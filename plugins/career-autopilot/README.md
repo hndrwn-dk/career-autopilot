@@ -19,13 +19,13 @@ Nothing about you is in the plugin. Your data stays in your own Google Sheet and
 | Any country, any work mode | Remote, hybrid or onsite, with commute limit, hours per week, schedule and pay per hour, day, project or month. Built-in sources for Singapore, APAC, EMEA and US/Canada; other countries' portals are found on first use. |
 | Account safety | A reminder mode for LinkedIn, JobStreet, Indeed, Upwork and similar platforms: you confirm the risk once, Claude stays under daily caps, warns at 80%, and pauses at the first warning sign. |
 | Scam guard | "Agents" who ask you to pay first, like or comment first, join a paid class or install an app are skipped automatically, along with task scams, money-mule and reshipping jobs, pay-to-join schemes, fake government recruitment, and overseas offers that match trafficking patterns. Paste any offer you received and ask "ini penipuan bukan?". |
-| No hassle | Three questions to start; nothing else is asked until it changes a result. Works in chat only if you do not connect Gmail or Drive. |
+| No hassle | Click-through onboarding: Claude sends a private page where you answer by clicking (no typing), then you say "sudah". Nothing else is asked until it changes a result. Works in chat only if you do not connect Gmail or Drive. |
 | Sounds like you | Every email, reply and cover letter follows a writing guide that removes AI-sounding patterns, and can match a sample of your own writing. |
 | No CV needed | `career-autopilot-cv-builder` interviews you in plain language and makes a CV, including an honest line for a career break if you want one. |
 | Watch mode | Already employed? A weekly digest of only the strongest matches, nothing filled in. |
 | Honest flags | Contract-via-agency, vendor placement, undefined "conversion to permanent", hidden client, licence conversion needed, title that does not match the duties. |
 | Family use | Several profiles on one account (`Career Autopilot Tracker - <name>`), each with its own tracker, CV and schedule. |
-| Dashboard | A private page per profile with the pipeline, next actions, platform usage and scams skipped, kept in sync by Claude after every run. |
+| Dashboard | A private page per profile with three tabs: Start (click-through onboarding), Dashboard (pipeline, next actions, platform usage, scams skipped, kept in sync after every run) and Quick commands (buttons that copy a command to paste into Claude). |
 | Interview prep | A brief per interview plus a mock interview, adapted to the situation (online tests for graduates, a short break explanation for returners, a call script for side jobs). |
 
 ## Install
@@ -57,7 +57,7 @@ Keep the browser (and, for scheduled `active` runs, the Claude desktop app) open
 
 ## First run
 
-Quick start: say **"mulai cari kerja"** (or pick **career-autopilot-setup** from the `/` menu) and answer three questions (what work, where or remote, CV or no CV). Claude shows matching jobs right away and asks for anything else only when it matters.
+Quick start: say **"mulai cari kerja"** (or pick **career-autopilot-setup** from the `/` menu). Claude sends a link to your private page: click your answers, press Save, come back and type **sudah**. Claude shows matching jobs right away and asks for anything else only when it matters. Prefer chat? Claude asks the same questions there.
 
 Full setup:
 
