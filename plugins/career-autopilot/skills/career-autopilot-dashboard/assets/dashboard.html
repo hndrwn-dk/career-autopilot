@@ -295,7 +295,7 @@ a{color:var(--teal)}
   var W={
     id:{tabs:["Mulai","Dashboard","Perintah cepat"],step:"Langkah",of:"dari",back:"Kembali",next:"Lanjut",save:"Simpan",skip:"Lewati",
       saved:"Tersimpan. Kembali ke chat Claude, lalu kirim pesan ini:",copy:"Salin",copied:"Tersalin. Tempel di chat Claude.",msg:"Lanjutkan setup Career Autopilot dari dashboard",
-      redo:"Ubah jawaban",cantSave:"Belum bisa menyimpan dari tampilan ini. Buka halaman ini di claude.ai dalam keadaan login, atau jawab pertanyaannya langsung di chat Claude.",
+      redo:"Ubah jawaban",mine:"Jawaban saya: ",cantSave:"Belum bisa menyimpan dari tampilan ini. Buka halaman ini di claude.ai dalam keadaan login, atau jawab pertanyaannya langsung di chat Claude.",
       other:"Lainnya (tulis sendiri)",area:"Kota atau area (opsional)",hours:"Berapa jam per minggu?",payText:"Contoh: IDR 6 juta per bulan, SGD 5.000 per bulan",
       review:"Cek lagi pilihan Anda",quickH:"Perintah cepat",quickHint:"Klik tombol untuk menyalin perintahnya, lalu tempel di chat Claude.",
       steps:[
@@ -312,7 +312,7 @@ a{color:var(--teal)}
       quick:[["cari lowongan","Cari lowongan","Daftar lowongan yang cocok untuk Anda"],["cek email lamaran","Cek balasan","Lihat balasan dari perusahaan"],["buatkan CV","Buatkan CV","Lewat tanya-jawab singkat"],["ini penipuan bukan? ","Cek penipuan","Tempel pesan tawaran setelahnya"],["persiapan interview","Persiapan interview","Perkiraan pertanyaan dan latihan"],["update dashboard saya","Perbarui dashboard","Sinkronkan data terbaru"]]},
     en:{tabs:["Start","Dashboard","Quick commands"],step:"Step",of:"of",back:"Back",next:"Next",save:"Save",skip:"Skip",
       saved:"Saved. Go back to the Claude chat and send this message:",copy:"Copy",copied:"Copied. Paste it in the Claude chat.",msg:"Continue Career Autopilot setup from the dashboard",
-      redo:"Change answers",cantSave:"This view can't save yet. Open this page on claude.ai while signed in, or answer the questions in the Claude chat.",
+      redo:"Change answers",mine:"My answers: ",cantSave:"This view can't save yet. Open this page on claude.ai while signed in, or answer the questions in the Claude chat.",
       other:"Other (type it)",area:"City or area (optional)",hours:"How many hours per week?",payText:"For example: SGD 5,000 per month, IDR 6 million per month",
       review:"Check your answers",quickH:"Quick commands",quickHint:"Click a button to copy the command, then paste it in the Claude chat.",
       steps:[
@@ -347,6 +347,20 @@ a{color:var(--teal)}
     $("quick").innerHTML=l.quick.map(function(q,n){return '<button data-n="'+n+'">'+esc(q[1])+'<small>'+esc(q[2])+'</small></button>'}).join("");
     $("quick").querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){copy(l.quick[+b.dataset.n][0])})});
   }
+  function summary(){
+    var l=L(),parts=[];
+    l.steps.forEach(function(s){
+      if(s.k==="language")return;
+      var v=A[s.k],lab=function(x){var o=s.o.filter(function(p){return p[0]===x})[0];return o?o[1]:x};
+      var out=Array.isArray(v)?v.map(lab).join(", "):(v?lab(v):"");
+      if(A[s.k+"_other"])out+=(out?", ":"")+A[s.k+"_other"];
+      if(s.area&&A.area)out+=" ("+A.area+")";
+      if(s.hours&&A.hours_per_week)out+=" ("+A.hours_per_week+" h)";
+      if(s.payText&&A.pay==="custom"&&A.pay_text)out=A.pay_text;
+      if(out)parts.push(out);
+    });
+    return l.msg+"\n"+l.mine+parts.join(" · ");
+  }
   function valid(s){
     var v=A[s.k];
     if(s.multi)return (Array.isArray(v)&&v.length>0)||(A[s.k+"_other"]||"").trim().length>0;
@@ -356,9 +370,10 @@ a{color:var(--teal)}
   function render(){
     var l=L(),steps=l.steps,w=$("wiz");
     if(saved){
-      w.innerHTML='<div class="done">'+esc(l.saved)+'<div class="copybox"><code>'+esc(l.msg)+'</code><button class="btn" id="cp">'+esc(l.copy)+'</button></div></div>'+
+      var full=summary();
+      w.innerHTML='<div class="done">'+esc(l.saved)+'<div class="copybox"><code style="white-space:pre-wrap">'+esc(full)+'</code><button class="btn" id="cp">'+esc(l.copy)+'</button></div></div>'+
         '<div class="navrow"><button class="btn ghost" id="redo">'+esc(l.redo)+'</button><span></span></div>';
-      $("cp").onclick=function(){copy(l.msg)};$("redo").onclick=function(){saved=false;i=0;render()};return;
+      $("cp").onclick=function(){copy(full)};$("redo").onclick=function(){saved=false;i=0;render()};return;
     }
     if(i>=steps.length){
       var rows=steps.map(function(s){
